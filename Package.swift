@@ -17,6 +17,7 @@ let package = Package(
             name: "ClimateChangeGroupApp",
             targets: ["AppModule"],
             bundleIdentifier: "org.jhhs.627115.ClimateChangeGroupApp",
+            teamIdentifier: "LR6JS3XL23",
             displayVersion: "1.0",
             bundleVersion: "1",
             appIcon: .placeholder(icon: .lightningBolt),
