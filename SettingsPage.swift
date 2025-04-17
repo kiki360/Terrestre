@@ -17,7 +17,7 @@ struct SettingsPage: View {
                 .onSubmit {
                     username = TempUsername
                 }
-                .textFieldStyle( RoundedBorderTextFieldStyle() )
+                .textFieldStyle( RoundedBorderTextFieldStyle())
             Text("Credits:")
                 .font(.largeTitle)
                 .bold()
