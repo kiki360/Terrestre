@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct HomeScreen: View {
-    @State var username = "username"
-    
+    @AppStorage("username") var username = "Guest"
     var body: some View {
         NavigationStack {
             HStack {
