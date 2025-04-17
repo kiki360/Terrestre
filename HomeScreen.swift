@@ -11,44 +11,47 @@ struct HomeScreen: View {
     @State var username = "username"
     
     var body: some View {
-        HStack {
-            Text("Welcome, \(username)")
-                .font(.custom("Times new roman", size: 75)) // Change font later
-            Button {
+        NavigationStack {
+            HStack {
+                Text("Welcome, \(username)")
+                    .font(.custom("Times new roman", size: 75)) // Change font later
                 
-            } label: {
-                Image(systemName: "gear")
-                    .font(.largeTitle)
-                    .bold()
-                    .foregroundStyle(.gray)
-            }
-        }
-        
-        HStack {
-            Button {
-                
-            } label: {
-                RoundedRectangle(cornerRadius: 25)
-                    .frame(width: 200, height: 75)
-                    .overlay {
-                        Text("Go to levels")
-                            .font(.title)
-                            .padding()
-                            .foregroundStyle(.black)
-                    }
+                NavigationLink {
+                    SettingsPage()
+                } label: {
+                    Image(systemName: "gear")
+                        .foregroundStyle(.gray)
+                        .font(.title)
+                }
+
             }
             
-            Button {
+            HStack {
+                NavigationLink {
+                    LevelsMenu()
+                } label: {
+                    RoundedRectangle(cornerRadius: 25)
+                        .frame(width: 200, height: 75)
+                        .overlay {
+                            Text("Go to levels")
+                                .font(.title)
+                                .padding()
+                                .foregroundStyle(.black)
+                        }
+                }
                 
-            } label: {
-                RoundedRectangle(cornerRadius: 25)
-                    .frame(width: 200, height: 75)
-                    .overlay {
-                        Text("Statistics")
-                            .font(.title)
-                            .padding()
-                            .foregroundStyle(.black)
-                    }
+                NavigationLink {
+                    StatisticsPage()
+                } label: {
+                    RoundedRectangle(cornerRadius: 25)
+                        .frame(width: 200, height: 75)
+                        .overlay {
+                            Text("Statistics")
+                                .font(.title)
+                                .padding()
+                                .foregroundStyle(.black)
+                        }
+                }
             }
         }
     }
