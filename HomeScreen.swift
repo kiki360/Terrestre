@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct HomeScreen: View {
-    @State var username = "username"
+    @AppStorage("username") var username = "username"
+    @State var TextFieldAppear: Bool = false
     
     var body: some View {
         NavigationStack {
