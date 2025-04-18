@@ -13,7 +13,7 @@ struct SettingsPage: View {
     var body: some View {
         VStack {
             TextField("Enter Username", text: $TempUsername)
-                .frame(width: 100,alignment: .center)
+                .frame(width: 150,alignment: .center)
                 .onSubmit {
                     username = TempUsername
                 }
