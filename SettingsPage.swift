@@ -21,6 +21,10 @@ struct SettingsPage: View {
             Text("Credits:")
                 .font(.largeTitle)
                 .bold()
+            Text("Calliope Epstein-Pawlak")
+            Text("Jacob Micheal Caulfield")
+            Text("Brennan Gonzales")
+            Text("Martin Zapryanov")
         }
     }
 }
