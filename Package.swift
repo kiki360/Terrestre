@@ -34,11 +34,16 @@ let package = Package(
             ]
         )
     ],
+    dependencies: [
+        .package(url: "https://github.com/apple/swift-algorithms.git", "1.2.1"..<"2.0.0")
+    ],
     targets: [
         .executableTarget(
             name: "AppModule",
+            dependencies: [
+                .product(name: "Algorithms", package: "swift-algorithms")
+            ],
             path: "."
         )
-    ],
-    swiftLanguageVersions: [.version("6")]
+    ]
 )

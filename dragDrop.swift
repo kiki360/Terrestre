@@ -5,6 +5,7 @@
 //  Created by Martin G. Zapryanov on 4/17/25.
 //
 import SwiftUI
+import Algorithms
 
 struct DragDropView: View {
     @State var items: [String] = ["Electronics 📱💻", "CDs 💿", "Batteries 🔋", "Boxes📦", "Balls ⚽️", "Juice boxes 🧃", "Paper 📄", "Cans🥫", "Glass jars 🫙", "Glass bottles🍾", "Used Band-Aids🩹", "Juice pouches", "Receipts 🧾", "Tires 🛞", "Loose plastic bags", "Ziploc bags", "Chip Bags", "Ice Cream container", "styrofoam 🥤", "Shoes 👞", "Medical waste 💉", "Diapers", "Car parts"]
@@ -20,8 +21,8 @@ struct DragDropView: View {
                         items.removeAll {$0 == task}
                         recycling.removeAll {$0 == task}
                     }
-                    
-                    trash += droppedItems
+                    let totalItems = trash + droppedItems
+                    trash = Array(totalItems.uniqued())
                     return true
                 }
 
