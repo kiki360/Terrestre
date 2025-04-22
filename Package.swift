@@ -10,7 +10,7 @@ import AppleProductTypes
 let package = Package(
     name: "ClimateChangeGroupApp",
     platforms: [
-        .iOS("18.4")
+        .iOS("18")
     ],
     products: [
         .iOSApplication(
