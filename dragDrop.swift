@@ -13,9 +13,21 @@ struct DragDropView: View {
     
     var body: some View {
         HStack(spacing: 20) {
-            
+            SortView(title: "Sort the items!", tasks: items)
+            SortView(title: "🗑️ Trash", tasks: trash)
+                .dropDestination(for: String.self) { droppedItems, location in
+                    for task in droppedItems {
+                        items.removeAll {$0 == task}
+                        recycling.removeAll {$0 == task}
+                    }
+                    
+                    trash += droppedItems
+                    return true
+                }
+
+            SortView(title: "♻️ Recycling", tasks: recycling)
         }
-        
+        .padding()
     }
 }
 
