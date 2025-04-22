@@ -9,7 +9,10 @@ import SwiftUI
 
 struct LevelsMenu: View {
     var body: some View {
-        Text("Select a Level")
+        NavigationStack{
+            Text("Select a Level")
+            NavigationLink("Question Test", destination: QuestionTest())
+        }
     }
 }
 
