@@ -13,13 +13,14 @@ struct Question: Identifiable {
 }
 
 struct QuestionTest: View {
-    let questions: [Question] = [Question(text: "Fracking is bad for the environment.", answers: [true: "Fracking releases a lot of carbon dioxide into the atmosphere, and causes chaos in neighborhoods.", false: "Incorrect. Fracking is bad for the environment."])]
+    let questions: [Question] = [Question(text: "Fracking is bad for the environment.", answers: [true: "Correct. Fracking releases a lot of carbon dioxide into the atmosphere, and causes chaos in neighborhoods.", false: "Incorrect. Fracking is bad for the environment."])]
     @State var answerTemporary: String = ""
     @State var answer: String = ""
     var body: some View {
         List{
             ForEach(questions, id: \.id){ question in
-                Section(header: Text(question.text)){
+                Section(){
+                    Text(question.text)
                     TextField("Enter your answer as true or false", text: $answerTemporary)
                         .onSubmit {
                             answer = answerTemporary
