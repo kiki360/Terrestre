@@ -5,18 +5,20 @@
 //  Created by Calliope Epstein-Pawlak on 4/17/25.
 //
 
-// I learned most of this code from ChatGPT, not the Sprites/Physics Learning in Schoology. The notes I took while using ChatGPT are in a different XCode project and I copied most of it for this file.
+// I learned most of this code from ChatGPT, not the Sprites/Physics Learning in Schoology. The notes I took while using ChatGPT are in a different XCode project and I reused most of it for this file.
 
 import SwiftUI
 import SpriteKit
 
 struct PhysicsCategory {
     static let Player: UInt32 = 0x1 << 0
-    static let Frame: UInt32 = 0x1 << 1
+    static let Platform: UInt32 = 0x1 << 1
+    static let Frame: UInt32 = 0x1 << 2
 }
 
 class GamePhysics: SKScene, SKPhysicsContactDelegate {
     let Player = SKSpriteNode()
+    let Platform = SKSpriteNode()
     
     override func sceneDidLoad() {
         physicsWorld.contactDelegate = self
@@ -42,6 +44,18 @@ class GamePhysics: SKScene, SKPhysicsContactDelegate {
         Player.physicsBody?.categoryBitMask = PhysicsCategory.Player
         Player.physicsBody?.contactTestBitMask = PhysicsCategory.Frame
         Player.physicsBody?.collisionBitMask = PhysicsCategory.Frame
+        Player.physicsBody?.contactTestBitMask = PhysicsCategory.Platform
+        Player.physicsBody?.collisionBitMask = PhysicsCategory.Platform
+        
+        
+        Platform.physicsBody = SKPhysicsBody()
+        
+        Platform.physicsBody?.isDynamic = true
+        Platform.physicsBody?.affectedByGravity = false
+        
+        Platform.physicsBody?.categoryBitMask = PhysicsCategory.Platform
+        Platform.physicsBody?.contactTestBitMask = PhysicsCategory.Player
+        Platform.physicsBody?.collisionBitMask = PhysicsCategory.Player
         
         
         let edgeFrame = SKPhysicsBody(edgeLoopFrom: self.frame)
@@ -59,7 +73,14 @@ class GamePhysics: SKScene, SKPhysicsContactDelegate {
             Player.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
             
             playerOnGround = true
+            print("Player on ground is true")
         }
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if playerOnGround {
+            Player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 300))
+            print("Player Jumped")
+        }
+    }
 }
