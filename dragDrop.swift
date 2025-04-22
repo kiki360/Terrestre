@@ -13,9 +13,21 @@ struct DragDropView: View {
     
     var body: some View {
         HStack(spacing: 20) {
-            
+            SortView(title: "Sort the items!", tasks: items)
+            SortView(title: "🗑️ Trash", tasks: trash)
+                .dropDestination(for: String.self) { droppedItems, location in
+                    for task in droppedItems {
+                        items.removeAll {$0 == task}
+                        recycling.removeAll {$0 == task}
+                    }
+                    
+                    trash += droppedItems
+                    return true
+                }
+
+            SortView(title: "♻️ Recycling", tasks: recycling)
         }
-        
+        .padding()
     }
 }
 
@@ -26,7 +38,29 @@ struct SortView: View {
     let tasks: [String]
     
     var body: some View {
-        Text("Hi")
+        VStack(alignment: .leading) {
+            Text(title)
+                .font(.largeTitle)
+            
+            ZStack {
+                RoundedRectangle(cornerRadius: 12)
+                    .frame(maxWidth: .infinity)
+                    .foregroundStyle(Color(.secondarySystemFill))
+                
+                VStack(alignment: .leading, spacing: 12) {
+                    ForEach(tasks, id: \.self) { task in
+                        Text(task)
+                            .padding(12)
+                            .background(Color(uiColor: .secondarySystemGroupedBackground))
+                            .cornerRadius(8)
+                            .shadow(radius: 1, x: 1, y: 1)
+                            .draggable(task)
+                    }
+                    Spacer()
+                }
+                .padding(.vertical)
+            }
+        }
     }
 }
 

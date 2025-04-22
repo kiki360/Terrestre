@@ -12,6 +12,7 @@ struct LevelsMenu: View {
         NavigationStack{
             Text("Select a Level")
             NavigationLink("Question Test", destination: QuestionTest())
+            NavigationLink("Drag and Drop Game", destination: DragDropView())
         }
     }
 }
