@@ -13,13 +13,18 @@ struct SettingsPage: View {
     var body: some View {
         VStack {
             TextField("Enter Username", text: $TempUsername)
-                .frame(alignment: .center)
+                .frame(width: 150,alignment: .center)
                 .onSubmit {
                     username = TempUsername
                 }
+                .textFieldStyle( RoundedBorderTextFieldStyle())
             Text("Credits:")
                 .font(.largeTitle)
                 .bold()
+            Text("Calliope Epstein-Pawlak")
+            Text("Jacob Micheal Caulfield")
+            Text("Brennan Gonzales")
+            Text("Martin Zapryanov")
         }
     }
 }
