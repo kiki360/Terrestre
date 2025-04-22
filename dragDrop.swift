@@ -26,7 +26,29 @@ struct SortView: View {
     let tasks: [String]
     
     var body: some View {
-        Text("Hi")
+        VStack(alignment: .leading) {
+            Text(title)
+                .font(.largeTitle)
+            
+            ZStack {
+                RoundedRectangle(cornerRadius: 12)
+                    .frame(maxWidth: .infinity)
+                    .foregroundStyle(Color(.secondarySystemFill))
+                
+                VStack(alignment: .leading, spacing: 12) {
+                    ForEach(tasks, id: \.self) { task in
+                        Text(task)
+                            .padding(12)
+                            .background(Color(uiColor: .secondarySystemGroupedBackground))
+                            .cornerRadius(8)
+                            .shadow(radius: 1, x: 1, y: 1)
+                            .draggable(task)
+                    }
+                    Spacer()
+                }
+                .padding(.vertical)
+            }
+        }
     }
 }
 
