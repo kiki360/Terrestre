@@ -16,7 +16,3 @@ struct LevelsMenu: View {
         }
     }
 }
-
-#Preview {
-    LevelsMenu()
-}
