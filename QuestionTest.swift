@@ -14,7 +14,7 @@ struct Question: Identifiable {
 
 struct QuestionTest: View {
     @State var questionAnswers: [UUID: String] = [:]
-    let questions: [Question] = [Question(text: "Fracking is bad for the environment.", answers: [true: "Correct. Fracking releases a lot of carbon dioxide into the atmosphere, and causes chaos in neighborhoods.", false: "Incorrect. Fracking is bad for the environment."]), Question(text: "The answer for this question is true", answers: [true: "correct", false: "incorrect"])]
+    let questions: [Question] = [Question(text: "Fracking is bad for the environment.", answers: [true: "Correct. Fracking releases a lot of carbon dioxide into the atmosphere, and causes chaos in neighborhoods.", false: "Incorrect. Fracking is bad for the environment."]), Question(text: "The answer for this question is true", answers: [true: "correct", false: "incorrect"]), Question(text: "this is question valid.", answers: [true: "correct", false: "incorrect"])]
     var body: some View {
         List{
             ForEach(questions, id: \Question.id){ question in

@@ -9,7 +9,6 @@ import SwiftUI
 struct QuestionView: View {
     let question: Question
     @State var answerTemporary: String = ""
-    @State var answer: String = ""
     @Binding var questionAnswers: [UUID: String]
     var body: some View {
         Text(question.text)
@@ -18,7 +17,6 @@ struct QuestionView: View {
                 questionAnswers[question.id] = answerTemporary
                 answerTemporary = ""
             }
-        
         if questionAnswers[question.id] == "true" || questionAnswers[question.id] == "True"{
             Text("\(question.answers[true] ?? "Incorrect")")
         } else if questionAnswers[question.id] == "false" || questionAnswers[question.id] == "False"{
