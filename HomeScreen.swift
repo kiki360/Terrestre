@@ -41,7 +41,7 @@ struct HomeScreen: View {
                     RoundedRectangle(cornerRadius: 25)
                         .frame(width: 200, height: 75)
                         .overlay {
-                            Text("Go to Missions")
+                            Text("Go to Levels")
                                 .font(.title)
                                 .padding()
                                 .foregroundStyle(.black)

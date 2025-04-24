@@ -10,7 +10,7 @@ import SwiftUI
 struct LevelsMenu: View {
     var body: some View {
         NavigationStack{
-            Text("Select a Level")
+            Text("Select a Mission")
             NavigationLink("Question Test", destination: QuestionTest())
             NavigationLink("Drag and Drop Game", destination: DragDropView())
         }
