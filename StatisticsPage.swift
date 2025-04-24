@@ -10,6 +10,7 @@ import SwiftUI
 struct StatisticsPage: View {
     var body: some View {
         Text("Statistics About Climate Change")
+            .font(.custom("Courier", size: 40))
     }
 }
 
