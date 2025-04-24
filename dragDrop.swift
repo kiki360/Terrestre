@@ -8,7 +8,7 @@ import SwiftUI
 import Algorithms
 
 struct DragDropView: View {
-    @State var items: [String] = ["Electronics 📱💻", "CDs 💿", "Batteries 🔋", "Boxes📦", "Balls ⚽️", "Juice boxes 🧃", "Paper 📄", "Cans🥫", "Glass jars 🫙", "Glass bottles🍾", "Used Band-Aids🩹", "Juice pouches", "Receipts 🧾", "Tires 🛞", "Loose plastic bags", "Ziploc bags", "Chip Bags", "Ice Cream container", "styrofoam 🥤", "Shoes 👞", "Medical waste 💉", "Diapers", "Car parts"]
+    @State var items: [String] = ["Electronics📱💻", "CDs 💿", "Batteries 🔋", "Boxes📦", "Juice boxes 🧃", "Paper 📄", "Cans🥫", "Glass🫙🍾", "Used Band-Aids🩹", "Juice pouches", "Receipts 🧾", "Tires 🛞", "Plastic bags", "Ziploc bags", "Chip Bags", "Ice Cream container", "Styrofoam🥤", "Shoes 👞", "Medical waste 💉", "Car parts"]
     @State var recycling: [String] = []
     @State var trash: [String] = []
     @State var isItemsTargeted = false
@@ -18,6 +18,18 @@ struct DragDropView: View {
     var body: some View {
         HStack(spacing: 20) {
             SortView(title: "Sort the items!", tasks: items, isTargeted: isItemsTargeted)
+                .font(.custom("Chalkboard SE", size: 15))
+                .dropDestination(for: String.self) { droppedItems, location in
+                    for task in droppedItems {
+                        trash.removeAll {$0 == task}
+                        recycling.removeAll {$0 == task}
+                    }
+                    let totalItems = items + droppedItems
+                    items = Array(totalItems.uniqued())
+                    return true
+                } isTargeted: { isTargeted in
+                    isItemsTargeted = isTargeted
+                }
             SortView(title: "🗑️ Trash", tasks: trash, isTargeted: isTrashtargeted)
                 .dropDestination(for: String.self) { droppedItems, location in
                     for task in droppedItems {
@@ -32,10 +44,23 @@ struct DragDropView: View {
                 }
 
             SortView(title: "♻️ Recycling", tasks: recycling, isTargeted: isRecyclingtargeted)
+                .dropDestination(for: String.self) { droppedItems, location in
+                    for task in droppedItems {
+                        items.removeAll {$0 == task}
+                        trash.removeAll {$0 == task}
+                    }
+                    let totalItems = recycling + droppedItems
+                    recycling = Array(totalItems.uniqued())
+                    return true
+                } isTargeted: { isTargeted in
+                    isRecyclingtargeted = isTargeted
+                }
+            
         }
         .padding()
     }
 }
+
 
 
 struct SortView: View {
@@ -51,13 +76,12 @@ struct SortView: View {
             
             ZStack {
                 RoundedRectangle(cornerRadius: 12)
-                    .frame(maxWidth: .infinity)
+                    .frame(maxWidth: 250, maxHeight: 718)
                     .foregroundStyle(isTargeted ? .teal.opacity(0.15) :Color(.secondarySystemFill))
                 
                 VStack(alignment: .leading, spacing: 12) {
                     ForEach(tasks, id: \.self) { task in
                         Text(task)
-                            .padding(12)
                             .background(Color(uiColor: .secondarySystemGroupedBackground))
                             .cornerRadius(8)
                             .shadow(radius: 1, x: 1, y: 1)
@@ -70,4 +94,3 @@ struct SortView: View {
         }
     }
 }
-
