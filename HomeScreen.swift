@@ -20,6 +20,7 @@ struct HomeScreen: View {
                     }
                     .popover(isPresented: $popover) {
                         Text("You can change your username in settings to the right")
+                            .padding()
                     }
                 //The popover was pretty straight forward; I didn't have to do anything with the developer documentation it was just similar to an alert
                 

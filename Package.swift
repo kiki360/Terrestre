@@ -45,5 +45,6 @@ let package = Package(
             ],
             path: "."
         )
-    ]
+    ],
+    swiftLanguageVersions: [.version("6")]
 )
