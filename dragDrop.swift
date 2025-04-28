@@ -64,6 +64,8 @@ struct DragDropView: View {
             } else if trash.contains("Boxes📦") {
                 Text("Try again! Cardboard boxes are definitely recyclable because it can be broken down and processed to make new cardboard materials such as new boxes, paper towels, tissues, and paper!")
             }
+            .padding()
+            .opacity(0.8)
         }
         .padding()
         

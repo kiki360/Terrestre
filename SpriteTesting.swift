@@ -13,8 +13,20 @@ import SpriteKit
 
 struct SpriteTesting: View {
     var body: some View {
-        GeometryReader { Geometry in
-            SpriteView(scene: GamePhysics(size: Geometry.size))
+        ZStack {
+            GeometryReader { Geometry in
+                SpriteView(scene: GamePhysics(size: Geometry.size))
+            }
+            HStack {
+                Button {
+                    
+                } label: {
+                    Image(systemName: "arrow.left")
+                        .font(.largeTitle)
+                        .bold()
+                }
+
+            }
         }
     }
 }
