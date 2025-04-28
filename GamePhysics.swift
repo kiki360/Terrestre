@@ -16,42 +16,22 @@ struct PhysicsCategory {
     static let Frame: UInt32 = 0x1 << 2
 }
 
-class GamePhysics: SKScene, SKPhysicsContactDelegate {
+class GamePhysics: SKScene, @preconcurrency SKPhysicsContactDelegate {
     let Player = SKSpriteNode()
     let Platform = SKSpriteNode()
+    let Frame = SKNode()
     
     override func sceneDidLoad() {
         physicsWorld.contactDelegate = self
         self.backgroundColor = .white
         
         Player.size = CGSize(width: 100, height: 150)
-        Player.position = CGPoint(x: 100, y: 500)
+        Player.position = CGPoint(x: 100, y: 600)
         Player.color = .red
         
         Platform.size = CGSize(width: 200, height: 25)
         Platform.position = CGPoint(x: 115, y: 300)
         Platform.color = .black
-    }
-    
-    var playerOnGround = false
-    
-    override func didMove(to view: SKView) {
-        physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
-        
-        Player.physicsBody = SKPhysicsBody()
-        
-        Player.physicsBody?.isDynamic = true
-        Player.physicsBody?.affectedByGravity = true
-        Player.physicsBody?.mass = 56
-        Player.physicsBody?.friction = 100
-        
-        Player.physicsBody?.categoryBitMask = PhysicsCategory.Player
-        Player.physicsBody?.contactTestBitMask = PhysicsCategory.Frame
-        Player.physicsBody?.collisionBitMask = PhysicsCategory.Frame
-        Player.physicsBody?.contactTestBitMask = PhysicsCategory.Platform
-        Player.physicsBody?.collisionBitMask = PhysicsCategory.Platform
-        
-        
         Platform.physicsBody = SKPhysicsBody()
         
         Platform.physicsBody?.isDynamic = true
@@ -60,26 +40,64 @@ class GamePhysics: SKScene, SKPhysicsContactDelegate {
         Platform.physicsBody?.categoryBitMask = PhysicsCategory.Platform
         Platform.physicsBody?.contactTestBitMask = PhysicsCategory.Player
         Platform.physicsBody?.collisionBitMask = PhysicsCategory.Player
+    }
+    
+    var playerOnGround = false
+    
+    override func didMove(to view: SKView) {
+        self.isUserInteractionEnabled = true
         
+        physicsWorld.gravity = CGVector(dx: 0, dy: -9.8)
         
-//        let edgeFrame = SKPhysicsBody(edgeLoopFrom: self.frame)
-//        edgeFrame.node?.physicsBody?.categoryBitMask = PhysicsCategory.Frame
-//        edgeFrame.node?.physicsBody?.contactTestBitMask = PhysicsCategory.Player
-//        edgeFrame.node?.physicsBody?.collisionBitMask = PhysicsCategory.Player
-//        self.physicsBody = edgeFrame
+        Player.physicsBody = SKPhysicsBody()
+        
+        Player.physicsBody?.isDynamic = true
+        Player.physicsBody?.affectedByGravity = true
+        Player.physicsBody?.mass = 2
+        Player.physicsBody?.friction = 100
+        
+        Player.physicsBody?.categoryBitMask = PhysicsCategory.Player
+        Player.physicsBody?.contactTestBitMask = PhysicsCategory.Platform | PhysicsCategory.Frame
+        Player.physicsBody?.collisionBitMask = PhysicsCategory.Platform | PhysicsCategory.Frame
+        
+        Frame.position = CGPoint(x: 0, y: 0)
+        Frame.physicsBody = SKPhysicsBody(edgeFrom: CGPoint(x: 0, y: 0), to: CGPoint(x: 1000, y: 0))
+        Frame.physicsBody?.categoryBitMask = PhysicsCategory.Frame
+        Frame.physicsBody?.contactTestBitMask = PhysicsCategory.Player
+        Frame.physicsBody?.collisionBitMask = PhysicsCategory.Player
         
         addChild(Player)
         addChild(Platform)
+        addChild(Frame)
     }
     
     override func update(_ currentTime: TimeInterval) {
-        if Player.position.y <= Platform.position.y + (Platform.size.height / 2) + Player.size.height / 2 {
-            Player.position.y = Platform.position.y + (Platform.size.height / 2) + Player.size.height / 2
-            Player.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
-            
-            playerOnGround = true
+        if playerOnGround == true {
+            Player.position.y = Platform.position.y + Platform.size.height / 2 + Player.size.height / 2
         }
     }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        let contact = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+        
+        if contact == PhysicsCategory.Player | PhysicsCategory.Platform {
+            playerOnGround = true
+        }/* else if contact == (PhysicsCategory.Player | PhysicsCategory.Frame) {
+            
+            playerOnGround = true
+            
+        } */
+    }
+//    
+//    func didEnd(_ contact: SKPhysicsContact) {
+//        let contact = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+//        
+//        if contact == (PhysicsCategory.Player | PhysicsCategory.Platform) {
+//            playerOnGround = false
+//        } /*else if contact == (PhysicsCategory.Player | PhysicsCategory.Frame) {
+//            playerOnGround = false
+//        } */
+//    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if playerOnGround {
