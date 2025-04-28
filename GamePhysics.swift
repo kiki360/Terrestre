@@ -17,7 +17,7 @@ struct PhysicsCategory {
 }
 
 class GamePhysics: SKScene, SKPhysicsContactDelegate {
-    var Player = SKSpriteNode()
+    var Player = SKSpriteNode(imageNamed: "PlayerCharacter")
     var Platform = SKSpriteNode()
     let Frame = SKNode()
     
@@ -74,6 +74,6 @@ class GamePhysics: SKScene, SKPhysicsContactDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
             Player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 2000))
-            print("Player Jumped")
+//            print("Player Jumped")
     }
 }
