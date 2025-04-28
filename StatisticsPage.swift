@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct StatisticsPage: View {
+    let appleURL = URL(string: "https://www.apple.com")
+    let firstURL = URL(string: "https:www.cnn.com/2023/03/16/world/plastic-water-bottles-un-report-climate/index.html")!
     let firstURL = URL(string: "https:www.cnn.com/2023/03/16/world/plastic-water-bottles-un-report-climate/index.html") 
     var body: some View {
+        Link("Link View Example", destination: appleURL!)
         VStack{
             HStack{
                 Image(systemName: "leaf.circle.fill")

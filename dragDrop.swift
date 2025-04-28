@@ -31,6 +31,7 @@ struct DragDropView: View {
                     isItemsTargeted = isTargeted
                 }
             SortView(title: "🗑️ Trash", tasks: trash, isTargeted: isTrashtargeted)
+                .font(.custom("Chalkboard SE", size: 15))
                 .dropDestination(for: String.self) { droppedItems, location in
                     for task in droppedItems {
                         items.removeAll {$0 == task}
@@ -44,6 +45,7 @@ struct DragDropView: View {
                 }
 
             SortView(title: "♻️ Recycling", tasks: recycling, isTargeted: isRecyclingtargeted)
+                .font(.custom("Chalkboard SE", size: 15))
                 .dropDestination(for: String.self) { droppedItems, location in
                     for task in droppedItems {
                         items.removeAll {$0 == task}
