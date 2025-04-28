@@ -16,50 +16,57 @@ struct DragDropView: View {
     @State var isRecyclingtargeted = false
     
     var body: some View {
-        HStack(spacing: 20) {
-            SortView(title: "Sort the items!", tasks: items, isTargeted: isItemsTargeted)
-                .font(.custom("Chalkboard SE", size: 15))
-                .dropDestination(for: String.self) { droppedItems, location in
-                    for task in droppedItems {
-                        trash.removeAll {$0 == task}
-                        recycling.removeAll {$0 == task}
+        ZStack{
+            Circle()
+            HStack(spacing: 20) {
+                SortView(title: "Sort the items!", tasks: items, isTargeted: isItemsTargeted)
+                    .font(.custom("Chalkboard SE", size: 15))
+                //Change the color of the text Here!
+                    .dropDestination(for: String.self) { droppedItems, location in
+                        for task in droppedItems {
+                            trash.removeAll {$0 == task}
+                            recycling.removeAll {$0 == task}
+                        }
+                        let totalItems = items + droppedItems
+                        items = Array(totalItems.uniqued())
+                        return true
+                    } isTargeted: { isTargeted in
+                        isItemsTargeted = isTargeted
                     }
-                    let totalItems = items + droppedItems
-                    items = Array(totalItems.uniqued())
-                    return true
-                } isTargeted: { isTargeted in
-                    isItemsTargeted = isTargeted
-                }
-            SortView(title: "🗑️ Trash", tasks: trash, isTargeted: isTrashtargeted)
-                .font(.custom("Chalkboard SE", size: 15))
-                .dropDestination(for: String.self) { droppedItems, location in
-                    for task in droppedItems {
-                        items.removeAll {$0 == task}
-                        recycling.removeAll {$0 == task}
+                SortView(title: "🗑️ Trash", tasks: trash, isTargeted: isTrashtargeted)
+                    .font(.custom("Chalkboard SE", size: 15))
+                //Change the color of the text Here!
+                    .dropDestination(for: String.self) { droppedItems, location in
+                        for task in droppedItems {
+                            items.removeAll {$0 == task}
+                            recycling.removeAll {$0 == task}
+                        }
+                        let totalItems = trash + droppedItems
+                        trash = Array(totalItems.uniqued())
+                        return true
+                    } isTargeted: { isTargeted in
+                        isTrashtargeted = isTargeted
                     }
-                    let totalItems = trash + droppedItems
-                    trash = Array(totalItems.uniqued())
-                    return true
-                } isTargeted: { isTargeted in
-                    isTrashtargeted = isTargeted
-                }
-
-            SortView(title: "♻️ Recycling", tasks: recycling, isTargeted: isRecyclingtargeted)
-                .font(.custom("Chalkboard SE", size: 15))
-                .dropDestination(for: String.self) { droppedItems, location in
-                    for task in droppedItems {
-                        items.removeAll {$0 == task}
-                        trash.removeAll {$0 == task}
+                
+                SortView(title: "♻️ Recycling", tasks: recycling, isTargeted: isRecyclingtargeted)
+                    .font(.custom("Chalkboard SE", size: 15))
+                //Change the color of the text Here!
+                    .dropDestination(for: String.self) { droppedItems, location in
+                        for task in droppedItems {
+                            items.removeAll {$0 == task}
+                            trash.removeAll {$0 == task}
+                        }
+                        let totalItems = recycling + droppedItems
+                        recycling = Array(totalItems.uniqued())
+                        return true
+                    } isTargeted: { isTargeted in
+                        isRecyclingtargeted = isTargeted
                     }
-                    let totalItems = recycling + droppedItems
-                    recycling = Array(totalItems.uniqued())
-                    return true
-                } isTargeted: { isTargeted in
-                    isRecyclingtargeted = isTargeted
-                }
-            
+                
+            }
+            .padding()
+            .opacity(0.8)
         }
-        .padding()
     }
 }
 
