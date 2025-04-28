@@ -23,7 +23,7 @@ struct SettingsPage: View {
                 .bold()
             Text("Calliope Epstein-Pawlak")
             Text("Jacob Micheal Caulfield")
-            Text("Brennan Gonzales")
+            Text("Brennan Gonzalez")
             Text("Martin Zapryanov")
         }
     }

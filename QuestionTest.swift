@@ -13,24 +13,13 @@ struct Question: Identifiable {
 }
 
 struct QuestionTest: View {
-    let questions: [Question] = [Question(text: "Fracking is bad for the environment.", answers: [true: "Correct. Fracking releases a lot of carbon dioxide into the atmosphere, and causes chaos in neighborhoods.", false: "Incorrect. Fracking is bad for the environment."])]
-    @State var answerTemporary: String = ""
-    @State var answer: String = ""
+    @State var questionAnswers: [UUID: String] = [:]
+    let questions: [Question] = [Question(text: "Fracking is bad for the environment.", answers: [true: "Correct. Fracking releases a lot of carbon dioxide into the atmosphere, and causes chaos in neighborhoods.", false: "Incorrect. Fracking is bad for the environment."]), Question(text: "The answer for this question is true", answers: [true: "correct", false: "incorrect"]), Question(text: "this question is valid.", answers: [true: "correct", false: "incorrect"])]
     var body: some View {
         List{
-            ForEach(questions, id: \.id){ question in
+            ForEach(questions, id: \Question.id){ question in
                 Section(){
-                    Text(question.text)
-                    TextField("Enter your answer as true or false", text: $answerTemporary)
-                        .onSubmit {
-                            answer = answerTemporary
-                            answerTemporary = ""
-                        }
-                    if answer == "true" || answer == "True"{
-                        Text("\(question.answers[true] ?? "Incorrect")")
-                    } else if answer == "false" || answer == "False"{
-                        Text("\(question.answers[false] ?? "Incorrect")")
-                    }
+                    QuestionView(question: question, questionAnswers: $questionAnswers)
                 }
             }
         }
