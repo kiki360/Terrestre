@@ -20,6 +20,7 @@ struct HomeScreen: View {
                     }
                     .popover(isPresented: $popover) {
                         Text("You can change your username in settings to the right")
+                            .padding()
                     }
                 //The popover was pretty straight forward; I didn't have to do anything with the developer documentation it was just similar to an alert
                 
@@ -41,7 +42,7 @@ struct HomeScreen: View {
                     RoundedRectangle(cornerRadius: 25)
                         .frame(width: 200, height: 75)
                         .overlay {
-                            Text("Go to levels")
+                            Text("Go to Levels")
                                 .font(.title)
                                 .padding()
                                 .foregroundStyle(.black)
