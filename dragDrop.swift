@@ -8,7 +8,9 @@ import SwiftUI
 import Algorithms
 
 struct DragDropView: View {
-    @State var items: [String] = ["Electronics📱💻", "CDs 💿", "Batteries 🔋", "Boxes📦", "Juice boxes 🧃", "Paper 📄", "Cans🥫", "Glass🫙🍾", "Used Band-Aids🩹", "Juice pouches", "Receipts 🧾", "Tires 🛞", "Plastic bags", "Ziploc bags", "Chip Bags", "Ice Cream container", "Styrofoam🥤", "Shoes 👞", "Medical waste 💉", "Car parts"]
+    @State var items: [String] = ["Electronics📱💻", "CDs 💿", "Batteries 🔋", "Boxes📦", "Juice boxes 🧃", "Paper 📄", "Cans🥫", "Glass🫙🍾", "Used Band-Aids or Tissues🩹🧻", "Juice pouches", "Receipts 🧾", "Tires 🛞", "Plastic bags", "Ziploc bags", "Chip Bags", "Ice Cream container", "Styrofoam🥤", "Shoes 👞", "Medical waste 💉", "Car parts", "Pizza Boxes🍕"]
+    let recyclingItems: Set<String> = ["Electronics📱💻", "CDs 💿", "Batteries 🔋", "Boxes📦", "Juice boxes 🧃", "Paper 📄", "Cans🥫", "Glass🫙🍾", "Tires 🛞",]
+    let trashItems: Set<String> = ["Used Band-Aids🩹", "Juice pouches", "Receipts 🧾" ]
     @State var recycling: [String] = []
     @State var trash: [String] = []
     @State var isItemsTargeted = false
@@ -56,8 +58,15 @@ struct DragDropView: View {
                     isRecyclingtargeted = isTargeted
                 }
             
+            
+            if recycling.contains("Boxes📦") {
+                Text("Correct! Cardboard boxes such as cereal boxes are recyclable! However, it is important to make sure the box you are recycling is flattened prior to throwing it in the bin to allow us to recycle even more items to save our environment.")
+            } else if trash.contains("Boxes📦") {
+                Text("Try again! Cardboard boxes are definitely recyclable because it can be broken down and processed to make new cardboard materials such as new boxes, paper towels, tissues, and paper!")
+            }
         }
         .padding()
+        
     }
 }
 
