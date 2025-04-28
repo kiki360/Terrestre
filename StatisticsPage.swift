@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct StatisticsPage: View {
+    let firstURL = URL(string: "https:www.cnn.com/2023/03/16/world/plastic-water-bottles-un-report-climate/index.html")!
     var body: some View {
         VStack{
             HStack{
@@ -21,6 +22,7 @@ struct StatisticsPage: View {
             Text("''The bottled water industry generated roughly 600 billion plastic bottles and containers in 2021, according to the report. This resulted in around 25 million tons of plastic waste — most of which is not recycled and ends up in landfills.''")
                 .font(.custom("Courier", size: 15))
                 .padding()
+            Link("Go To CNN Article", destination: firstURL)
             Text("''However, around 1 million plants and animals are currently under the threat of extinction, and climate change is a key driver, along with other forms of habitat destruction.''")
                 .font(.custom("Courier", size: 16))
                 .padding()
