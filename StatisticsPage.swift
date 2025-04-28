@@ -57,9 +57,9 @@ struct StatisticsPage: View {
                 .padding()
             Link("Go To Article Source", destination: (sixthURL!))
                 .font(.caption)
-                .padding()
             Text("''The total generation of municipal solid waste (MSW) in 2018 was 292.4 million tons (U.S. short tons, unless specified) or 4.9 pounds per person per day. Of the MSW generated, approximately 69 million tons were recycled and 25 million tons were composted.''")
                 .font(.custom("Courier", size: 14))
+                .padding()
             Link("Go To Article Source", destination: (seventhURL!))
                 .font(.caption)
             
