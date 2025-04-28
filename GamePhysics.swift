@@ -73,7 +73,12 @@ class GamePhysics: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-            Player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 2000))
-//            print("Player Jumped")
+        Player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 2000))
+        //            print("Player Jumped")
     }
+    
+        func playerMovedLeft(_ touches: Set<UITouch>, with event: UIEvent?) {
+            let leftMovement = SKAction.move(by: CGVector(dx: 150, dy: 0), duration: 1.0)
+            Player.run(leftMovement)
+        }
 }
