@@ -61,8 +61,12 @@ struct DragDropView: View {
             
             if recycling.contains("Boxes📦") {
                 Text("Correct! Cardboard boxes such as cereal boxes are recyclable! However, it is important to make sure the box you are recycling is flattened prior to throwing it in the bin to allow us to recycle even more items to save our environment.")
+                    .padding()
+                    .opacity(0.8)
             } else if trash.contains("Boxes📦") {
                 Text("Try again! Cardboard boxes are definitely recyclable because it can be broken down and processed to make new cardboard materials such as new boxes, paper towels, tissues, and paper!")
+                    .padding()
+                    .opacity(0.8)
             }
 //            .padding()
 //            .opacity(0.8)

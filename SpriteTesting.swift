@@ -17,16 +17,7 @@ struct SpriteTesting: View {
             GeometryReader { Geometry in
                 SpriteView(scene: GamePhysics(size: Geometry.size))
             }
-            HStack {
-                Button {
-                    
-                } label: {
-                    Image(systemName: "arrow.left")
-                        .font(.largeTitle)
-                        .bold()
-                }
-
-            }
+            GamePad()
         }
     }
 }

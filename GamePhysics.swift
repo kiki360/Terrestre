@@ -16,7 +16,7 @@ struct PhysicsCategory {
     static let Frame: UInt32 = 0x1 << 2
 }
 
-class GamePhysics: SKScene, SKPhysicsContactDelegate {
+class GamePhysics: SKScene, SKPhysicsContactDelegate, ObservableObject {
     var Player = SKSpriteNode(imageNamed: "PlayerCharacter")
     var Platform = SKSpriteNode()
     let Frame = SKNode()
@@ -77,8 +77,24 @@ class GamePhysics: SKScene, SKPhysicsContactDelegate {
         //            print("Player Jumped")
     }
     
-        func playerMovedLeft(_ touches: Set<UITouch>, with event: UIEvent?) {
+        func playerMovedLeft(/*_ touches: Set<UITouch>, with event: UIEvent?*/) {
             let leftMovement = SKAction.move(by: CGVector(dx: 150, dy: 0), duration: 1.0)
             Player.run(leftMovement)
         }
+}
+
+struct GamePad: View {
+    @EnvironmentObject var gamePhysics: GamePhysics
+    var body: some View {
+        HStack {
+            Button {
+                gamePhysics.playerMovedLeft()
+            } label: {
+                Image(systemName: "arrow.right")
+                    .font(.largeTitle)
+                    .bold()
+            }
+
+        }
+    }
 }
