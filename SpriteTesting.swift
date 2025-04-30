@@ -12,6 +12,7 @@ import SwiftUI
 import SpriteKit
 
 struct SpriteTesting: View {
+    @EnvironmentObject var gamePhysics: GamePhysics
     var body: some View {
         ZStack {
             GeometryReader { Geometry in
@@ -24,4 +25,5 @@ struct SpriteTesting: View {
 
 #Preview {
     SpriteTesting()
+        .environmentObject(GamePhysics())
 }

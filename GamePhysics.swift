@@ -77,10 +77,24 @@ class GamePhysics: SKScene, SKPhysicsContactDelegate, ObservableObject {
         //            print("Player Jumped")
     }
     
-        func playerMovedLeft(/*_ touches: Set<UITouch>, with event: UIEvent?*/) {
-            let leftMovement = SKAction.move(by: CGVector(dx: 150, dy: 0), duration: 1.0)
-            Player.run(leftMovement)
-        }
+    
+    func playerMovedRight(by vector: CGVector) {
+        let movePlayerRight = SKAction.move(by: vector, duration: 1)
+        Player.run(movePlayerRight)
+        print("Player position = \(Player.position)")
+    }
+    
+    func playerMovedUp(by vector: CGVector) {
+        let movePlayerUp = SKAction.move(by: vector, duration: 1)
+        Player.run(movePlayerUp)
+        print("Player position = \(Player.position)")
+    }
+    
+    func playerMovedLeft(by vector: CGVector) {
+        let movePlayerLeft = SKAction.move(by: vector, duration: 1)
+        Player.run(movePlayerLeft)
+        print("Player position = \(Player.position)")
+    }
 }
 
 struct GamePad: View {
@@ -88,13 +102,32 @@ struct GamePad: View {
     var body: some View {
         HStack {
             Button {
-                gamePhysics.playerMovedLeft()
+                print("Left Button pressed")
+                gamePhysics.playerMovedLeft(by: CGVector(dx: -150, dy: 0))
+            } label: {
+                Image(systemName: "arrow.left")
+                    .font(.largeTitle)
+                    .bold()
+            }
+            
+            Button {
+                print("Up Button pressed")
+                gamePhysics.playerMovedRight(by: CGVector(dx: 0, dy: 2000))
+            } label: {
+                Image(systemName: "arrow.up")
+                    .font(.largeTitle)
+                    .bold()
+            }
+            
+            Button {
+                print("Right Button pressed")
+                gamePhysics.playerMovedRight(by: CGVector(dx: 150, dy: 0))
             } label: {
                 Image(systemName: "arrow.right")
                     .font(.largeTitle)
                     .bold()
             }
-
+            
         }
     }
 }
