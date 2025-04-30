@@ -9,8 +9,6 @@ import Algorithms
 
 struct DragDropView: View {
     @State var items: [String] = ["Electronics📱💻", "CDs 💿", "Batteries 🔋", "Boxes📦", "Juice boxes 🧃", "Paper 📄", "Cans🥫", "Glass🫙🍾", "Used Tissues🧻", "Juice pouches", "Receipts 🧾", "Tires 🛞", "Plastic bags", "Ziploc bags", "Chip Bags", "Ice Cream container", "Styrofoam🥤", "Shoes 👞", "Medical waste 💉", "Car parts", "Pizza Boxes🍕"]
-//    let recyclingItems: Set<String> = ["Electronics📱💻", "CDs 💿", "Batteries 🔋", "Boxes📦", "Juice boxes 🧃", "Paper 📄", "Cans🥫", "Glass🫙🍾", "Tires 🛞",]
-//    let trashItems: Set<String> = ["Used Band-Aids🩹", "Juice pouches", "Receipts 🧾" ]
     @State var recycling: [String] = []
     @State var trash: [String] = []
     @State var isItemsTargeted = false
@@ -84,6 +82,40 @@ struct DragDropView: View {
                 } else if trash.contains("Boxes📦") {
                     Text("Try again! Cardboard boxes are definitely recyclable because it can be broken down and processed to make new cardboard materials such as new boxes, paper towels, tissues, and paper!")
                 }
+            
+            if recycling.contains("Juice boxes 🧃") {
+                    Text("Yes! Juice boxes are recyclable because they are often made of plastic, paperboard, and aluminum, all of which are recyclable!")
+                } else if trash.contains("Juice boxes 🧃") {
+                    Text("Oops! juice boxes are made of a combination of plastic, paper, and aluminum, which definitely makes them recyclable.")
+                }
+            
+            if recycling.contains("Paper 📄") {
+                    Text("Correct! Paper is definitely recyclable because it is made of the most important and abundant renewable resource- trees!")
+                } else if trash.contains("Paper 📄") {
+                    Text("Oops! When you think of recycling, paper should definitely ring a bell! Paper is made of wood, meaning it is recyclable.")
+                }
+            
+            if recycling.contains("Cans🥫") {
+                    Text("Yes! Cans are usually made of aluminum or other metals and alloys, which are recyclable. These metals also include steel, copper, brass, tin, and others as well. In fact, almost all metals are recyclable (except of course ones that are radioactive, which we hope you aren't recycling...)")
+                } else if trash.contains("Cans🥫") {
+                    Text("Incorrect. Cans are almost always made of metals such as aluminum and tin, which are recyclable!")
+                }
+            
+            if recycling.contains("Glass🫙🍾") {
+                    Text("Correct, glass is recyclable! It can be melted and reformed into new class infinitely without losing its quality!")
+                } else if trash.contains("Glass🫙🍾") {
+                    Text("Try again! Glass is recyclable because it can be melted and formed into new glass!")
+                }
+            
+            if recycling.contains("Used Tissues🧻") {
+                    Text("Good Try! Even though they are made of paper, tissues are actually made up of shorter and weaker fibers that make them unable to be re-processed into new products. Additionally, tissues have residue on them from during their use. This makes it best for them to be ")
+                } else if trash.contains("Used Tissues🧻") {
+                    Text("")
+                }
+            
+            
+            
+            
                 
             }
             
