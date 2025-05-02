@@ -9,6 +9,7 @@
 
 import SwiftUI
 import SpriteKit
+import UIKit
 
 struct PhysicsCategory {
     static let Player: UInt32 = 0x1 << 0
@@ -22,6 +23,7 @@ class GamePhysics: SKScene, SKPhysicsContactDelegate, ObservableObject {
     let Frame = SKNode()
     
     override func sceneDidLoad() {
+        print("Scene loaded")
         physicsWorld.contactDelegate = self
         self.backgroundColor = .white
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
@@ -44,6 +46,7 @@ class GamePhysics: SKScene, SKPhysicsContactDelegate, ObservableObject {
         Platform.physicsBody?.collisionBitMask = PhysicsCategory.Player
         
         addChild(Platform)
+        print("added Platform")
     }
     
     var playerOnGround = false
@@ -72,9 +75,26 @@ class GamePhysics: SKScene, SKPhysicsContactDelegate, ObservableObject {
         addChild(Frame)
     }
     
+    override func update(_ currentTime: TimeInterval) {
+        
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         Player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 2000))
-        //            print("Player Jumped")
+                    print("Player Jumped")
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let int = Int.random(in: 2...100)
+        if let touch1 = touches.first {
+            if let touch2 = touches.description.last {
+                if touch1.location(in: self).x < touch2.location(in: self).x {
+                    playerMovedRight(by: CGVector(dx: 10, dy: 0))
+                } else if touch1.location(in: self).x > touch2.location(in: self).x {
+                    playerMovedLeft(by: CGVector(dx: -10, dy: 0))
+                }
+            }
+        }
     }
     
     
@@ -128,6 +148,9 @@ struct GamePad: View {
                     .bold()
             }
             
+        }
+        .onAppear() {
+            print("Game Pad Loaded")
         }
     }
 }
