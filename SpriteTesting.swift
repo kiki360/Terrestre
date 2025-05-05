@@ -18,7 +18,7 @@ struct SpriteTesting: View {
             GeometryReader { Geometry in
                 SpriteView(scene: GamePhysics(size: Geometry.size))
             }
-            GamePad()
+//            GamePad()
         }
     }
 }
