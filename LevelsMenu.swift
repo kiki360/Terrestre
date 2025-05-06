@@ -11,11 +11,18 @@ struct LevelsMenu: View {
     var body: some View {
         NavigationStack{
             Text("Select a Mission")
+            
             NavigationLink("Question Test", destination: QuestionTest())
+            
             NavigationLink("Drag and Drop Game", destination: DragDropView())
-            NavigationLink("Sprite Testing -- This will be removed") {
-                SpriteTesting()
+            
+//            NavigationLink("Sprite Testing -- This will be removed") {
+//                SpriteTesting()
+//            }
+            NavigationLink(destination: OilSpill()) {
+                Text("Oil Spill")
             }
+            
             NavigationLink("Dialogue Test", destination: DialogueTest())
         }
     }
