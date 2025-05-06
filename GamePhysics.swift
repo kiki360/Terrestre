@@ -55,20 +55,19 @@ class GamePhysics: SKScene, SKPhysicsContactDelegate, ObservableObject {
         Platform.physicsBody?.contactTestBitMask = PhysicsCategory.Player
         Platform.physicsBody?.collisionBitMask = PhysicsCategory.Player
         
-        upArrow.fillColor = .red
-        upArrow.position = CGPoint(x: 650, y: 690)
-//        upArrow.addChild(SKNode())
-//        upArrow.childNode(withName: "uparrow")?.position = upArrow.position
+        upArrow.fillColor = .clear
+        upArrow.strokeColor = .black
+        upArrow.position = CGPoint(x: 125, y: 140)
         upArrow.name = "uparrow"
         
-        leftArrow.position = CGPoint(x: 600, y: 600)
-        leftArrow.fillColor = .red
-//        leftArrow.childNode(withName: "leftarrow")?.position = leftArrow.position
+        leftArrow.position = CGPoint(x: 80, y: 50)
+        leftArrow.fillColor = .clear
+        leftArrow.strokeColor = .black
         leftArrow.name = "leftarrow"
         
-        rightArrow.position = CGPoint(x: 700, y: 600)
-        rightArrow.fillColor = .red
-//        rightArrow.childNode(withName: "rightarrow")?.position = rightArrow.position
+        rightArrow.position = CGPoint(x: 175, y: 50)
+        rightArrow.fillColor = .clear
+        rightArrow.strokeColor = .black
         rightArrow.name = "rightarrow"
         
         addChild(Platform)
@@ -89,8 +88,8 @@ class GamePhysics: SKScene, SKPhysicsContactDelegate, ObservableObject {
         
         Player.physicsBody?.isDynamic = true
         Player.physicsBody?.affectedByGravity = true
-        Player.physicsBody?.allowsRotation = true
-        Player.physicsBody?.mass = 2
+        Player.physicsBody?.allowsRotation = false
+        Player.physicsBody?.mass = 3
         Player.physicsBody?.friction = 10
         Player.physicsBody?.restitution = 0.2
         
@@ -120,9 +119,7 @@ class GamePhysics: SKScene, SKPhysicsContactDelegate, ObservableObject {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        Player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 2000))
 //        print("Player Jumped")
-//        print("touchesBegan working")
         for touch in touches {
             let position = touch.location(in: self)
             if nodes(at: position).first != nil {
