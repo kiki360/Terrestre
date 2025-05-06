@@ -9,41 +9,28 @@ import SwiftUI
 
 struct DialogueTest: View {
     @AppStorage("username") var username = "Guest"
+    let TotalIterations: Int = 2
+    @State var iterations: Int = 1
     var body: some View {
-        NavigationStack{
-            VStack{
-                
-                NavigationLink {
-                    Dialogue(characterName: "Test", response: false, dialogue: ["Hi, \(username)! We need your help to stop the fracking in our town. To do this, could you please contact our local Town Hall?", "Thanks! We will surely remember this when you return."], totalIteration: 2)
-                } label: {
-                    Image(systemName: "exclamationmark.bubble.fill")
-                }
-            }
-        }
-    }
-}
-
-struct Dialogue: View {
-    let characterName: String
-    let response: Bool
-    let dialogue: [String]
-    @State var Iterations: Int = 0
-    let totalIteration: Int
-    var body: some View {
-        Text(characterName)
-        List{
-            ForEach(dialogue, id: \.self){speech in
-                if Iterations >= totalIteration{
-                    Text(speech)
-                        .onAppear(){
-                            Iterations += 1
-                        }
-                    // This is incomplete, I'm just trying to display the number of texts that the user has finished reading
-                }
-            }
-        }
+        Text("\(Dialogue())")
         Button("Next"){
-            Iterations += 1
+            iterations += 1
+            if iterations >= 2{
+                iterations = 2
+            }
+        }
+    }
+    func Dialogue() -> String{
+        let Dialogue: [Int: String] = [1: "Hi, \(username)! We need your help to stop the fracking in our town. To do this, could you please contact our local Town Hall?",2: "Thanks! We will surely remember this when you return."]
+        switch iterations{
+        case 1:
+            return Dialogue[1]!
+        case 2:
+            return Dialogue[1]! + "\n" + Dialogue[2]!
+        default:
+            return ""
         }
     }
 }
+// dialogue: ["Hi, \(username)! We need your help to stop the fracking in our town. To do this, could you please contact our local Town Hall?", "Thanks! We will surely remember this when you return."], totalIteration: 2)
+
