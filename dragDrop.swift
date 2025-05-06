@@ -8,12 +8,14 @@ import SwiftUI
 import Algorithms
 
 struct DragDropView: View {
-    @State var items: [String] = ["Electronics📱💻", "CDs 💿", "Batteries 🔋", "Boxes📦", "Juice boxes 🧃", "Paper 📄", "Cans🥫", "Glass🫙🍾", "Used Tissues🧻", "Juice boxes 🧃", "Receipts 🧾", "Tires 🛞", "Plastic bags", "Ziploc bags", "Chip Bags", "Ice Cream container", "Styrofoam🥤", "Shoes 👞", "Medical waste 💉", "Car parts", "Pizza Boxes🍕"]
+    @State var items: [String] = ["Electronics📱💻", "CDs 💿", "Batteries 🔋", "Boxes📦", "Juice boxes 🧃", "Paper 📄", "Cans🥫", "Glass🫙🍾", "Used Tissues🧻", "Juice boxes 🧃", "Receipts 🧾", "Tires 🛞", "Plastic bags", "Ziploc bags", "Chip Bags", "Ice Cream containers", "Medical waste 💉", "Car parts", "Pizza Boxes🍕"]
     @State var recycling: [String] = []
     @State var trash: [String] = []
+    @State var depends: [String] = []
     @State var isItemsTargeted = false
     @State var isTrashtargeted = false
     @State var isRecyclingtargeted = false
+    @State var isDependstargeted = false
     let ElectronicsURL = URL(string: "https://epa.illinois.gov/topics/waste-management/materials-management/electronics-recycling1.html#:~:text=Did%20you%20know%20that%20it,are%20unwanted%20by%20Illinois%20residents.")
     
     var body: some View {
@@ -24,6 +26,7 @@ struct DragDropView: View {
                     for task in droppedItems {
                         trash.removeAll {$0 == task}
                         recycling.removeAll {$0 == task}
+                        depends.removeAll {$0 == task}
                     }
                     let totalItems = items + droppedItems
                     items = Array(totalItems.uniqued())
@@ -36,6 +39,7 @@ struct DragDropView: View {
                     for task in droppedItems {
                         items.removeAll {$0 == task}
                         recycling.removeAll {$0 == task}
+                        depends.removeAll {$0 == task}
                     }
                     let totalItems = trash + droppedItems
                     trash = Array(totalItems.uniqued())
@@ -49,6 +53,7 @@ struct DragDropView: View {
                     for task in droppedItems {
                         items.removeAll {$0 == task}
                         trash.removeAll {$0 == task}
+                        depends.removeAll {$0 == task}
                     }
                     let totalItems = recycling + droppedItems
                     recycling = Array(totalItems.uniqued())
@@ -57,7 +62,21 @@ struct DragDropView: View {
                     isRecyclingtargeted = isTargeted
                 }
             
-            if recycling.contains("Electronics📱💻") {
+            SortView(title: "Depends", tasks: depends, isTargeted: isDependstargeted)
+                .dropDestination(for: String.self) { droppedItems, location in
+                    for task in droppedItems {
+                        items.removeAll {$0 == task}
+                        trash.removeAll {$0 == task}
+                        recycling.removeAll {$0 == task}
+                    }
+                    let totalItems = depends + droppedItems
+                    depends = Array(totalItems.uniqued())
+                    return true
+                } isTargeted: { isTargeted in
+                    isDependstargeted = isTargeted
+                }
+            
+            if recycling.contains("Electronics📱💻") { //MOVE TO DEPENDS
                 Text("This is a tricky one! Most people mistakenly throw away their unwanted electronics, but they are actually recyclable! However, it is important to note that electronics cannot be recycled in traditional curbside recycling bins. Instead, they are recycled through special recycling events or drop-off locations to ensure the proper disposal of devices.")
                 Link("Visit this EPA link for more information on special recycling circumstances for electronics!", destination: (ElectronicsURL!))
             } else if trash.contains("Electronics📱💻") {
@@ -66,7 +85,7 @@ struct DragDropView: View {
                 Text("")
             }
             
-            if recycling.contains("CDs 💿") {
+            if recycling.contains("CDs 💿") { //MOVE TO DEPENDS
                 Text("Correct! CDs are usually made out of materials like polycarbonate plastic and aluminum, which are definitely recyclable! By recycling them, we are also conserving some of the resources that are key to the process of creating CDs, like natural gas, crude oil, and water.")
             } else if trash.contains("CDs 💿") {
                 Text("Try again. CDs can't be put into landfills because the materials they are made out of (such as plastic) are not biodegradable.")
@@ -126,11 +145,45 @@ struct DragDropView: View {
                     Text("Correct! Receipts are usually printed on thermal paper in order to allow ink to be printed on them. This material contains BPA and BPS, which are toxic chemicals, making receipts very hard to recycle and ultimately better for them to be thrown out to prevent contamination.")
                 }
             
-            if recycling.contains("Tires 🛞") {
+            if recycling.contains("Tires 🛞") { //MOVE TO DEPENDS
                     Text("Right! It is much more environmentally friendly to recycle tires because if they were to be trashed, they are burnt, which results in pollution. However, it is important to note that tires cannot be recycled in curbside bins because they don't fit and have materials that need to be separated through special processes. Check with your city to see where there are specialized tire drop-off locations to properly dispose of them!")
                 } else if trash.contains("Tires 🛞") {
                     Text("Try one more time! As a matter of fact, tires can be recycled because they are not biodegradable and they are usually burned in landfills, which releases harmful chemicals into the air.")
                 }
+            
+            if recycling.contains("Plastic bags") { //MOVE TO DEPENDS
+                    Text("Another tricky one! Plastic bags can be recycled, but they need to be once again recycled in special places that collect plastics bags for recycling. Usually one of these locations is near you, like in your local Target or Walmart! When recycled, plastic bags are turned into plastic pellets that could be used to produce new plastic bags or other plastic materials.")
+                } else if trash.contains("Plastic bags") {
+                    Text("Uh-oh! Although plastic bags can't be recycled normally, they still need to be recycled through special programs because if we were to put them in landfills, it would take thousands of years for them to degrade into the soil. Recycling here is your best bet, but make sure to check locally to see where such programs can take place. ")
+                } else if depends.contains("Plastic bags") {
+                    Text("Right on! Plastic bags are recyclable, but they need to be recycled in special places that collect plastics bags for recycling. Usually one of these locations is near you, like in your local Target or Walmart! When recycled, plastic bags are turned into plastic pellets that could be used to produce new plastic bags or other plastic materials.")
+                }
+            
+            if recycling.contains("Ziploc bags") { //MOVE TO DEPENDS
+                    Text("Yes! Ziploc bags are recyclable because they are made of plain plastic. However, it would be safe to drop them off at separate locations like with plastic bags because they could cause problems with recycling machinery")
+                } else if trash.contains("Ziploc bags") {
+                    Text("Try again! Ziploc bags are made of plastic, which does make them recyclable!")
+                }
+            
+            if recycling.contains("Chip Bags") {
+                    Text("Not quite! Chip bags often contain metal or other materials that can damage recycling machinery. Try to find a different location to drop them off!")
+                } else if trash.contains("Chip Bags") {
+                    Text("Not quite! Chip bags are not degradable, so they need to be disposed of another way!")
+                } else if depends.contains("Chip Bags") {
+                    Text("Yes! Because chip bags are made of mixed materials that are fused together, it makes it hard for them to get recycled, but through sepcial recycling locations, they can be recycled!")
+                }
+            
+            if recycling.contains("Ice Cream containers") {
+                    Text("While they may seem to be recyclable, most ice cream containers have wax or plastic linings that prevent them from being able to be recycled. Try Again!")
+                } else if trash.contains("Ice Cream containers") {
+                    Text("Oops! ")
+                } else if depends.contains("Ice Cream containers") {
+                    Text("")
+                }
+            
+            
+            
+            
             
             
             
@@ -158,7 +211,7 @@ struct DragDropView: View {
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 12)
-                        .frame(maxWidth: 250, maxHeight: 718)
+                        .frame(maxWidth: 250, maxHeight: .infinity)
                         .foregroundStyle(isTargeted ? .teal.opacity(0.15) :Color(.secondarySystemFill))
                     
                     VStack(alignment: .leading, spacing: 12) {
