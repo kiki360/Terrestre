@@ -5,7 +5,7 @@
 //  Created by Calliope Epstein-Pawlak on 4/17/25.
 //
 
-// I learned most of this code from ChatGPT, not the Sprites/Physics Learning in Schoology. The notes I took while using ChatGPT are in a different XCode project and I reused most of it for this file.
+// I learned most of this code from ChatGPT and YouTube, not the Sprites/Physics Learning in Schoology. The notes I took while using ChatGPT are in a different XCode project and I reused most of it for this file.
 
 import SwiftUI
 import SpriteKit
@@ -27,9 +27,9 @@ class GamePhysics: SKScene, SKPhysicsContactDelegate, ObservableObject {
     var right = false
     var grabbing = false
     
-    let upArrow = SKShapeNode(rectOf: CGSize(width: 75, height: 75))
-    let leftArrow = SKShapeNode(rectOf: CGSize(width: 75, height: 75))
-    let rightArrow = SKShapeNode(rectOf: CGSize(width: 75, height: 75))
+    let upArrow = SKSpriteNode(imageNamed: "upArrow")
+    let leftArrow = SKSpriteNode(imageNamed: "leftArrow")
+    let rightArrow = SKSpriteNode(imageNamed: "rightArrow")
     let actionButton = SKShapeNode(ellipseOf: CGSize(width: 100, height: 100))
     
     
@@ -58,18 +58,12 @@ class GamePhysics: SKScene, SKPhysicsContactDelegate, ObservableObject {
         Platform.physicsBody?.collisionBitMask = PhysicsCategory.Player
         
         upArrow.position = UserDefaults.standard.getCGPoint(forKey: "upButtonPlacement") ?? CGPoint(x: 125, y: 140)
-        upArrow.fillColor = .clear
-        upArrow.strokeColor = .black
         upArrow.name = "uparrow"
         
         leftArrow.position = UserDefaults.standard.getCGPoint(forKey: "leftButtonPlacement") ?? CGPoint(x: 80, y: 50)
-        leftArrow.fillColor = .clear
-        leftArrow.strokeColor = .black
         leftArrow.name = "leftarrow"
         
         rightArrow.position = UserDefaults.standard.getCGPoint(forKey: "rightButtonPlacement") ?? CGPoint(x: 175, y: 50)
-        rightArrow.fillColor = .clear
-        rightArrow.strokeColor = .black
         rightArrow.name = "rightarrow"
         
         actionButton.fillColor = .clear
