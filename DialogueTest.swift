@@ -11,26 +11,43 @@ struct DialogueTest: View {
     @AppStorage("username") var username = "Guest"
     let TotalIterations: Int = 2
     @State var iterations: Int = 1
+    @State var showHistory: Bool = false
+    @State var history: [String] = []
     var body: some View {
-        Text("\(Dialogue())")
-        Button("Next"){
-            iterations += 1
-            if iterations >= 2{
-                iterations = 2
+        //        Text("\(Dialogue())")
+        if showHistory{
+            ForEach(history, id: \.self){ text in
+                Text(text)
+            }
+        } else {
+            Text("\(Dialogue2())")
+            Button("Next"){
+                iterations += 1
+                if iterations > TotalIterations{
+                    iterations = TotalIterations
+                }
             }
         }
     }
-    func Dialogue() -> String{
-        let Dialogue: [Int: String] = [1: "Hi, \(username)! We need your help to stop the fracking in our town. To do this, could you please contact our local Town Hall?",2: "Thanks! We will surely remember this when you return."]
-        switch iterations{
-        case 1:
-            return Dialogue[1]!
-        case 2:
-            return Dialogue[1]! + "\n" + Dialogue[2]!
-        default:
-            return ""
-        }
+//    func Dialogue() -> String{
+//        let Dialogue: [Int: String] = [1: "Hi, \(username)! We need your help to stop the fracking in our town. To do this, could you please contact our local Town Hall?",2: "Thanks! We will surely remember this when you return."]
+//        switch iterations{
+//        case 1:
+//            return Dialogue[1]!
+//        case 2:
+//            return Dialogue[1]! + "\n" + Dialogue[2]!
+//        default:
+//            return ""
+//        }
+//    }
+func Dialogue2() -> String{
+    let Dialogue: [Int: String] = [1: "Hi, \(username)! We need your help to stop the fracking in our town. To do this, could you please contact our local Town Hall?",2: "Thanks! We will surely remember this when you return."]
+    if let iteration = Dialogue[iterations]{
+        history.append(iteration)
+        return iteration
     }
+    return ""
+}
 }
 // dialogue: ["Hi, \(username)! We need your help to stop the fracking in our town. To do this, could you please contact our local Town Hall?", "Thanks! We will surely remember this when you return."], totalIteration: 2)
 
