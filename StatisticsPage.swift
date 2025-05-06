@@ -22,7 +22,7 @@ struct StatisticsPage: View {
             HStack{
                 Image(systemName: "leaf.circle.fill")
                     .font(.largeTitle)
-                Text("Statistics About Climate Change")
+                Text(" Statistics About Climate Change ")
                     .font(.custom("Courier", size: 40))
                 Image(systemName: "leaf.circle.fill")
                     .font(.largeTitle)

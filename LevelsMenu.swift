@@ -13,6 +13,7 @@ struct LevelsMenu: View {
             Text("Select a Mission")
             NavigationLink("Question Test", destination: QuestionTest())
             NavigationLink("Drag and Drop Game", destination: DragDropView())
+            NavigationLink("Dialogue Test", destination: DialogueTest())
         }
     }
 }
