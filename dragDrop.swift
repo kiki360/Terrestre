@@ -63,6 +63,8 @@ struct DragDropView: View {
                 Link("Visit this EPA link for more information on special recycling circumstances for electronics!", destination: (ElectronicsURL!))
             } else if trash.contains("Electronics📱💻") {
                 Text("Not quite! More than 20% of electronics get thrown away because many people do not know that they are in fact recyclable! However, the reason behind public skepticism is the special circumstances or recycling these items, namely recycling them through special recycling events or drop-off locations to ensure the proper disposal of devices.")
+            } else {
+                Text("")
             }
             
             if recycling.contains("CDs 💿") {
@@ -108,10 +110,30 @@ struct DragDropView: View {
                 }
             
             if recycling.contains("Used Tissues🧻") {
-                    Text("Good Try! Even though they are made of paper, tissues are actually made up of shorter and weaker fibers that make them unable to be re-processed into new products. Additionally, tissues have residue on them from during their use. This makes it best for them to be ")
+                    Text("Good Try! Even though they are made of paper, tissues are actually made up of shorter and weaker fibers that make them unable to be re-processed into new products. Additionally, tissues have residue on them from during their use. This makes it best for them to be thrown away")
                 } else if trash.contains("Used Tissues🧻") {
-                    Text("")
+                    Text("Correct! Tissues are made up of shorter and weaker fibers that make them unable to be re-processed into new products. In addition, when we use tissues, there is usually residue on them, preventing them from being able to be reprocessed.")
                 }
+            
+            if recycling.contains("Juice pouches") {
+                    Text("Incorrect. Even though juice boxes are able to be recycled, juice boxes' materials are often laminated together, which makes them difficult to separate. The next time you grab a CapriSun, make sure to throw it out instead of recycling it!")
+                } else if trash.contains("Juice pouches") {
+                    Text("Correct! Juice boxes' materials are often laminated together, which makes them difficult to separate. Just throwing them in the trash works best for them!")
+                }
+            
+            if recycling.contains("Receipts 🧾") {
+                    Text("This is an extremely tricky one! Although receipts look like just another piece of paper that can be recycled, they are actually made with thermal paper, a material which contains toxic chemicals like BPA and BPS, which allows for ink to be printed on again. As a result, it is easier to throw them out to prevent contamination in the recycling system. Now you know!")
+                } else if trash.contains("Receipts 🧾") {
+                    Text("Correct! Receipts are usually printed on thermal paper in order to allow ink to be printed on them. This material contains BPA and BPS, which are toxic chemicals, making receipts very hard to recycle and ultimately better for them to be thrown out to prevent contamination.")
+                }
+            
+            if recycling.contains("Tires 🛞") {
+                    Text("Right! It is much more environmentally friendly to recycle tires because if they were to be trashed, they are burnt, which results in pollution. However, it is important to note that tires cannot be recycled in curbside bins because they don't fit and have materials that need to be separated through special processes. Check with your city to see where there are specialized tire drop-off locations to properly dispose of them!")
+                } else if trash.contains("Tires 🛞") {
+                    Text("Try one more time! As a matter of fact, tires can be recycled because they are not biodegradable and they are usually burned in landfills, which releases harmful chemicals into the air.")
+                }
+            
+            
             
             
             
