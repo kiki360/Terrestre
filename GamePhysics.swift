@@ -20,20 +20,22 @@ struct PhysicsCategory {
 class GamePhysics: SKScene, SKPhysicsContactDelegate, ObservableObject {
     var Player = SKSpriteNode(imageNamed: "PlayerCharacter")
     var Platform = SKSpriteNode()
-//    let Frame = SKNode()
+    //    let Frame = SKNode()
     
     var up = false
     var left = false
     var right = false
+    var grabbing = false
     
     let upArrow = SKShapeNode(rectOf: CGSize(width: 75, height: 75))
     let leftArrow = SKShapeNode(rectOf: CGSize(width: 75, height: 75))
     let rightArrow = SKShapeNode(rectOf: CGSize(width: 75, height: 75))
+    let actionButton = SKShapeNode(ellipseOf: CGSize(width: 100, height: 100))
     
     
     
     override func sceneDidLoad() {
-//        print("Scene loaded")
+        //        print("Scene loaded")
         physicsWorld.contactDelegate = self
         self.backgroundColor = .white
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
@@ -55,26 +57,33 @@ class GamePhysics: SKScene, SKPhysicsContactDelegate, ObservableObject {
         Platform.physicsBody?.contactTestBitMask = PhysicsCategory.Player
         Platform.physicsBody?.collisionBitMask = PhysicsCategory.Player
         
+        upArrow.position = UserDefaults.standard.getCGPoint(forKey: "upButtonPlacement") ?? CGPoint(x: 125, y: 140)
         upArrow.fillColor = .clear
         upArrow.strokeColor = .black
-        upArrow.position = CGPoint(x: 125, y: 140)
         upArrow.name = "uparrow"
         
-        leftArrow.position = CGPoint(x: 80, y: 50)
+        leftArrow.position = UserDefaults.standard.getCGPoint(forKey: "leftButtonPlacement") ?? CGPoint(x: 80, y: 50)
         leftArrow.fillColor = .clear
         leftArrow.strokeColor = .black
         leftArrow.name = "leftarrow"
         
-        rightArrow.position = CGPoint(x: 175, y: 50)
+        rightArrow.position = UserDefaults.standard.getCGPoint(forKey: "rightButtonPlacement") ?? CGPoint(x: 175, y: 50)
         rightArrow.fillColor = .clear
         rightArrow.strokeColor = .black
         rightArrow.name = "rightarrow"
         
+        actionButton.fillColor = .clear
+        actionButton.strokeColor = .black
+        actionButton.position = UserDefaults.standard.getCGPoint(forKey: "actionButtonPlacement") ?? CGPoint(x: 1100, y: 75)
+        actionButton.name = "actionbutton"
+        
+        addChild(Player)
         addChild(Platform)
         addChild(upArrow)
         addChild(leftArrow)
         addChild(rightArrow)
-//        print("added Platform")
+        addChild(actionButton)
+        //        print("added Platform")
     }
     
     var playerOnGround = false
@@ -99,43 +108,71 @@ class GamePhysics: SKScene, SKPhysicsContactDelegate, ObservableObject {
         Player.physicsBody?.contactTestBitMask = PhysicsCategory.Platform | PhysicsCategory.Frame
         Player.physicsBody?.collisionBitMask = PhysicsCategory.Platform | PhysicsCategory.Frame
         
-        addChild(Player)
-//        addChild(Frame)
+        
+        //        addChild(Frame)
     }
     
     override func update(_ currentTime: TimeInterval) {
         if up == true {
-            Player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 1000))
-//            print("player moving up")
+            withAnimation {
+                Player.position.y += 20
+            }
+            //            print("player moving up")
         }
         
         if left == true {
-            Player.position.x -= 10
-//            print("player moving left")
+            withAnimation {
+                Player.position.x -= 10
+            }
+            //            print("player moving left")
         } else if right == true {
-            Player.position.x += 10
-//            print("player moving right")
+            withAnimation {
+                Player.position.x += 10
+            }
+            //            print("player moving right")
         }
+        
+        if grabbing == true {
+            
+        }
+        
+        //        if let upPosition = UserDefaults.standard.value(forKey: "upButtonPlacement") as? CGPoint {
+        //            return upArrow.position = upPosition
+        //        }
+        //
+        //        if let leftPosition = UserDefaults.standard.value(forKey: "leftButtonPosition") as? CGPoint {
+        //            return leftArrow.position = leftPosition
+        //        }
+        //
+        //        if let rightPosition = UserDefaults.standard.value(forKey: "rightButtonPosition") as? CGPoint {
+        //            return leftArrow.position = rightPosition
+        //        }
+        //
+        //        if let actionButtonPosition = UserDefaults.standard.value(forKey: "actionButtonPosition") as? CGPoint {
+        //            return leftArrow.position = actionButtonPosition
+        //        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        print("Player Jumped")
+        //        print("Player Jumped")
         for touch in touches {
             let position = touch.location(in: self)
             if nodes(at: position).first != nil {
-//                print("there is a node here")
+                //                print("there is a node here")
                 switch nodes(at: position).first?.name?.lowercased() {
                 case "uparrow":
-//                    print("upArrow")
+                    //                    print("upArrow")
                     up = true
-                    case "leftarrow":
-//                    print("leftArrow")
+                case "leftarrow":
+                    //                    print("leftArrow")
                     left = true
                 case "rightarrow":
-//                    print("rightArrow")
+                    //                    print("rightArrow")
                     right = true
+                case "actionbutton":
+                    grabbing = true
                 default:
-//                    print("no nodes")
+                    //                    print("no nodes")
                     break
                 }
             }
@@ -153,60 +190,4 @@ class GamePhysics: SKScene, SKPhysicsContactDelegate, ObservableObject {
         
     }
     
-    
-    //    func playerMovedRight(by vector: CGVector) {
-    //        let movePlayerRight = SKAction.move(by: vector, duration: 1)
-    //        Player.run(movePlayerRight)
-    //        print("Player position = \(Player.position)")
-    //    }
-    //
-    //    func playerMovedUp(by vector: CGVector) {
-    //        let movePlayerUp = SKAction.move(by: vector, duration: 1)
-    //        Player.run(movePlayerUp)
-    //        print("Player position = \(Player.position)")
-    //    }
-    //
-    //    func playerMovedLeft(by vector: CGVector) {
-    //        let movePlayerLeft = SKAction.move(by: vector, duration: 1)
-    //        Player.run(movePlayerLeft)
-    //        print("Player position = \(Player.position)")
-    //    }
 }
-
-//struct GamePad: View {
-//    @EnvironmentObject var gamePhysics: GamePhysics
-//    var body: some View {
-//        HStack {
-//            Button {
-//                print("Left Button pressed")
-//                gamePhysics.playerMovedLeft(by: CGVector(dx: -150, dy: 0))
-//            } label: {
-//                Image(systemName: "arrow.left")
-//                    .font(.largeTitle)
-//                    .bold()
-//            }
-//
-//            Button {
-//                print("Up Button pressed")
-//                gamePhysics.playerMovedRight(by: CGVector(dx: 0, dy: 2000))
-//            } label: {
-//                Image(systemName: "arrow.up")
-//                    .font(.largeTitle)
-//                    .bold()
-//            }
-//
-//            Button {
-//                print("Right Button pressed")
-//                gamePhysics.playerMovedRight(by: CGVector(dx: 150, dy: 0))
-//            } label: {
-//                Image(systemName: "arrow.right")
-//                    .font(.largeTitle)
-//                    .bold()
-//            }
-//
-//        }
-//        .onAppear() {
-//            print("Game Pad Loaded")
-//        }
-//    }
-//}
