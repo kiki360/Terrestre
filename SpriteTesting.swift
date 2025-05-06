@@ -12,25 +12,18 @@ import SwiftUI
 import SpriteKit
 
 struct SpriteTesting: View {
+    @EnvironmentObject var gamePhysics: GamePhysics
     var body: some View {
         ZStack {
             GeometryReader { Geometry in
                 SpriteView(scene: GamePhysics(size: Geometry.size))
             }
-            HStack {
-                Button {
-                    
-                } label: {
-                    Image(systemName: "arrow.left")
-                        .font(.largeTitle)
-                        .bold()
-                }
-
-            }
+//            GamePad()
         }
     }
 }
 
 #Preview {
     SpriteTesting()
+        .environmentObject(GamePhysics())
 }
