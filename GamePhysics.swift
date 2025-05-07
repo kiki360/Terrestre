@@ -18,9 +18,12 @@ struct PhysicsCategory {
 }
 
 class GamePhysics: SKScene, SKPhysicsContactDelegate, ObservableObject {
+    let cameraNode = SKCameraNode()
+    
+    var backgroundImage = ""
     var Player = SKSpriteNode(imageNamed: "PlayerCharacter")
-    var Platform = SKSpriteNode()
-    //    let Frame = SKNode()
+    
+    var startingPlatform = SKSpriteNode()
     
     var up = false
     var left = false
@@ -32,52 +35,88 @@ class GamePhysics: SKScene, SKPhysicsContactDelegate, ObservableObject {
     let rightArrow = SKSpriteNode(imageNamed: "rightArrow")
     let actionButton = SKShapeNode(ellipseOf: CGSize(width: 100, height: 100))
     
+    var level = ""
+    
+    // Animal Sprites in the OilSpill level
+    
     
     
     override func sceneDidLoad() {
-        //        print("Scene loaded")
+        switch level {
+        case "OilSpill":
+            backgroundImage = "OilSpillBackground"
+        case "Arctic":
+            backgroundImage = "ArcticBackground"
+        case "Fracking":
+            backgroundImage = "FrackingBackground"
+        default:
+            break
+        }
+        
+        let Background = SKSpriteNode(imageNamed: backgroundImage)
+        Background.size = self.size
+        Background.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        Background.zPosition = -1
+        
         physicsWorld.contactDelegate = self
-        self.backgroundColor = .white
-        self.physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
+        self.physicsBody = SKPhysicsBody(edgeChainFrom: CGPath(rect: CGRect(x: 0, y: 0, width: self.size.width, height: 0), transform: nil))
+        self.anchorPoint = CGPoint(x: 0, y: 0)
         
         Player.size = CGSize(width: 100, height: 150)
         Player.position = CGPoint(x: 100, y: 700)
         Player.color = .red
+        Player.name = "player"
         
-        Platform.size = CGSize(width: 200, height: 25)
-        Platform.position = CGPoint(x: 115, y: 300)
-        Platform.color = .black
+        startingPlatform.size = CGSize(width: 200, height: 25)
+        startingPlatform.position = CGPoint(x: 115, y: 300)
+        startingPlatform.color = .black
         
-        Platform.physicsBody = SKPhysicsBody(rectangleOf: Platform.size)
+        startingPlatform.physicsBody = SKPhysicsBody(rectangleOf: startingPlatform.size)
         
-        Platform.physicsBody?.isDynamic = false
-        Platform.physicsBody?.affectedByGravity = false
+        startingPlatform.physicsBody?.isDynamic = false
+        startingPlatform.physicsBody?.affectedByGravity = false
         
-        Platform.physicsBody?.categoryBitMask = PhysicsCategory.Platform
-        Platform.physicsBody?.contactTestBitMask = PhysicsCategory.Player
-        Platform.physicsBody?.collisionBitMask = PhysicsCategory.Player
+        startingPlatform.physicsBody?.categoryBitMask = PhysicsCategory.Platform
+        startingPlatform.physicsBody?.contactTestBitMask = PhysicsCategory.Player
+        startingPlatform.physicsBody?.collisionBitMask = PhysicsCategory.Player
         
-        upArrow.position = UserDefaults.standard.getCGPoint(forKey: "upButtonPlacement") ?? CGPoint(x: 125, y: 140)
+        for i in 1...10 {
+            let otherPlatform = SKSpriteNode(color: .black, size: startingPlatform.size)
+            
+            let x = Int.random(in: 10...1000)
+            let y = Int.random(in: 10...1000)
+            
+            otherPlatform.position = CGPoint(x: x, y: y)
+            otherPlatform.physicsBody = SKPhysicsBody(rectangleOf: startingPlatform.size)
+            otherPlatform.physicsBody?.isDynamic = false
+            addChild(otherPlatform)
+        }
+        
+        //        upArrow.position = UserDefaults.standard.getCGPoint(forKey: "upButtonPlacement") ?? CGPoint(x: 450, y: -200)
+        upArrow.position = CGPoint(x: 450, y: -200)
         upArrow.name = "uparrow"
         
-        leftArrow.position = UserDefaults.standard.getCGPoint(forKey: "leftButtonPlacement") ?? CGPoint(x: 80, y: 50)
+        //        leftArrow.position = UserDefaults.standard.getCGPoint(forKey: "leftButtonPlacement") ?? CGPoint(x: 400, y: -300)
+        leftArrow.position = CGPoint(x: 400, y: -300)
         leftArrow.name = "leftarrow"
         
-        rightArrow.position = UserDefaults.standard.getCGPoint(forKey: "rightButtonPlacement") ?? CGPoint(x: 175, y: 50)
+        //        rightArrow.position = UserDefaults.standard.getCGPoint(forKey: "rightButtonPlacement") ?? CGPoint(x: 500, y: -300)
+        rightArrow.position = CGPoint(x: 500, y: -300)
         rightArrow.name = "rightarrow"
         
         actionButton.fillColor = .clear
         actionButton.strokeColor = .black
-        actionButton.position = UserDefaults.standard.getCGPoint(forKey: "actionButtonPlacement") ?? CGPoint(x: 1100, y: 75)
+        //        actionButton.position = UserDefaults.standard.getCGPoint(forKey: "actionButtonPlacement") ?? CGPoint(x: -520, y: -300)
+        actionButton.position = CGPoint(x: -520, y: -300)
         actionButton.name = "actionbutton"
         
+        
         addChild(Player)
-        addChild(Platform)
-        addChild(upArrow)
-        addChild(leftArrow)
-        addChild(rightArrow)
-        addChild(actionButton)
-        //        print("added Platform")
+        addChild(startingPlatform)
+        cameraNode.addChild(upArrow)
+        cameraNode.addChild(leftArrow)
+        cameraNode.addChild(rightArrow)
+        cameraNode.addChild(actionButton)
     }
     
     var playerOnGround = false
@@ -103,7 +142,10 @@ class GamePhysics: SKScene, SKPhysicsContactDelegate, ObservableObject {
         Player.physicsBody?.collisionBitMask = PhysicsCategory.Platform | PhysicsCategory.Frame
         
         
-        //        addChild(Frame)
+        cameraNode.position.x = Player.position.x + 500
+        cameraNode.position.y = size.height / 2
+        self.camera = cameraNode
+        addChild(cameraNode)
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -111,62 +153,57 @@ class GamePhysics: SKScene, SKPhysicsContactDelegate, ObservableObject {
             withAnimation {
                 Player.position.y += 20
             }
-            //            print("player moving up")
         }
         
         if left == true {
             withAnimation {
                 Player.position.x -= 10
             }
-            //            print("player moving left")
+            
+            let lastPosition = cameraNode.position
+            camera?.position = CGPoint(x: lastPosition.x - 10, y: size.height / 2)
+            
+            if cameraNode.position.x < Player.position.x - 500 {
+                cameraNode.position.x = Player.position.x - 500
+            }
+            
         } else if right == true {
             withAnimation {
                 Player.position.x += 10
             }
-            //            print("player moving right")
+            
+            let lastPosition = cameraNode.position
+            
+                camera?.position = CGPoint(x: lastPosition.x + 10, y: size.height / 2)
+
+            if cameraNode.position.x > Player.position.x + 500 {
+                cameraNode.position.x = Player.position.x + 500
+            }
         }
         
         if grabbing == true {
             
         }
         
-        //        if let upPosition = UserDefaults.standard.value(forKey: "upButtonPlacement") as? CGPoint {
-        //            return upArrow.position = upPosition
-        //        }
-        //
-        //        if let leftPosition = UserDefaults.standard.value(forKey: "leftButtonPosition") as? CGPoint {
-        //            return leftArrow.position = leftPosition
-        //        }
-        //
-        //        if let rightPosition = UserDefaults.standard.value(forKey: "rightButtonPosition") as? CGPoint {
-        //            return leftArrow.position = rightPosition
-        //        }
-        //
-        //        if let actionButtonPosition = UserDefaults.standard.value(forKey: "actionButtonPosition") as? CGPoint {
-        //            return leftArrow.position = actionButtonPosition
-        //        }
+        if Player.position.y <= 0 {
+            Player.position = CGPoint(x: 100, y: 700)
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //        print("Player Jumped")
         for touch in touches {
             let position = touch.location(in: self)
             if nodes(at: position).first != nil {
-                //                print("there is a node here")
                 switch nodes(at: position).first?.name?.lowercased() {
                 case "uparrow":
-                    //                    print("upArrow")
                     up = true
                 case "leftarrow":
-                    //                    print("leftArrow")
                     left = true
                 case "rightarrow":
-                    //                    print("rightArrow")
                     right = true
                 case "actionbutton":
                     grabbing = true
                 default:
-                    //                    print("no nodes")
                     break
                 }
             }
