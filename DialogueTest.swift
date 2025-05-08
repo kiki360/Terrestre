@@ -27,7 +27,7 @@ struct DialogueTest: View {
                 }
             }
         }
-        Button("Show Chat History"){
+        Button("\(ButtonName())"){
             showHistory.toggle()
         }
     }
@@ -48,6 +48,13 @@ struct DialogueTest: View {
             return iteration
         }
         return ""
+    }
+    func ButtonName() -> String{
+        if showHistory{
+            return "Hide Chat History"
+        } else {
+            return "Show Chat History"
+        }
     }
 }
 // dialogue: ["Hi, \(username)! We need your help to stop the fracking in our town. To do this, could you please contact our local Town Hall?", "Thanks! We will surely remember this when you return."], totalIteration: 2)
