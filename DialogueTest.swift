@@ -16,11 +16,11 @@ struct DialogueTest: View {
     var body: some View {
         //        Text("\(Dialogue())")
         if showHistory{
-            ForEach(history, id: \.self){ text in
-                Text(text)
+            ForEach(0...iterations, id: \.self){ text in
+                Text("\(Dialogue(Iteration: text))")
             }
         } else {
-            Text("\(Dialogue2())")
+            Text("\(Dialogue(Iteration: iterations))")
             Button("Next"){
                 iterations += 1
                 if iterations > TotalIterations{
@@ -28,26 +28,29 @@ struct DialogueTest: View {
                 }
             }
         }
+        Button("Show Chat History"){
+            showHistory.toggle()
+        }
     }
-//    func Dialogue() -> String{
-//        let Dialogue: [Int: String] = [1: "Hi, \(username)! We need your help to stop the fracking in our town. To do this, could you please contact our local Town Hall?",2: "Thanks! We will surely remember this when you return."]
-//        switch iterations{
-//        case 1:
-//            return Dialogue[1]!
-//        case 2:
-//            return Dialogue[1]! + "\n" + Dialogue[2]!
-//        default:
-//            return ""
-//        }
-//    }
-func Dialogue2() -> String{
-    let Dialogue: [Int: String] = [1: "Hi, \(username)! We need your help to stop the fracking in our town. To do this, could you please contact our local Town Hall?",2: "Thanks! We will surely remember this when you return."]
-    if let iteration = Dialogue[iterations]{
-        history.append(iteration)
-        return iteration
+    //    func Dialogue() -> String{
+    //        let Dialogue: [Int: String] = [1: "Hi, \(username)! We need your help to stop the fracking in our town. To do this, could you please contact our local Town Hall?",2: "Thanks! We will surely remember this when you return."]
+    //        switch iterations{
+    //        case 1:
+    //            return Dialogue[1]!
+    //        case 2:
+    //            return Dialogue[1]! + "\n" + Dialogue[2]!
+    //        default:
+    //            return ""
+    //        }
+    //    }
+    func Dialogue(Iteration: Int) -> String{
+        let Dialogue: [Int: String] = [1: "Hi, \(username)! We need your help to stop the fracking in our town. To do this, could you please contact our local Town Hall?",2: "Thanks! We will surely remember this when you return."]
+        if let iteration = Dialogue[Iteration]{
+            history.append(iteration)
+            return iteration
+        }
+        return ""
     }
-    return ""
-}
 }
 // dialogue: ["Hi, \(username)! We need your help to stop the fracking in our town. To do this, could you please contact our local Town Hall?", "Thanks! We will surely remember this when you return."], totalIteration: 2)
 
