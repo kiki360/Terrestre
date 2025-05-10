@@ -34,9 +34,11 @@ struct DialogueTest: View {
             } else {
                 //MARK: Response Version Here
                 Text("\(DialogueResponse(purpose: "Text"))")
-                ForEach(1...(ResponseOptions[1]?.count ?? 1), id: \.self){ text in
-                    Button("\(ResponseOptions[text] ?? [:][text] ?? "Error")") {
-                        ButtonClicked(WhichOne: text)
+                HStack{
+                    ForEach(ResponseOptions[1]?.count, id: \.self){ text in
+                        Button("\(ResponseOptions[text] ?? [:][text] ?? "Error")") {
+                            ButtonClicked(WhichOne: text)
+                        }
                     }
                 }
                 }
@@ -80,7 +82,7 @@ struct DialogueTest: View {
     //        }
     //    }
     func DialogueNoResponse(Iteration: Int) -> String{
-        let dialogue = [1: "Hi, \(username)! We need your help to stop the fracking in our town. To do this, could you please contact our local Town Hall?",2: "Thanks! We will surely remember this when you return."]
+        let dialogue = [1: "Hi, \(username)! We need your help to stop the fracking in our town. To do this, could you please contact our local Town Hall?", 2: "Thanks! We will surely remember this when you return."]
         if let iteration = dialogue[Iteration]{
             return iteration
         }
