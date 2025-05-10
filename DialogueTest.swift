@@ -6,10 +6,6 @@
 //
 
 import SwiftUI
-struct Dialogue{
-    var Integer: Int
-    var responses: [String]
-}
 
 struct DialogueTest: View {
     @AppStorage("username") var username = "Guest"
