@@ -12,11 +12,10 @@ import SwiftUI
 import SpriteKit
 
 struct SpriteTesting: View {
-    @EnvironmentObject var gamePhysics: GamePhysics
     var body: some View {
         ZStack {
             GeometryReader { Geometry in
-                SpriteView(scene: GamePhysics(size: Geometry.size))
+                SpriteView(scene: OilSpillGameScene(size: Geometry.size))
             }
 //            GamePad()
         }
@@ -25,5 +24,4 @@ struct SpriteTesting: View {
 
 #Preview {
     SpriteTesting()
-        .environmentObject(GamePhysics())
 }

@@ -11,7 +11,7 @@ struct OilSpill: View {
     var body: some View {
         VStack {
             GeometryReader { Geometry in
-                SpriteView(scene: GamePhysics(size: Geometry.size))
+                SpriteView(scene: OilSpillGameScene(size: Geometry.size))
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
