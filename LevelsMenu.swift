@@ -16,7 +16,7 @@ struct LevelsMenu: View {
             NavigationLink("Sprite Testing -- This will be removed") {
                 SpriteTesting()
             }
-            NavigationLink("Dialogue Test", destination: DialogueTest())
+//            NavigationLink("Dialogue Test", destination: DialogueTest())
         }
     }
 }
