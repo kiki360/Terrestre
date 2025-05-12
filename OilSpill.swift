@@ -9,5 +9,6 @@ import SwiftUI
 struct OilSpill: View {
     var body: some View {
         Text("")
+            .font(.custom("Courier", size: 23))
     }
 }
