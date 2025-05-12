@@ -47,7 +47,8 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     let rightArrow = SKSpriteNode(imageNamed: "rightArrow")
     let actionButton = SKShapeNode(ellipseOf: CGSize(width: 100, height: 100))
     
-    var level = ""
+    var animalsSaved = 0
+    var animalCounter = SKLabelNode()
     
     var spritePositionX: [Int] = []
     var spritePositionY: [Int] = []
@@ -55,14 +56,14 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     
     
     override func sceneDidLoad() {
-        
+        // MARK: Background
         let Background = SKSpriteNode(imageNamed: backgroundImage)
         Background.size = self.size
         Background.position = CGPoint(x: size.width / 2, y: size.height / 2)
         Background.zPosition = -1
         
         physicsWorld.contactDelegate = self
-        self.physicsBody = SKPhysicsBody(/*edgeChainFrom: CGPath(rect: CGRect(x: 0, y: 0, width: self.size.width, height: 0), transform: nil)*/)
+        self.physicsBody = SKPhysicsBody()
         self.anchorPoint = CGPoint(x: 0, y: 0)
         
         // MARK: Player and Platform starting code
@@ -196,7 +197,10 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         actionButton.position = UserDefaults.standard.getCGPoint(forKey: "actionButtonPlacement") ?? CGPoint(x: -520, y: -300)
         actionButton.name = "actionbutton"
         
-        
+        animalCounter.position = CGPoint(x: -275, y: 300)
+        animalCounter.fontColor = .white
+        animalCounter.fontSize = 40
+        animalCounter.fontName = "Courier new"
         
         addChild(startingPlatform)
         addChild(Animal1)
@@ -214,6 +218,7 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         cameraNode.addChild(leftArrow)
         cameraNode.addChild(rightArrow)
         cameraNode.addChild(actionButton)
+        cameraNode.addChild(animalCounter)
     }
     
     var playerOnGround = false
@@ -285,25 +290,35 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
             if node != nil {
                 switch node {
                 case "animal1":
-                        Animal1.size = CGSize(width: 0, height: 0)
+                    Animal1.size = CGSize(width: 0, height: 0)
+                    animalsSaved += 1
                 case "animal2":
                     Animal2.size = CGSize(width: 0, height: 0)
+                    animalsSaved += 1
                 case "animal3":
                     Animal3.size = CGSize(width: 0, height: 0)
+                    animalsSaved += 1
                 case "animal4":
                     Animal4.size = CGSize(width: 0, height: 0)
+                    animalsSaved += 1
                 case "animal5":
                     Animal5.size = CGSize(width: 0, height: 0)
+                    animalsSaved += 1
                 case "animal6":
                     Animal6.size = CGSize(width: 0, height: 0)
+                    animalsSaved += 1
                 case "animal7":
                     Animal7.size = CGSize(width: 0, height: 0)
+                    animalsSaved += 1
                 case "animal8":
                     Animal8.size = CGSize(width: 0, height: 0)
+                    animalsSaved += 1
                 case "animal9":
                     Animal9.size = CGSize(width: 0, height: 0)
+                    animalsSaved += 1
                 case "animal10":
                     Animal10.size = CGSize(width: 0, height: 0)
+                    animalsSaved += 1
                 default:
                     break
                 }
@@ -314,6 +329,8 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
             Player.position = CGPoint(x: 100, y: 700)
             cameraNode.position.x = Player.position.x + 500
         }
+        
+        animalCounter.text = "\(animalsSaved) out of 10 animals saved"
     }
     
     // MARK: Touches Began
