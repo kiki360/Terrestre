@@ -23,6 +23,7 @@ struct DialogueTest: View {
         if Response {
             //Do not go into this it will crash the app
 //            DialogueTestResponse(iterations: $iterations, totalIterations: TotalIterations)
+            Text("Our MacBooks aren't updated to support this; I might be wrong, but an error said that the SwiftUI Previewer isn't supported on this version of MacOS.")
             //It should work once Mr. Brown updates the macbooks to the newest MacOS version
         } else {
             DialogueTestNoResponse(TotalIterations: TotalIterations, iterations: $iterations, showHistory: $showHistory)
