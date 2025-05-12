@@ -8,13 +8,13 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "ClimateChangeGroupApp",
+    name: "TerestreDev",
     platforms: [
         .iOS("18")
     ],
     products: [
         .iOSApplication(
-            name: "ClimateChangeGroupApp",
+            name: "TerestreDev",
             targets: ["AppModule"],
             bundleIdentifier: "org.rootlike.627115.ClimateChangeGroupApp",
             teamIdentifier: "U34DP379RQ",
