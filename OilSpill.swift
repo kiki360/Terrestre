@@ -19,7 +19,7 @@ struct OilSpill: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.blue)
             .onAppear() {
-                showMission = true
+//                showMission = true
             }
             .fullScreenCover(isPresented: $showMission) {
                 Spacer()

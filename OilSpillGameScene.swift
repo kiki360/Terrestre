@@ -107,18 +107,19 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         Animal1.position = CGPoint(x: spritePositionX[0], y: spritePositionY[0])
         Animal1.color = .red
         Animal1.size = CGSize(width: 100, height: 100)
-        Animal1.physicsBody = SKPhysicsBody()
+        Animal1.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: 10))
         Animal1.physicsBody?.categoryBitMask = PhysicsCategory.animal
         Animal1.physicsBody?.collisionBitMask = PhysicsCategory.Player
         Animal1.physicsBody?.contactTestBitMask = PhysicsCategory.Player
         Animal1.physicsBody?.affectedByGravity = false
+        Animal1.physicsBody?.isDynamic = false
         
         // MARK: Animal2
         Animal2.name = "animal2"
         Animal2.position = CGPoint(x: spritePositionX[2], y: spritePositionY[2])
         Animal2.color = .red
         Animal2.size = CGSize(width: 100, height: 100)
-        Animal2.physicsBody = SKPhysicsBody()
+        Animal2.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: 10))
         Animal2.physicsBody?.categoryBitMask = PhysicsCategory.animal
         Animal2.physicsBody?.collisionBitMask = PhysicsCategory.Player
         Animal2.physicsBody?.contactTestBitMask = PhysicsCategory.Player
@@ -129,7 +130,7 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         Animal3.position = CGPoint(x: spritePositionX[6], y: spritePositionY[6])
         Animal3.color = .red
         Animal3.size = CGSize(width: 100, height: 100)
-        Animal3.physicsBody = SKPhysicsBody()
+        Animal3.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: 10))
         Animal3.physicsBody?.categoryBitMask = PhysicsCategory.animal
         Animal3.physicsBody?.collisionBitMask = PhysicsCategory.Player
         Animal3.physicsBody?.contactTestBitMask = PhysicsCategory.Player
@@ -140,7 +141,7 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         Animal4.position = CGPoint(x: spritePositionX[18], y: spritePositionY[18])
         Animal4.color = .red
         Animal4.size = CGSize(width: 100, height: 100)
-        Animal4.physicsBody = SKPhysicsBody()
+        Animal4.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: 10))
         Animal4.physicsBody?.categoryBitMask = PhysicsCategory.animal
         Animal4.physicsBody?.collisionBitMask = PhysicsCategory.Player
         Animal4.physicsBody?.contactTestBitMask = PhysicsCategory.Player
@@ -151,7 +152,7 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         Animal5.position = CGPoint(x: spritePositionX[20], y: spritePositionY[20])
         Animal5.color = .red
         Animal5.size = CGSize(width: 100, height: 100)
-        Animal5.physicsBody = SKPhysicsBody()
+        Animal5.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: 10))
         Animal5.physicsBody?.categoryBitMask = PhysicsCategory.animal
         Animal5.physicsBody?.collisionBitMask = PhysicsCategory.Player
         Animal5.physicsBody?.contactTestBitMask = PhysicsCategory.Player
@@ -162,7 +163,7 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         Animal6.position = CGPoint(x: spritePositionX[30], y: spritePositionY[30])
         Animal6.color = .red
         Animal6.size = CGSize(width: 100, height: 100)
-        Animal6.physicsBody = SKPhysicsBody()
+        Animal6.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: 10))
         Animal6.physicsBody?.categoryBitMask = PhysicsCategory.animal
         Animal6.physicsBody?.collisionBitMask = PhysicsCategory.Player
         Animal6.physicsBody?.contactTestBitMask = PhysicsCategory.Player
@@ -173,7 +174,7 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         Animal7.position = CGPoint(x: spritePositionX[44], y: spritePositionY[44])
         Animal7.color = .red
         Animal7.size = CGSize(width: 100, height: 100)
-        Animal7.physicsBody = SKPhysicsBody()
+        Animal7.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: 10))
         Animal7.physicsBody?.categoryBitMask = PhysicsCategory.animal
         Animal7.physicsBody?.collisionBitMask = PhysicsCategory.Player
         Animal7.physicsBody?.contactTestBitMask = PhysicsCategory.Player
@@ -184,7 +185,7 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         Animal8.position = CGPoint(x: spritePositionX[60], y: spritePositionY[60])
         Animal8.color = .red
         Animal8.size = CGSize(width: 100, height: 100)
-        Animal8.physicsBody = SKPhysicsBody()
+        Animal8.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: 10))
         Animal8.physicsBody?.categoryBitMask = PhysicsCategory.animal
         Animal8.physicsBody?.collisionBitMask = PhysicsCategory.Player
         Animal8.physicsBody?.contactTestBitMask = PhysicsCategory.Player
@@ -195,7 +196,7 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         Animal9.position = CGPoint(x: spritePositionX[72], y: spritePositionY[72])
         Animal9.color = .red
         Animal9.size = CGSize(width: 100, height: 100)
-        Animal9.physicsBody = SKPhysicsBody()
+        Animal9.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: 10))
         Animal9.physicsBody?.affectedByGravity = false
         
         // MARK: Animal10
@@ -203,7 +204,7 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         Animal10.position = CGPoint(x: spritePositionX[80], y: spritePositionY[80])
         Animal10.color = .red
         Animal10.size = CGSize(width: 100, height: 100)
-        Animal10.physicsBody = SKPhysicsBody()
+        Animal10.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: 10))
         Animal10.physicsBody?.categoryBitMask = PhysicsCategory.animal
         Animal10.physicsBody?.collisionBitMask = PhysicsCategory.Player
         Animal10.physicsBody?.contactTestBitMask = PhysicsCategory.Player
@@ -267,10 +268,10 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         Player.physicsBody?.restitution = 0.2
         
         Player.physicsBody?.categoryBitMask = PhysicsCategory.Player
-        Player.physicsBody?.contactTestBitMask = PhysicsCategory.Frame
-        Player.physicsBody?.collisionBitMask = PhysicsCategory.Frame
-        Player.physicsBody?.contactTestBitMask = PhysicsCategory.Platform | PhysicsCategory.Frame
-        Player.physicsBody?.collisionBitMask = PhysicsCategory.Platform | PhysicsCategory.Frame
+//        Player.physicsBody?.contactTestBitMask = PhysicsCategory.Frame
+//        Player.physicsBody?.collisionBitMask = PhysicsCategory.Frame
+        Player.physicsBody?.contactTestBitMask = PhysicsCategory.Platform | PhysicsCategory.animal
+        Player.physicsBody?.collisionBitMask = PhysicsCategory.Platform | PhysicsCategory.animal
         
         
         cameraNode.position.x = Player.position.x + 500
@@ -350,45 +351,61 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         grabbing = false
     }
     
-    
+   // MARK: didBegin
    nonisolated func didBegin(_ contact: SKPhysicsContact) {
        let contactA = contact.bodyA.node
        let contactB = contact.bodyB.node
        
        DispatchQueue.main.async {
+           print(contactA?.name ?? "nil")
+           print(contactB?.name ?? "nil")
            if self.grabbing == true {
-               if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal1" {
+               print("grabbing == true")
+               if contactA?.name?.lowercased() == "animal1" && contactB?.name?.lowercased() == "player" {
                    self.Animal1.size = CGSize(width: 0, height: 0)
                    self.animalsSaved += 1
-               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal2" {
-                   self.Animal2.size = CGSize(width: 0, height: 0)
-                   self.animalsSaved += 1
-               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal3" {
-                   self.Animal3.size = CGSize(width: 0, height: 0)
-                   self.animalsSaved += 1
-               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal4" {
-                   self.Animal4.size = CGSize(width: 0, height: 0)
-                   self.animalsSaved += 1
-               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal5" {
-                   self.Animal5.size = CGSize(width: 0, height: 0)
-                   self.animalsSaved += 1
-               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal6" {
-                   self.Animal6.size = CGSize(width: 0, height: 0)
-                   self.animalsSaved += 1
-               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal7" {
-                   self.Animal7.size = CGSize(width: 0, height: 0)
-                   self.animalsSaved += 1
-               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal8" {
-                   self.Animal8.size = CGSize(width: 0, height: 0)
-                   self.animalsSaved += 1
-               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal9" {
-                   self.Animal9.size = CGSize(width: 0, height: 0)
-                   self.animalsSaved += 1
-               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal10" {
-                   self.Animal10.size = CGSize(width: 0, height: 0)
-                   self.animalsSaved += 1
+               } else if self.grabbing == false {
+                   print("grabbing = false")
                }
+//               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal2" {
+//                   self.Animal2.size = CGSize(width: 0, height: 0)
+//                   self.animalsSaved += 1
+//               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal3" {
+//                   self.Animal3.size = CGSize(width: 0, height: 0)
+//                   self.animalsSaved += 1
+//               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal4" {
+//                   self.Animal4.size = CGSize(width: 0, height: 0)
+//                   self.animalsSaved += 1
+//               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal5" {
+//                   self.Animal5.size = CGSize(width: 0, height: 0)
+//                   self.animalsSaved += 1
+//               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal6" {
+//                   self.Animal6.size = CGSize(width: 0, height: 0)
+//                   self.animalsSaved += 1
+//               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal7" {
+//                   self.Animal7.size = CGSize(width: 0, height: 0)
+//                   self.animalsSaved += 1
+//               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal8" {
+//                   self.Animal8.size = CGSize(width: 0, height: 0)
+//                   self.animalsSaved += 1
+//               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal9" {
+//                   self.Animal9.size = CGSize(width: 0, height: 0)
+//                   self.animalsSaved += 1
+//               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal10" {
+//                   self.Animal10.size = CGSize(width: 0, height: 0)
+//                   self.animalsSaved += 1
+//               }
+//               
+//               if contactA?.name?.lowercased() == "animal1" && contactB?.name?.lowercased() == "player" {
+//                   self.Animal1.size = CGSize(width: 0, height: 0)
+//                   self.animalsSaved += 1
+//               }
            }
        }
+    }
+    
+    // MARK: didEnd
+    nonisolated func didEnd(_ contact: SKPhysicsContact) {
+        
     }
 }
