@@ -10,7 +10,7 @@ import AppleProductTypes
 let package = Package(
     name: "TerestreDev",
     platforms: [
-        .iOS("18")
+        .iOS("17")
     ],
     products: [
         .iOSApplication(

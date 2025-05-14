@@ -17,6 +17,8 @@ struct DragDropView: View {
     @State var isRecyclingtargeted = false
     @State var isDependstargeted = false
     let ElectronicsURL = URL(string: "https://epa.illinois.gov/topics/waste-management/materials-management/electronics-recycling1.html#:~:text=Did%20you%20know%20that%20it,are%20unwanted%20by%20Illinois%20residents.")
+    @State var showRecycledElectronics: Bool = false
+    @State var showTrashedElectronics: Bool = false
     
     var body: some View {
         HStack(spacing: 20) {
@@ -77,9 +79,20 @@ struct DragDropView: View {
                 }
             
             if recycling.contains("Electronics📱💻") {
-                Text("This is a tricky one! Most people mistakenly throw away their unwanted electronics, but they are actually recyclable! However, it is important to note that electronics cannot be recycled in traditional curbside recycling bins.")
+                Button("Show Answer") {
+                    showRecycledElectronics.toggle()
+                }
+                .alert("This is a tricky one! Most people mistakenly throw away their unwanted electronics, but they are actually recyclable! However, it is important to note that electronics cannot be recycled in traditional curbside recycling bins.", isPresented: $showRecycledElectronics) {
+                    
+                }
+
             } else if trash.contains("Electronics📱💻") {
-                Text("Not quite! More than 80% of electronics get thrown away because many people do not know that they are in fact recyclable! However, the reason behind public skepticism is the special circumstances or recycling these items, namely recycling them through special recycling events or drop-off locations to ensure the proper disposal of devices.")
+                Button("Show Answer") {
+                    showTrashedElectronics.toggle()
+                }
+                .alert("Not quite! More than 80% of electronics get thrown away because many people do not know that they are in fact recyclable! However, the reason behind public skepticism is the special circumstances or recycling these items, namely recycling them through special recycling events or drop-off locations to ensure the proper disposal of devices.", isPresented: $showTrashedElectronics) {
+                    
+                }
             } else if depends.contains("Electronics📱💻"){
                 Text("You got it! Due to their materials, electronics are recyclable, but putting them in a regular recycling bin poses a fire hazard, so it is best to recycle them through special drop-off locations or special recycling programs. In addition, you can ask your phone/tech provider like Verizon or T-Mobile if you can trade in your device for a newer one and dispose of your it that way! Click the link below to find out more about recycling electronics.")
                 Link("Visit this EPA link for more information on special recycling circumstances for electronics!", destination: (ElectronicsURL!))
