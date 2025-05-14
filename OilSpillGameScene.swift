@@ -246,7 +246,7 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         cameraNode.addChild(upArrow)
         cameraNode.addChild(leftArrow)
         cameraNode.addChild(rightArrow)
-        cameraNode.addChild(actionButton)
+//        cameraNode.addChild(actionButton)
         cameraNode.addChild(animalCounter)
     }
     
@@ -360,75 +360,74 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
        let selectedPoint = contact.contactPoint
        
        Task {
-           var savedAnimals = await self.animalsSaved
            
            if await Animal1.contains(selectedPoint) {
                await Animal1.removeFromParent()
                DispatchQueue.main.async {
-                   self.animalsSaved = savedAnimals + 1
+                   self.animalsSaved += 1
                }
            }
            
            if await Animal2.contains(selectedPoint) {
                await Animal2.removeFromParent()
                DispatchQueue.main.async {
-                   self.animalsSaved = savedAnimals + 1
+                   self.animalsSaved += 1
                }
            }
            
            if await Animal3.contains(selectedPoint) {
                await Animal3.removeFromParent()
                DispatchQueue.main.async {
-                   self.animalsSaved = savedAnimals + 1
+                   self.animalsSaved += 1
                }
            }
            
            if await Animal4.contains(selectedPoint) {
                await Animal4.removeFromParent()
                DispatchQueue.main.async {
-                   self.animalsSaved = savedAnimals + 1
+                   self.animalsSaved += 1
                }
            }
            
            if await Animal5.contains(selectedPoint) {
                await Animal5.removeFromParent()
                DispatchQueue.main.async {
-                   self.animalsSaved = savedAnimals + 1
+                   self.animalsSaved += 1
                }
            }
            
            if await Animal6.contains(selectedPoint) {
                await Animal6.removeFromParent()
                DispatchQueue.main.async {
-                   self.animalsSaved = savedAnimals + 1
+                   self.animalsSaved += 1
                }
            }
            
            if await Animal7.contains(selectedPoint) {
                await Animal7.removeFromParent()
                DispatchQueue.main.async {
-                   self.animalsSaved = savedAnimals + 1
+                   self.animalsSaved += 1
                }
            }
            
            if await Animal8.contains(selectedPoint) {
                await Animal8.removeFromParent()
                DispatchQueue.main.async {
-                   self.animalsSaved = savedAnimals + 1
+                   self.animalsSaved += 1
                }
            }
            
            if await Animal9.contains(selectedPoint) {
                await Animal9.removeFromParent()
                DispatchQueue.main.async {
-                   self.animalsSaved = savedAnimals + 1
+                   self.animalsSaved += 1
                }
            }
            
            if await Animal10.contains(selectedPoint) {
                await Animal10.removeFromParent()
                DispatchQueue.main.async {
-                   self.animalsSaved = savedAnimals + 1
+                   self.animalsSaved += 1
                }
            }
        }

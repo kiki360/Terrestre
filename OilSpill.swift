@@ -19,19 +19,22 @@ struct OilSpill: View {
                     SpriteView(scene: OilSpillGameScene(size: Geometry.size))
                 }
                 
-//                Button {
-//                    dismiss()
-//                } label: {
-//                    Image(systemName: "house.fill")
-//                        .font(.largeTitle)
-//                        .position(x: 1170, y: 25)
-//                }
-
+                //                Button {
+                //                    print("button pressed")
+                //                    dismiss.callAsFunction()
+                //                } label: {
+                //                    Image(systemName: "house.fill")
+                //                        .font(.largeTitle)
+                //                        .position(x: 650, y: -300)
+                //                        .foregroundStyle(.white)
+                //                        .frame(width: 200, height: 200)
+                //                }
+                
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.blue)
             .onAppear() {
-//                showMission = true
+                showMission = true
             }
             .fullScreenCover(isPresented: $showMission) {
                 Spacer()
@@ -59,10 +62,10 @@ struct OilSpill: View {
                 Spacer()
             }
         }
-        .navigationBarBackButtonHidden()
+//        .navigationBarBackButtonHidden()
     }
 }
- 
+
 #Preview {
     OilSpill()
 }
