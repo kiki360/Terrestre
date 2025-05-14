@@ -9,12 +9,24 @@ import SpriteKit
 
 struct OilSpill: View {
     @State var showMission = false
+    
+    @Environment(\.isPresented) var isPresented
+    @Environment(\.dismiss) var dismiss
     var body: some View {
         NavigationStack {
-            VStack {
+            ZStack {
                 GeometryReader { Geometry in
                     SpriteView(scene: OilSpillGameScene(size: Geometry.size))
                 }
+                
+//                Button {
+//                    dismiss()
+//                } label: {
+//                    Image(systemName: "house.fill")
+//                        .font(.largeTitle)
+//                        .position(x: 1170, y: 25)
+//                }
+
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.blue)

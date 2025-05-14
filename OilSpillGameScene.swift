@@ -336,6 +336,7 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
                     right = true
                 case "actionbutton":
                     grabbing = true
+                    
                 default:
                     break
                 }
@@ -353,21 +354,95 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     
    // MARK: didBegin
    nonisolated func didBegin(_ contact: SKPhysicsContact) {
-       let contactA = contact.bodyA.node
-       let contactB = contact.bodyB.node
+//       let contactA = contact.bodyA.node
+//       let contactB = contact.bodyB.node
        
-       DispatchQueue.main.async {
-           print(contactA?.name ?? "nil")
-           print(contactB?.name ?? "nil")
-           if self.grabbing == true {
-               print("grabbing == true")
-               if contactA?.name?.lowercased() == "animal1" && contactB?.name?.lowercased() == "player" {
-                   self.Animal1.size = CGSize(width: 0, height: 0)
-                   self.animalsSaved += 1
-               } else if self.grabbing == false {
-                   print("grabbing = false")
+       let selectedPoint = contact.contactPoint
+       
+       Task {
+           var savedAnimals = await self.animalsSaved
+           
+           if await Animal1.contains(selectedPoint) {
+               await Animal1.removeFromParent()
+               DispatchQueue.main.async {
+                   self.animalsSaved = savedAnimals + 1
                }
-//               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal2" {
+           }
+           
+           if await Animal2.contains(selectedPoint) {
+               await Animal2.removeFromParent()
+               DispatchQueue.main.async {
+                   self.animalsSaved = savedAnimals + 1
+               }
+           }
+           
+           if await Animal3.contains(selectedPoint) {
+               await Animal3.removeFromParent()
+               DispatchQueue.main.async {
+                   self.animalsSaved = savedAnimals + 1
+               }
+           }
+           
+           if await Animal4.contains(selectedPoint) {
+               await Animal4.removeFromParent()
+               DispatchQueue.main.async {
+                   self.animalsSaved = savedAnimals + 1
+               }
+           }
+           
+           if await Animal5.contains(selectedPoint) {
+               await Animal5.removeFromParent()
+               DispatchQueue.main.async {
+                   self.animalsSaved = savedAnimals + 1
+               }
+           }
+           
+           if await Animal6.contains(selectedPoint) {
+               await Animal6.removeFromParent()
+               DispatchQueue.main.async {
+                   self.animalsSaved = savedAnimals + 1
+               }
+           }
+           
+           if await Animal7.contains(selectedPoint) {
+               await Animal7.removeFromParent()
+               DispatchQueue.main.async {
+                   self.animalsSaved = savedAnimals + 1
+               }
+           }
+           
+           if await Animal8.contains(selectedPoint) {
+               await Animal8.removeFromParent()
+               DispatchQueue.main.async {
+                   self.animalsSaved = savedAnimals + 1
+               }
+           }
+           
+           if await Animal9.contains(selectedPoint) {
+               await Animal9.removeFromParent()
+               DispatchQueue.main.async {
+                   self.animalsSaved = savedAnimals + 1
+               }
+           }
+           
+           if await Animal10.contains(selectedPoint) {
+               await Animal10.removeFromParent()
+               DispatchQueue.main.async {
+                   self.animalsSaved = savedAnimals + 1
+               }
+           }
+       }
+       
+//       DispatchQueue.main.async {
+//           print(contactA?.name ?? "nil")
+//           print(contactB?.name ?? "nil")
+//           if self.grabbing == true {
+//               print("grabbing == true")
+//               if contactA?.name?.lowercased() == "animal1" && contactB?.name?.lowercased() == "player" {
+//                   self.Animal1.size = CGSize(width: 0, height: 0)
+//                   self.animalsSaved += 1
+//               } 
+//               else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal2" {
 //                   self.Animal2.size = CGSize(width: 0, height: 0)
 //                   self.animalsSaved += 1
 //               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal3" {
@@ -400,8 +475,10 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
 //                   self.Animal1.size = CGSize(width: 0, height: 0)
 //                   self.animalsSaved += 1
 //               }
-           }
-       }
+//           } else if self.grabbing == false {
+//               print("grabbing = false")
+//           }
+//       }
     }
     
     // MARK: didEnd
