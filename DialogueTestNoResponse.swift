@@ -9,8 +9,9 @@ import SwiftUI
 struct DialogueTestNoResponse: View {
     @AppStorage("username") var username = "Guest"
     let TotalIterations: Int
-    @Binding var iterations: Int
-    @Binding var showHistory: Bool
+    @State var iterations: Int = 0
+    @State var showHistory: Bool = false
+    let dialogue: [Int: String]
     var body: some View {
         Text("\(DialogueNoResponse(Iteration: iterations))")
         Button("Next"){
@@ -29,7 +30,7 @@ struct DialogueTestNoResponse: View {
         }
     }
     func DialogueNoResponse(Iteration: Int) -> String{
-        let dialogue = [1: "Hi, \(username)! We need your help to stop the fracking in our town. To do this, could you please contact our local Town Hall?", 2: "Thanks! We will surely remember this when you return."]
+        
         if let iteration = dialogue[Iteration]{
             return iteration
         }

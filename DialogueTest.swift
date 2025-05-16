@@ -26,7 +26,7 @@ struct DialogueTest: View {
             Text("Our MacBooks aren't updated to support this; I might be wrong, but an error said that the SwiftUI Previewer isn't supported on this version of MacOS.")
             //It should work once Mr. Brown updates the macbooks to the newest MacOS version
         } else {
-            DialogueTestNoResponse(TotalIterations: TotalIterations, iterations: $iterations, showHistory: $showHistory)
+//            DialogueTestNoResponse(TotalIterations: TotalIterations, iterations: iterations, showHistory: showHistory)
         }
     }
 //    func Dialogue() -> String{
