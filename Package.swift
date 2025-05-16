@@ -16,8 +16,8 @@ let package = Package(
         .iOSApplication(
             name: "TerestreDev",
             targets: ["AppModule"],
-            bundleIdentifier: "org.rootlike.627115.ClimateChangeGroupApp",
-            teamIdentifier: "LR6JS3XL23",
+            bundleIdentifier: "org.jhhs.627115.ClimateChangeGroupApp",
+            teamIdentifier: "U34DP379RQ",
             displayVersion: "1.0",
             bundleVersion: "1",
             appIcon: .placeholder(icon: .lightningBolt),

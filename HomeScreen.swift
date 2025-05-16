@@ -43,13 +43,15 @@ struct HomeScreen: View {
                     LevelsMenu()
                 } label: {
                     RoundedRectangle(cornerRadius: 25)
+                        .foregroundStyle(.black)
                         .frame(width: 200, height: 75)
                         .overlay {
-                            Text("Go to Levels")
+                            Text("Play")
                                 .font(.custom("Courier", size: 23))
                                 .padding()
-                                .foregroundStyle(.black)
+                                .foregroundStyle(.white)
                         }
+                        .shadow(radius: 5, x: 7, y: 7)
                 }
                 
                 NavigationLink {
@@ -57,12 +59,14 @@ struct HomeScreen: View {
                 } label: {
                     RoundedRectangle(cornerRadius: 25)
                         .frame(width: 200, height: 75)
+                        .foregroundStyle(.blue)
                         .overlay {
                             Text("Statistics")
                                 .font(.custom("Courier", size: 23))
                                 .padding()
                                 .foregroundStyle(.black)
                         }
+                        .shadow(radius: 5, x: 7, y: 7)
                 }
             }
         }

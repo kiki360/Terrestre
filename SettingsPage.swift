@@ -32,22 +32,22 @@ struct SettingsPage: View {
         }
         .onChange(of: toggleControlPlacement) { oldValue, newValue in
             if toggleControlPlacement == true {
-                UserDefaults.standard.setCGPoint(CGPoint(x: 1050, y: 140), forKey: "upButtonPlacement")
+                UserDefaults.standard.setCGPoint(CGPoint(x: -500, y: -200), forKey: "upButtonPlacement")
                 
-                UserDefaults.standard.setCGPoint(CGPoint(x: 1000, y: 50), forKey: "leftButtonPlacement")
+                UserDefaults.standard.setCGPoint(CGPoint(x: -545, y: -300), forKey: "leftButtonPlacement")
                 
-                UserDefaults.standard.setCGPoint(CGPoint(x: 1100, y: 50), forKey: "rightButtonPlacement")
+                UserDefaults.standard.setCGPoint(CGPoint(x: -455, y: -300), forKey: "rightButtonPlacement")
                 
-                UserDefaults.standard.setCGPoint(CGPoint(x: 125, y: 75), forKey: "actionButtonPlacement")
+                UserDefaults.standard.setCGPoint(CGPoint(x: 450, y: -300), forKey: "actionButtonPlacement")
                 
             } else if toggleControlPlacement == false {
-                UserDefaults.standard.setCGPoint(CGPoint(x: 125, y: 140), forKey: "upButtonPlacement")
+                UserDefaults.standard.setCGPoint(CGPoint(x: 450, y: -200), forKey: "upButtonPlacement")
                 
-                UserDefaults.standard.setCGPoint(CGPoint(x: 80, y: 50), forKey: "leftButtonPlacement")
+                UserDefaults.standard.setCGPoint(CGPoint(x: 400, y: -300), forKey: "leftButtonPlacement")
                 
-                UserDefaults.standard.setCGPoint(CGPoint(x: 175, y: 50), forKey: "rightButtonPlacement")
+                UserDefaults.standard.setCGPoint(CGPoint(x: 500, y: -300), forKey: "rightButtonPlacement")
                 
-                UserDefaults.standard.setCGPoint(CGPoint(x: 1100, y: 75), forKey: "actionButtonPlacement")
+                UserDefaults.standard.setCGPoint(CGPoint(x: -520, y: -300), forKey: "actionButtonPlacement")
             }
         }
     }
