@@ -11,19 +11,17 @@ struct LevelsMenu: View {
     var body: some View {
         NavigationStack{
             Text("Select a Mission")
-            
+                .font(.custom("Courier", size: 23))
             NavigationLink("Question Test", destination: QuestionTest())
-            
+                .font(.custom("Courier", size: 23))
             NavigationLink("Drag and Drop Game", destination: DragDropView())
-            
-//            NavigationLink("Sprite Testing -- This will be removed") {
-//                SpriteTesting()
-//            }
-            NavigationLink(destination: OilSpill()) {
-                Text("Oil Spill")
+                .font(.custom("Courier", size: 23))
+            NavigationLink("Sprite Testing -- This will be removed") {
+                SpriteTesting()
             }
-            
+            .font(.custom("Courier", size: 23))
             NavigationLink("Dialogue Test", destination: DialogueTest())
+                .font(.custom("Courier", size: 23))
         }
     }
 }

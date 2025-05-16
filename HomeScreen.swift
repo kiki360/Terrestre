@@ -8,19 +8,22 @@
 import SwiftUI
 
 struct HomeScreen: View {
+    //MARK: Universal font for this app
+    //    .font(.custom("Courier", size: 23))
     @AppStorage("username") var username = "Guest"
     @State var popover = false
     var body: some View {
         NavigationStack {
             HStack {
                 Text("Welcome, \(username)")
-                    .font(.custom("Times new roman", size: 75)) // Change font later
+                    .font(.custom("Courier", size: 70))
                     .onTapGesture {
                         popover.toggle()
                     }
                     .popover(isPresented: $popover) {
                         Text("You can change your username in settings to the right")
                             .padding()
+                            .font(.custom("Courier", size: 30))
                     }
                 //The popover was pretty straight forward; I didn't have to do anything with the developer documentation it was just similar to an alert
                 
@@ -32,7 +35,7 @@ struct HomeScreen: View {
                         .font(.title)
                 }
                 .padding()
-
+                
             }
             
             HStack {
@@ -43,7 +46,7 @@ struct HomeScreen: View {
                         .frame(width: 200, height: 75)
                         .overlay {
                             Text("Go to Levels")
-                                .font(.title)
+                                .font(.custom("Courier", size: 23))
                                 .padding()
                                 .foregroundStyle(.black)
                         }
@@ -56,7 +59,7 @@ struct HomeScreen: View {
                         .frame(width: 200, height: 75)
                         .overlay {
                             Text("Statistics")
-                                .font(.title)
+                                .font(.custom("Courier", size: 23))
                                 .padding()
                                 .foregroundStyle(.black)
                         }
