@@ -21,6 +21,11 @@ struct PhysicsCategory {
 class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     let cameraNode = SKCameraNode()
     
+    let atlas = SKTextureAtlas(named: "player")
+    //let idle = atlas.textureNamed("walk1")
+    //let walking = atlas.textureNamed("walk2")
+    //let playerWalkSprites = [idle, walking]
+    
     var backgroundImage = ""
     var animalImage = ""
     
