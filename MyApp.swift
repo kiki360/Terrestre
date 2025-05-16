@@ -3,7 +3,7 @@ import SpriteKit
 
 @main
 struct MyApp: App {
-    @State var lauchScreen = true
+    @State var lauchScreen = false
     
     @StateObject var oilSpillScene = OilSpillGameScene()
     var body: some Scene {
