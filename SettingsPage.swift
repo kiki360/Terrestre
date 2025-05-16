@@ -11,6 +11,7 @@ struct SettingsPage: View {
     @AppStorage("username") var username = "Guest"
     @State var TempUsername: String = "Guest"
     @AppStorage("toggleControlPlacement") var toggleControlPlacement = false
+    @State var controls: Bool = false
     var body: some View {
         VStack {
             TextField("Enter Username", text: $TempUsername)
@@ -48,6 +49,23 @@ struct SettingsPage: View {
                 UserDefaults.standard.setCGPoint(CGPoint(x: 500, y: -300), forKey: "rightButtonPlacement")
                 
                 UserDefaults.standard.setCGPoint(CGPoint(x: -520, y: -300), forKey: "actionButtonPlacement")
+            }
+        }
+        Toggle(isOn: $controls){
+            Text("Show Controls")
+        }
+        if controls{
+            HStack{
+                Image("leftArrow")
+                Text("Moves the player character to the left.")
+            }
+            HStack{
+                Image("rightArrow")
+                Text("Moves the player character to the right.")
+            }
+            HStack{
+                Image("upArrow")
+                Text("Makes the player character jump. Hold this at the end of a jump to jump higher.")
             }
         }
     }
