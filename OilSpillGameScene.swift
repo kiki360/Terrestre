@@ -21,6 +21,11 @@ struct PhysicsCategory {
 class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     let cameraNode = SKCameraNode()
     
+    let atlas = SKTextureAtlas(named: "player")
+    //let idle = atlas.textureNamed("walk1")
+    //let walking = atlas.textureNamed("walk2")
+    //let playerWalkSprites = [idle, walking]
+    
     var backgroundImage = ""
     var animalImage = ""
     
@@ -226,7 +231,7 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         actionButton.position = UserDefaults.standard.getCGPoint(forKey: "actionButtonPlacement") ?? CGPoint(x: -520, y: -300)
         actionButton.name = "actionbutton"
         
-        animalCounter.position = CGPoint(x: -275, y: 400)
+        animalCounter.position = CGPoint(x: -275, y: 300)
         animalCounter.fontColor = .white
         animalCounter.fontSize = 40
         animalCounter.fontName = "Courier new"
