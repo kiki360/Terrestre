@@ -8,16 +8,16 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "TerestreDev",
+    name: "Terestre",
     platforms: [
         .iOS("17")
     ],
     products: [
         .iOSApplication(
-            name: "TerestreDev",
+            name: "Terestre",
             targets: ["AppModule"],
-            bundleIdentifier: "org.rootlike.627115.ClimateChangeGroupApp",
-            teamIdentifier: "LR6JS3XL23",
+            bundleIdentifier: "org.jhhs.627115.ClimateChangeGroupApp",
+            teamIdentifier: "U34DP379RQ",
             displayVersion: "1.0",
             bundleVersion: "1",
             appIcon: .placeholder(icon: .lightningBolt),
