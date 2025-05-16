@@ -8,15 +8,16 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "ClimateChangeGroupApp",
+    name: "Terestre",
     platforms: [
-        .iOS("16.0")
+        .iOS("17")
     ],
     products: [
         .iOSApplication(
-            name: "ClimateChangeGroupApp",
+            name: "Terestre",
             targets: ["AppModule"],
             bundleIdentifier: "org.jhhs.627115.ClimateChangeGroupApp",
+            teamIdentifier: "U34DP379RQ",
             displayVersion: "1.0",
             bundleVersion: "1",
             appIcon: .placeholder(icon: .lightningBolt),
@@ -33,9 +34,15 @@ let package = Package(
             ]
         )
     ],
+    dependencies: [
+        .package(url: "https://github.com/apple/swift-algorithms.git", "1.2.1"..<"2.0.0")
+    ],
     targets: [
         .executableTarget(
             name: "AppModule",
+            dependencies: [
+                .product(name: "Algorithms", package: "swift-algorithms")
+            ],
             path: "."
         )
     ],
