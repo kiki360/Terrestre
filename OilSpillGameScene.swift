@@ -226,7 +226,7 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         actionButton.position = UserDefaults.standard.getCGPoint(forKey: "actionButtonPlacement") ?? CGPoint(x: -520, y: -300)
         actionButton.name = "actionbutton"
         
-        animalCounter.position = CGPoint(x: -275, y: 300)
+        animalCounter.position = CGPoint(x: -275, y: 400)
         animalCounter.fontColor = .white
         animalCounter.fontSize = 40
         animalCounter.fontName = "Courier new"
