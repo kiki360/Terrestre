@@ -48,7 +48,7 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     let rightArrow = SKSpriteNode(imageNamed: "rightArrow")
     let actionButton = SKShapeNode(ellipseOf: CGSize(width: 100, height: 100))
     
-    var animalsSaved = 0
+    @Published var animalsSaved = 0
     var animalCounter = SKLabelNode()
     
     var spritePositionX: [Int] = []
@@ -431,53 +431,6 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
                }
            }
        }
-       
-//       DispatchQueue.main.async {
-//           print(contactA?.name ?? "nil")
-//           print(contactB?.name ?? "nil")
-//           if self.grabbing == true {
-//               print("grabbing == true")
-//               if contactA?.name?.lowercased() == "animal1" && contactB?.name?.lowercased() == "player" {
-//                   self.Animal1.size = CGSize(width: 0, height: 0)
-//                   self.animalsSaved += 1
-//               } 
-//               else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal2" {
-//                   self.Animal2.size = CGSize(width: 0, height: 0)
-//                   self.animalsSaved += 1
-//               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal3" {
-//                   self.Animal3.size = CGSize(width: 0, height: 0)
-//                   self.animalsSaved += 1
-//               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal4" {
-//                   self.Animal4.size = CGSize(width: 0, height: 0)
-//                   self.animalsSaved += 1
-//               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal5" {
-//                   self.Animal5.size = CGSize(width: 0, height: 0)
-//                   self.animalsSaved += 1
-//               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal6" {
-//                   self.Animal6.size = CGSize(width: 0, height: 0)
-//                   self.animalsSaved += 1
-//               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal7" {
-//                   self.Animal7.size = CGSize(width: 0, height: 0)
-//                   self.animalsSaved += 1
-//               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal8" {
-//                   self.Animal8.size = CGSize(width: 0, height: 0)
-//                   self.animalsSaved += 1
-//               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal9" {
-//                   self.Animal9.size = CGSize(width: 0, height: 0)
-//                   self.animalsSaved += 1
-//               } else if contactA?.name?.lowercased() == "player" && contactB?.name?.lowercased() == "animal10" {
-//                   self.Animal10.size = CGSize(width: 0, height: 0)
-//                   self.animalsSaved += 1
-//               }
-//               
-//               if contactA?.name?.lowercased() == "animal1" && contactB?.name?.lowercased() == "player" {
-//                   self.Animal1.size = CGSize(width: 0, height: 0)
-//                   self.animalsSaved += 1
-//               }
-//           } else if self.grabbing == false {
-//               print("grabbing = false")
-//           }
-//       }
     }
     
     // MARK: didEnd

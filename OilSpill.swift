@@ -7,9 +7,11 @@
 import SwiftUI
 import SpriteKit
 
-struct OilSpill: View {
+struct OilSpillStruct: View {
     @State var showMission = false
+    @State var hasEnded = false
     
+    @EnvironmentObject var oilSpill: OilSpillGameScene
     @Environment(\.isPresented) var isPresented
     @Environment(\.dismiss) var dismiss
     var body: some View {
@@ -17,37 +19,43 @@ struct OilSpill: View {
             ZStack {
                 GeometryReader { Geometry in
                     SpriteView(scene: OilSpillGameScene(size: Geometry.size))
+                    
+                    Button {
+                        print("button pressed")
+                        dismiss()
+                    } label: {
+                        Image(systemName: "house.fill")
+                            .font(.largeTitle)
+                            .foregroundStyle(.white)
+                    }
                 }
-                
-                //                Button {
-                //                    print("button pressed")
-                //                    dismiss.callAsFunction()
-                //                } label: {
-                //                    Image(systemName: "house.fill")
-                //                        .font(.largeTitle)
-                //                        .position(x: 650, y: -300)
-                //                        .foregroundStyle(.white)
-                //                        .frame(width: 200, height: 200)
-                //                }
-                
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.blue)
+            .background(.clear)
             .onAppear() {
                 showMission = true
             }
+//            .onChange(of: oilSpill.animalsSaved, { oldValue, newValue in
+//                print(oilSpill.animalsSaved)
+//                if oilSpill.animalsSaved == 10 {
+//                    hasEnded = true
+//                    print("hasEnded = \(hasEnded)")
+//                }
+//            })
             .fullScreenCover(isPresented: $showMission) {
                 Spacer()
                 
                 Text("Oh No! A large oil spill has occurred in the Pacific Ocean.")
                     .font(.largeTitle)
                 
+                Spacer()
+                
                 Text("Mission: Help the animals affected by the oil spill and remove as much oil as possible.")
                     .font(.title)
                     .multilineTextAlignment(.center)
                 
                 Text("Don't fall off the platforms or you'll restart!")
-                    .font(.title2)
+                    .font(.title)
                 
                 Spacer()
                 
@@ -62,10 +70,11 @@ struct OilSpill: View {
                 Spacer()
             }
         }
-//        .navigationBarBackButtonHidden()
+        .navigationBarBackButtonHidden()
     }
 }
 
 #Preview {
-    OilSpill()
+    OilSpillStruct()
+        .environmentObject(OilSpillGameScene())
 }
