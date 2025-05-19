@@ -33,7 +33,7 @@ struct OilSpillStruct: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.clear)
             .onAppear() {
-                showMission = true
+//                showMission = true
             }
 //            .onChange(of: oilSpill.animalsSaved, { oldValue, newValue in
 //                print(oilSpill.animalsSaved)
