@@ -8,7 +8,7 @@ import SwiftUI
 import Algorithms
 
 struct DragDropView: View {
-    @State var items: [String] = ["Electronics📱💻", "CDs 💿", "Batteries 🔋", "Boxes📦", "Juice boxes 🧃", "Paper 📄", "Cans🥫", "Glass🫙🍾", "Used Tissues🧻", "Juice boxes 🧃", "Receipts 🧾", "Tires 🛞", "Plastic bags", "Ziploc bags", "Chip Bags", "Ice Cream containers", "Medical waste 💉", "Car parts", "Pizza Boxes🍕"]
+    @State var items: [String] = ["Electronics📱💻", "CDs 💿", "Batteries 🔋", "Boxes📦", "Juice boxes 🧃", "Paper 📄", "Cans🥫", "Glass🫙🍾", "Used Tissues🧻", "Juice pouches", "Receipts 🧾", "Tires 🛞", "Plastic bags", "Ziploc bags", "Chip Bags", "Ice Cream containers", "Medical waste 💉", "Car parts", "Pizza Boxes🍕"]
     @State var recycling: [String] = []
     @State var trash: [String] = []
     @State var depends: [String] = []
@@ -29,6 +29,42 @@ struct DragDropView: View {
     @State var showRecycledBoxes: Bool = false
     @State var showTrashedBoxes: Bool = false
     @State var showDependsBoxes: Bool = false
+    @State var showRecycledJuiceBoxes: Bool = false
+    @State var showTrashedJuiceBoxes: Bool = false
+    @State var showDependsJuiceBoxes: Bool = false
+    @State var showRecycledPaper: Bool = false
+    @State var showTrashedPaper: Bool = false
+    @State var showDependsPaper: Bool = false
+    @State var showRecycledCans: Bool = false
+    @State var showTrashedCans: Bool = false
+    @State var showDependsCans: Bool = false
+    @State var showRecycledGlass: Bool = false
+    @State var showTrashedGlass: Bool = false
+    @State var showDependsGlass: Bool = false
+    @State var showRecycledTissues: Bool = false
+    @State var showTrashedTissues: Bool = false
+    @State var showDependsTissues: Bool = false
+    @State var showRecycledJuicePouches: Bool = false
+    @State var showTrashedJuicePouches: Bool = false
+    @State var showDependsJuicePouches: Bool = false
+    @State var showRecycledReceipts: Bool = false
+    @State var showTrashedReceipts: Bool = false
+    @State var showDependsReceipts: Bool = false
+    @State var showRecycledTires: Bool = false
+    @State var showTrashedTires: Bool = false
+    @State var showDependsTires: Bool = false
+    @State var showRecycledPlasticBags: Bool = false
+    @State var showTrashedPlasticBags: Bool = false
+    @State var showDependsPlasticBags: Bool = false
+    @State var showRecycledZiplocs: Bool = false
+    @State var showTrashedZiplocs: Bool = false
+    @State var showDependsZiplocs: Bool = false
+    @State var showRecycledChips: Bool = false
+    @State var showTrashedChips: Bool = false
+    @State var showDependsChips: Bool = false
+    @State var showRecycledPizza: Bool = false
+    @State var showTrashedPizza: Bool = false
+    @State var showDependsPizza: Bool = false
     
     
     
@@ -193,91 +229,289 @@ struct DragDropView: View {
             }
             
             if recycling.contains("Juice boxes 🧃") {
-                Text("Yes! Juice boxes are recyclable because they are often made of plastic, paperboard, and aluminum, all of which are recyclable!")
+                Button("Show Feedback") {
+                    showRecycledJuiceBoxes.toggle()
+                }
+                .alert("Yes! Juice boxes are recyclable because they are often made of plastic, paperboard, and aluminum, all of which are recyclable!", isPresented: $showRecycledJuiceBoxes) {
+                    
+                }
+                
             } else if trash.contains("Juice boxes 🧃") {
-                Text("Oops! juice boxes are made of a combination of plastic, paper, and aluminum, which definitely makes them recyclable.")
+                Button("Show Feedback") {
+                    showTrashedJuiceBoxes.toggle()
+                }
+                .alert("Oops! juice boxes are made of a combination of plastic, paper, and aluminum, which definitely makes them recyclable.", isPresented: $showTrashedJuiceBoxes) {
+                    
+                }
+
             } else if depends.contains("Juice boxes 🧃"){
-                Text("Oops! Try this one again! Hint: Juice boxes are usually made of cardboard and some metal!")
+                Button("Show Feedback") {
+                    showDependsJuiceBoxes.toggle()
+                }
+                .alert("Oops! juice boxes are made of a combination of plastic, paper, and aluminum, which definitely makes them recyclable.", isPresented: $showDependsJuiceBoxes) {
+                    
+                }
+
             }
             
             if recycling.contains("Paper 📄") {
-                Text("Correct! Paper is definitely recyclable because it is made of the most important and abundant renewable resource- trees!")
+                Button("Show Feedback") {
+                    showRecycledPaper.toggle()
+                }
+                .alert("Correct! Paper is definitely recyclable because it is made of the most important and abundant renewable resource- trees!", isPresented: $showRecycledPaper) {
+                    
+                }
+
             } else if trash.contains("Paper 📄") {
-                Text("Oops! When you think of recycling, paper should definitely ring a bell! Paper is made of wood, meaning it is recyclable.")
+                Button("Show Feedback") {
+                    showTrashedPaper.toggle()
+                }
+                .alert("Oops! When you think of recycling, paper should definitely ring a bell! Paper is made of wood, meaning it is recyclable.", isPresented: $showTrashedPaper) {
+                    
+                }
+                
             } else if depends.contains("Paper 📄"){
-                Text("Try this one again! Hint: Paper is made of wood/plant material!")
+                Button("Show Feedback") {
+                    showDependsPaper.toggle()
+                }
+                .alert("Try this one again! Hint: Paper is made of wood/plant material!", isPresented: $showDependsPaper) {
+                    
+                }
+
             }
             
             if recycling.contains("Cans🥫") {
-                Text("Yes! Cans are usually made of aluminum or other metals and alloys, which are recyclable. These metals also include steel, copper, brass, tin, and others as well. In fact, almost all metals are recyclable (except of course ones that are radioactive, which we hope you aren't recycling...)")
+                Button("Show Feedback") {
+                    showRecycledCans.toggle()
+                }
+                .alert("Yes! Cans are usually made of aluminum or other metals and alloys, which are recyclable. These metals also include steel, copper, brass, tin, and others as well. In fact, almost all metals are recyclable (except of course ones that are radioactive, which we hope you aren't recycling...)", isPresented: $showRecycledCans) {
+                    
+                }
+                
             } else if trash.contains("Cans🥫") {
-                Text("Incorrect. Cans are almost always made of metals such as aluminum and tin, which are recyclable!")
+                Button("Show Feedback") {
+                    showTrashedCans.toggle()
+                }
+                .alert("Incorrect. Cans are almost always made of metals such as aluminum and tin, which are recyclable!", isPresented: $showTrashedCans) {
+                    
+                }
+                
             } else if depends.contains("Cans🥫"){
-                Text("Try again! This one is simpler than you think as it is almost always made of metal!")
+                Button("Show Feedback") {
+                    showDependsCans.toggle()
+                }
+                .alert("Try again! This one is simpler than you think as it is almost always made of metal!", isPresented: $showDependsCans) {
+                    
+                }
+                
             }
             
             if recycling.contains("Glass🫙🍾") {
-                Text("Correct, glass is recyclable! It can be melted and reformed into new class infinitely without losing its quality!")
+                Button("Show Feedback") {
+                    showRecycledGlass.toggle()
+                }
+                .alert("Correct, glass is recyclable! It can be melted and reformed into new class infinitely without losing its quality!", isPresented: $showRecycledGlass) {
+                    
+                }
+                
             } else if trash.contains("Glass🫙🍾") {
-                Text("Try again! Glass is recyclable because it can be melted and formed into new glass!")
+                Button("Show Feedback") {
+                    showTrashedGlass.toggle()
+                }
+                .alert("Try again! Glass is recyclable because it can be melted and formed into new glass!", isPresented: $showTrashedGlass) {
+                    
+                }
+                
             } else if depends.contains("Glass🫙🍾"){
-                Text("Almost there! Even though glass is usually sharp, it is a basic material that can be recycled.")
+                Button("Show Feedback") {
+                    showDependsGlass.toggle()
+                }
+                .alert("Almost there! Even though glass is usually sharp, it is a basic material that can be recycled.", isPresented: $showDependsGlass) {
+                    
+                }
+                
             }
             
             if recycling.contains("Used Tissues🧻") {
-                Text("Good Try! Even though they are made of paper, tissues are actually made up of shorter and weaker fibers that make them unable to be re-processed into new products. Additionally, tissues have residue on them from during their use. This makes it best for them to be thrown away")
+                Button("Show Feedback") {
+                    showRecycledTissues.toggle()
+                }
+                .alert("Good Try! Even though they are made of paper, tissues are actually made up of shorter and weaker fibers that make them unable to be re-processed into new products. Additionally, tissues have residue on them from during their use. This makes it best for them to be thrown away", isPresented: $showRecycledTissues) {
+                    
+                }
+                
             } else if trash.contains("Used Tissues🧻") {
-                Text("Correct! Tissues are made up of shorter and weaker fibers that make them unable to be re-processed into new products. In addition, when we use tissues, there is usually residue on them, preventing them from being able to be reprocessed.")
+                Button("Show Feedback") {
+                    showTrashedTissues.toggle()
+                }
+                .alert("Correct! Tissues are made up of shorter and weaker fibers that make them unable to be re-processed into new products. In addition, when we use tissues, there is usually residue on them, preventing them from being able to be reprocessed.", isPresented: $showTrashedTissues) {
+                    
+                }
+                
             } else if depends.contains("Used Tissues🧻"){
-                Text("Try again! This one's a bit easier. When we use tissues, we usually leave behind residue on them, which makes them unable to be reprocessed.")
+                Button("Show Feedback") {
+                    showDependsTissues.toggle()
+                }
+                .alert("Try again! This one's a bit easier. When we use tissues, we usually leave behind residue on them, which makes them unable to be reprocessed.", isPresented: $showDependsTissues) {
+                    
+                }
+                
             }
             
             if recycling.contains("Juice pouches") {
-                Text("Incorrect. Even though juice pouches are able to be recycled, their materials are often laminated together, which makes them difficult to separate. The next time you grab a CapriSun, make sure to throw it out instead of recycling it!")
+                Button("Show Feedback") {
+                    showRecycledJuicePouches.toggle()
+                }
+                .alert("Incorrect. Even though juice pouches are able to be recycled, their materials are often laminated together, which makes them difficult to separate. The next time you grab a CapriSun, make sure to throw it out instead of recycling it!", isPresented: $showRecycledJuicePouches) {
+                    
+                }
+                
             } else if trash.contains("Juice pouches") {
-                Text("Correct! Juice pouches'' materials are often laminated together, which makes them difficult to separate. Just throwing them in the trash works best for them!")
+                Button("Show Feedback") {
+                    showTrashedJuicePouches.toggle()
+                }
+                .alert("Correct! Juice pouches'' materials are often laminated together, which makes them difficult to separate. Just throwing them in the trash works best for them!", isPresented: $showTrashedJuicePouches) {
+                    
+                }
+                
             } else if depends.contains("Juice pouches") {
-                Text("Another hard one! Unlike their juice BOX counterparts, juice pouches are actually made of laminated materials, which makes them difficult to recycle at all.")
+                Button("Show Feedback") {
+                    showDependsJuicePouches.toggle()
+                }
+                .alert("Another hard one! Unlike their juice BOX counterparts, juice pouches are actually made of laminated materials, which makes them difficult to recycle at all.", isPresented: $showDependsJuicePouches) {
+                    
+                }
+                
             }
             
             if recycling.contains("Receipts 🧾") {
-                Text("This is an extremely tricky one! Although receipts look like just another piece of paper that can be recycled, they are actually made with thermal paper, a material which contains toxic chemicals like BPA and BPS, which allows for ink to be printed on again. As a result, it is easier to throw them out to prevent contamination in the recycling system. Now you know!")
+                Button("Show Feedback") {
+                    showRecycledReceipts.toggle()
+                }
+                .alert("This is an extremely tricky one! Although receipts look like just another piece of paper that can be recycled, they are actually made with thermal paper, a material which contains toxic chemicals like BPA and BPS, which allows for ink to be printed on again. As a result, it is easier to throw them out to prevent contamination in the recycling system. Now you know!", isPresented: $showRecycledReceipts) {
+                    
+                }
+                
             } else if trash.contains("Receipts 🧾") {
-                Text("Correct! Receipts are usually printed on thermal paper in order to allow ink to be printed on them. This material contains BPA and BPS, which are toxic chemicals, making receipts very hard to recycle and ultimately better for them to be thrown out to prevent contamination.")
+                Button("Show Feedback") {
+                    showTrashedReceipts.toggle()
+                }
+                .alert("Correct! Receipts are usually printed on thermal paper in order to allow ink to be printed on them. This material contains BPA and BPS, which are toxic chemicals, making receipts very hard to recycle and ultimately better for them to be thrown out to prevent contamination.", isPresented: $showTrashedReceipts) {
+                    
+                }
+               
             } else if depends.contains("Receipts 🧾") {
-                Text("Oooh so close! Recepts are made of paper, but the paper they are made with is thermal paper to allow for cheap production, inkless printing and heat resistance! Try again!")
+                Button("Show Feedback") {
+                    showDependsReceipts.toggle()
+                }
+                .alert("Oooh so close! Recepts are made of paper, but the paper they are made with is thermal paper to allow for cheap production, inkless printing and heat resistance! Try again!", isPresented: $showDependsReceipts) {
+                    
+                }
+                
             }
             
             if recycling.contains("Tires 🛞") {
-                Text("Close! It is much more environmentally friendly to recycle tires because if they were to be trashed, they are burnt, which results in pollution. However, it is important to note that tires cannot be recycled in curbside bins because they don't fit and have materials that need to be separated through special processes. Check with your city to see where there are specialized tire drop-off locations to properly dispose of them!")
+                Button("Show Feedback") {
+                    showRecycledTires.toggle()
+                }
+                .alert("Close! It is much more environmentally friendly to recycle tires because if they were to be trashed, they are burnt, which results in pollution. However, it is important to note that tires cannot be recycled in curbside bins because they don't fit and have materials that need to be separated through special processes. Check with your city to see where there are specialized tire drop-off locations to properly dispose of them!", isPresented: $showRecycledTires) {
+                    
+                }
+                
             } else if trash.contains("Tires 🛞") {
-                Text("Try one more time! As a matter of fact, tires can be recycled because they are not biodegradable and they are usually burned in landfills, which releases harmful chemicals into the air.")
+                Button("Show Feedback") {
+                    showTrashedTires.toggle()
+                }
+                .alert("Try one more time! As a matter of fact, tires can be recycled because they are not biodegradable and they are usually burned in landfills, which releases harmful chemicals into the air.", isPresented: $showTrashedTires) {
+                    
+                }
+                
             } else if depends.contains("Tires 🛞") {
-                Text("Correct! Because tires are large, they don't really fit into most recycling bins and have materials that need to be separated through special processes, making this item a perfect fit for this category. Check with your city to see where there are specialized tire drop-off locations to properly dispose of them!")
+                Button("Show Feedback") {
+                    showDependsTires.toggle()
+                }
+                .alert("Correct! Because tires are large, they don't really fit into most recycling bins and have materials that need to be separated through special processes, making this item a perfect fit for this category. Check with your city to see where there are specialized tire drop-off locations to properly dispose of them!", isPresented: $showDependsTires) {
+                    
+                }
+                
             }
             
             if recycling.contains("Plastic bags") {
-                Text("Another tricky one! Plastic bags can be recycled, but they need to be once again recycled in special places that collect plastics bags for recycling. Usually one of these locations is near you, like in your local Target or Walmart! When recycled, plastic bags are turned into plastic pellets that could be used to produce new plastic bags or other plastic materials.")
+                Button("Show Feedback") {
+                    showRecycledPlasticBags.toggle()
+                }
+                .alert("Another tricky one! Plastic bags can be recycled, but they need to be once again recycled in special places that collect plastics bags for recycling. Usually one of these locations is near you, like in your local Target or Walmart! When recycled, plastic bags are turned into plastic pellets that could be used to produce new plastic bags or other plastic materials.", isPresented: $showRecycledPlasticBags) {
+                    
+                }
+                
             } else if trash.contains("Plastic bags") {
-                Text("Uh-oh! Although plastic bags can't be recycled normally, they still need to be recycled through special programs because if we were to put them in landfills, it would take thousands of years for them to degrade into the soil. Recycling here is your best bet, but make sure to check locally to see where such programs can take place. ")
+                Button("Show Feedback") {
+                    showTrashedPlasticBags.toggle()
+                }
+                .alert("Uh-oh! Although plastic bags can't be recycled normally, they still need to be recycled through special programs because if we were to put them in landfills, it would take thousands of years for them to degrade into the soil. Recycling here is your best bet, but make sure to check locally to see where such programs can take place.", isPresented: $showTrashedPlasticBags) {
+                    
+                }
+                
             } else if depends.contains("Plastic bags") {
-                Text("Right on! Plastic bags are recyclable, but they need to be recycled in special places that collect plastics bags for recycling. Usually one of these locations is near you, like in your local Target or Walmart! When recycled, plastic bags are turned into plastic pellets that could be used to produce new plastic bags or other plastic materials.")
+                Button("Show Feedback") {
+                    showDependsPlasticBags.toggle()
+                }
+                .alert("Right on! Plastic bags are recyclable, but they need to be recycled in special places that collect plastics bags for recycling. Usually one of these locations is near you, like in your local Target or Walmart! When recycled, plastic bags are turned into plastic pellets that could be used to produce new plastic bags or other plastic materials.", isPresented: $showDependsPlasticBags) {
+                    
+                }
+                
             }
             
             if recycling.contains("Ziploc bags") {
-                Text("Almost! Ziploc bags are recyclable because they are made of plain plastic. However, it would be safe to drop them off at separate locations like with plastic bags because they could cause problems with recycling machinery.")
+                Button("Show Feedback") {
+                    showRecycledZiplocs.toggle()
+                }
+                .alert("Almost! Ziploc bags are recyclable because they are made of plain plastic. However, it would be safe to drop them off at separate locations like with plastic bags because they could cause problems with recycling machinery.", isPresented: $showRecycledZiplocs) {
+                    
+                }
+                
             } else if trash.contains("Ziploc bags") {
-                Text("Try again! Ziploc bags are made of plastic, which does make them recyclable!")
+                Button("Show Feedback") {
+                    showTrashedZiplocs.toggle()
+                }
+                .alert("Try again! Ziploc bags are made of plastic, which does make them recyclable!", isPresented: $showTrashedZiplocs) {
+                    
+                }
+                
             } else if depends.contains("Ziploc bags") {
-                Text("Yup! Because Ziploc bags are made of plain plastic, they can be recycled, but their plastic composition could give the recycling machinery a hard time processing them! So, it's best to drop them off at separate locations like with plastic bags!")
+                Button("Show Feedback") {
+                    showDependsZiplocs.toggle()
+                }
+                .alert("Yup! Because Ziploc bags are made of plain plastic, they can be recycled, but their plastic composition could give the recycling machinery a hard time processing them! So, it's best to drop them off at separate locations like with plastic bags!", isPresented: $showDependsZiplocs) {
+                    
+                }
+                
             }
             
             if recycling.contains("Chip Bags") {
-                Text("Not quite! Chip bags often contain metal or other materials that can damage recycling machinery. Try to find a different location to drop them off!")
+                Button("Show Feedback") {
+                    showRecycledChips.toggle()
+                }
+                .alert("Not quite! Chip bags often contain metal or other materials that can damage recycling machinery. Try to find a different location to drop them off!", isPresented: $showRecycledChips) {
+                    
+                }
+                
             } else if trash.contains("Chip Bags") {
-                Text("Not quite! Chip bags are not degradable, so they need to be disposed of another way!")
+                Button("Show Feedback") {
+                    showTrashedChips.toggle()
+                }
+                .alert("Not quite! Chip bags are not degradable, so they need to be disposed of another way!", isPresented: $showTrashedChips) {
+                    
+                }
+                
             } else if depends.contains("Chip Bags") {
-                Text("Yes! Because chip bags are made of mixed materials that are fused together, it makes it hard for them to get recycled, but through sepcial recycling locations, they can be recycled!")
+                Button("Show Feedback") {
+                    showDependsChips.toggle()
+                }
+                .alert("Yes! Because chip bags are made of mixed materials that are fused together, it makes it hard for them to get recycled, but through sepcial recycling locations, they can be recycled!", isPresented: $showDependsChips) {
+                    
+                }
+                
             }
             
             if recycling.contains("Ice Cream containers") {
@@ -305,7 +539,13 @@ struct DragDropView: View {
             }
             
             if recycling.contains("Pizza Boxes🍕") {
-                Text("This one's a bit of a curveball! Even though pizza boxes are usually made of cardboard, the food inside them usually leaves grease on the cardboard, making it hard for them to recycle.")
+                Button("Show Feedback") {
+                    showRecycledPizza.toggle()
+                }
+                .alert("This one's a bit of a curveball! Even though pizza boxes are usually made of cardboard, the food inside them usually leaves grease on the cardboard, making it hard for them to recycle.", isPresented: $showRecycledPizza) {
+                    
+                }
+               
             } else if trash.contains("Pizza Boxes🍕") {
                 Text("Yep! Because pizzas usually leave greasy residue on the cardboard box, it's hard for them to be recycled, so your best bet is to just throw it in the trash.")
             } else if depends.contains("Pizza Boxes🍕") {

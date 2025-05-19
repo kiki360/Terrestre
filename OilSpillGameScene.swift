@@ -21,20 +21,25 @@ struct PhysicsCategory {
 class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     let cameraNode = SKCameraNode()
     
-    var backgroundImage = ""
+    let atlas = SKTextureAtlas(named: "player")
+    //let idle = atlas.textureNamed("walk1")
+    //let walking = atlas.textureNamed("walk2")
+    //let playerWalkSprites = [idle, walking]
+    
+    //    var backgroundImage = ""
     var animalImage = ""
     
     var Player = SKSpriteNode(imageNamed: "PlayerCharacter")
-    var Animal1 = SKSpriteNode()
-    var Animal2 = SKSpriteNode()
-    var Animal3 = SKSpriteNode()
-    var Animal4 = SKSpriteNode()
-    var Animal5 = SKSpriteNode()
-    var Animal6 = SKSpriteNode()
-    var Animal7 = SKSpriteNode()
-    var Animal8 = SKSpriteNode()
-    var Animal9 = SKSpriteNode()
-    var Animal10 = SKSpriteNode()
+    var Animal1 = SKSpriteNode(imageNamed: "Duck")
+    var Animal2 = SKSpriteNode(imageNamed: "Duck")
+    var Animal3 = SKSpriteNode(imageNamed: "Duck")
+    var Animal4 = SKSpriteNode(imageNamed: "Duck")
+    var Animal5 = SKSpriteNode(imageNamed: "Duck")
+    var Animal6 = SKSpriteNode(imageNamed: "Duck")
+    var Animal7 = SKSpriteNode(imageNamed: "Duck")
+    var Animal8 = SKSpriteNode(imageNamed: "Duck")
+    var Animal9 = SKSpriteNode(imageNamed: "Duck")
+    var Animal10 = SKSpriteNode(imageNamed: "Duck")
     
     var startingPlatform = SKSpriteNode()
     
@@ -58,9 +63,9 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     
     override func sceneDidLoad() {
         // MARK: Background
-        let Background = SKSpriteNode(imageNamed: backgroundImage)
+        let Background = SKSpriteNode(imageNamed: "OilSpillBg")
         Background.size = self.size
-        Background.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        Background.position = CGPoint(x: 0, y: 0)
         Background.zPosition = -1
         
         physicsWorld.contactDelegate = self
@@ -68,7 +73,7 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         self.anchorPoint = CGPoint(x: 0, y: 0)
         
         // MARK: Player and Platform starting code
-        Player.size = CGSize(width: 100, height: 150)
+        Player.size = CGSize(width: 144, height: 192)
         Player.position = CGPoint(x: 100, y: 700)
         Player.name = "player"
         
@@ -98,7 +103,7 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
             addChild(otherPlatform)
             
             spritePositionX.append(x)
-            spritePositionY.append((y + 100))
+            spritePositionY.append((y + 60))
             
         }
         
@@ -226,10 +231,10 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         actionButton.position = UserDefaults.standard.getCGPoint(forKey: "actionButtonPlacement") ?? CGPoint(x: -520, y: -300)
         actionButton.name = "actionbutton"
         
-        animalCounter.position = CGPoint(x: -275, y: 400)
+        animalCounter.position = CGPoint(x: -200, y: 325)
         animalCounter.fontColor = .white
-        animalCounter.fontSize = 40
-        animalCounter.fontName = "Courier new"
+        animalCounter.fontSize = 50
+        animalCounter.fontName = "Courier New Bold"
         
         addChild(startingPlatform)
         addChild(Animal1)
@@ -246,8 +251,9 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         cameraNode.addChild(upArrow)
         cameraNode.addChild(leftArrow)
         cameraNode.addChild(rightArrow)
-//        cameraNode.addChild(actionButton)
+        //        cameraNode.addChild(actionButton)
         cameraNode.addChild(animalCounter)
+        cameraNode.addChild(Background)
     }
     
     var playerOnGround = false
@@ -268,8 +274,8 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         Player.physicsBody?.restitution = 0.2
         
         Player.physicsBody?.categoryBitMask = PhysicsCategory.Player
-//        Player.physicsBody?.contactTestBitMask = PhysicsCategory.Frame
-//        Player.physicsBody?.collisionBitMask = PhysicsCategory.Frame
+        //        Player.physicsBody?.contactTestBitMask = PhysicsCategory.Frame
+        //        Player.physicsBody?.collisionBitMask = PhysicsCategory.Frame
         Player.physicsBody?.contactTestBitMask = PhysicsCategory.Platform | PhysicsCategory.animal
         Player.physicsBody?.collisionBitMask = PhysicsCategory.Platform | PhysicsCategory.animal
         
@@ -352,85 +358,135 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         grabbing = false
     }
     
-   // MARK: didBegin
-   nonisolated func didBegin(_ contact: SKPhysicsContact) {
-//       let contactA = contact.bodyA.node
-//       let contactB = contact.bodyB.node
-       
-       let selectedPoint = contact.contactPoint
-       
-       Task {
-           
-           if await Animal1.contains(selectedPoint) {
-               await Animal1.removeFromParent()
-               DispatchQueue.main.async {
-                   self.animalsSaved += 1
-               }
-           }
-           
-           if await Animal2.contains(selectedPoint) {
-               await Animal2.removeFromParent()
-               DispatchQueue.main.async {
-                   self.animalsSaved += 1
-               }
-           }
-           
-           if await Animal3.contains(selectedPoint) {
-               await Animal3.removeFromParent()
-               DispatchQueue.main.async {
-                   self.animalsSaved += 1
-               }
-           }
-           
-           if await Animal4.contains(selectedPoint) {
-               await Animal4.removeFromParent()
-               DispatchQueue.main.async {
-                   self.animalsSaved += 1
-               }
-           }
-           
-           if await Animal5.contains(selectedPoint) {
-               await Animal5.removeFromParent()
-               DispatchQueue.main.async {
-                   self.animalsSaved += 1
-               }
-           }
-           
-           if await Animal6.contains(selectedPoint) {
-               await Animal6.removeFromParent()
-               DispatchQueue.main.async {
-                   self.animalsSaved += 1
-               }
-           }
-           
-           if await Animal7.contains(selectedPoint) {
-               await Animal7.removeFromParent()
-               DispatchQueue.main.async {
-                   self.animalsSaved += 1
-               }
-           }
-           
-           if await Animal8.contains(selectedPoint) {
-               await Animal8.removeFromParent()
-               DispatchQueue.main.async {
-                   self.animalsSaved += 1
-               }
-           }
-           
-           if await Animal9.contains(selectedPoint) {
-               await Animal9.removeFromParent()
-               DispatchQueue.main.async {
-                   self.animalsSaved += 1
-               }
-           }
-           
-           if await Animal10.contains(selectedPoint) {
-               await Animal10.removeFromParent()
-               DispatchQueue.main.async {
-                   self.animalsSaved += 1
-               }
-           }
-       }
+    // MARK: didBegin
+    nonisolated func didBegin(_ contact: SKPhysicsContact) {
+        //       let contactA = contact.bodyA.node
+        //       let contactB = contact.bodyB.node
+        
+        let selectedPoint = contact.contactPoint
+        
+        Task {
+            
+            if await Animal1.contains(selectedPoint) {
+                DispatchQueue.main.async {
+                    self.Animal1.removeFromParent()
+                    if self.Animal1.isHidden == false {
+                        self.animalsSaved += 1
+                        self.Animal1.isHidden = true
+                    } else {
+                        self.animalsSaved += 0
+                    }
+                }
+            }
+            
+            if await Animal2.contains(selectedPoint) {
+                DispatchQueue.main.async {
+                    self.Animal2.removeFromParent()
+                    if self.Animal2.isHidden == false {
+                        self.animalsSaved += 1
+                        self.Animal2.isHidden = true
+                    } else {
+                        self.animalsSaved += 0
+                    }
+                }
+            }
+            
+            if await Animal3.contains(selectedPoint) {
+                DispatchQueue.main.async {
+                    self.Animal3.removeFromParent()
+                    if self.Animal3.isHidden == false {
+                        self.animalsSaved += 1
+                        self.Animal3.isHidden = true
+                    } else {
+                        self.animalsSaved += 0
+                    }
+                }
+            }
+            
+            if await Animal4.contains(selectedPoint) {
+                DispatchQueue.main.async {
+                    self.Animal4.removeFromParent()
+                    if self.Animal4.isHidden == false {
+                        self.animalsSaved += 1
+                        self.Animal4.isHidden = true
+                    } else {
+                        self.animalsSaved += 0
+                    }
+                }
+            }
+            
+            if await Animal5.contains(selectedPoint) {
+                DispatchQueue.main.async {
+                    self.Animal5.removeFromParent()
+                    if self.Animal5.isHidden == false {
+                        self.animalsSaved += 1
+                        self.Animal5.isHidden = true
+                    } else {
+                        self.animalsSaved += 0
+                    }
+                }
+            }
+            
+            if await Animal6.contains(selectedPoint) {
+                DispatchQueue.main.async {
+                    self.Animal6.removeFromParent()
+                    if self.Animal6.isHidden == false {
+                        self.animalsSaved += 1
+                        self.Animal6.isHidden = true
+                    } else {
+                        self.animalsSaved += 0
+                    }
+                }
+            }
+            
+            if await Animal7.contains(selectedPoint) {
+                DispatchQueue.main.async {
+                    self.Animal7.removeFromParent()
+                    if self.Animal7.isHidden == false {
+                        self.animalsSaved += 1
+                        self.Animal7.isHidden = true
+                    } else {
+                        self.animalsSaved += 0
+                    }
+                }
+            }
+            
+            if await Animal8.contains(selectedPoint) {
+                DispatchQueue.main.async {
+                    self.Animal8.removeFromParent()
+                    if self.Animal8.isHidden == false {
+                        self.animalsSaved += 1
+                        self.Animal8.isHidden = true
+                    } else {
+                        self.animalsSaved += 0
+                    }
+                }
+            }
+            
+            if await Animal9.contains(selectedPoint) {
+                DispatchQueue.main.async {
+                    self.Animal9.removeFromParent()
+                    if self.Animal9.isHidden == false {
+                        self.animalsSaved += 1
+                        self.Animal9.isHidden = true
+                    } else {
+                        self.animalsSaved += 0
+                    }
+                }
+            }
+            
+            if await Animal10.contains(selectedPoint) {
+                DispatchQueue.main.async {
+                    self.Animal10.removeFromParent()
+                    if self.Animal10.isHidden == false {
+                        self.animalsSaved += 1
+                        self.Animal10.isHidden = true
+                    } else {
+                        self.animalsSaved += 0
+                    }
+                }
+            }
+        }
     }
     
     // MARK: didEnd
