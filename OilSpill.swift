@@ -33,15 +33,17 @@ struct OilSpillStruct: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.clear)
             .onAppear() {
-//                showMission = true
+                print(oilSpill.animalsSaved)
+                showMission = true
             }
-//            .onChange(of: oilSpill.animalsSaved, { oldValue, newValue in
-//                print(oilSpill.animalsSaved)
-//                if oilSpill.animalsSaved == 10 {
-//                    hasEnded = true
-//                    print("hasEnded = \(hasEnded)")
-//                }
-//            })
+            .onChange(of: oilSpill.animalsSaved, {
+                print("change registered")
+                print(oilSpill.animalsSaved)
+                if oilSpill.animalsSaved == 10 {
+                    hasEnded = true
+                    print(hasEnded)
+                }
+            })
             .fullScreenCover(isPresented: $showMission) {
                 Spacer()
                 
@@ -68,6 +70,22 @@ struct OilSpillStruct: View {
                 }
                 
                 Spacer()
+            }
+            .fullScreenCover(isPresented: $hasEnded) {
+                HStack {
+                    Button {
+                        oilSpill.Player.position.x = 100
+                        hasEnded = false
+                    } label: {
+                        Text("Restart")
+                    }
+
+                    Button {
+                        dismiss()
+                    } label: {
+                        Text("Home")
+                    }
+                }
             }
         }
         .navigationBarBackButtonHidden()
