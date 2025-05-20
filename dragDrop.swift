@@ -68,12 +68,13 @@ struct DragDropView: View {
     
     
     
+    
     var body: some View {
         HStack(spacing: 20) {
             SortView(title: "Sort the items!", tasks: items, isTargeted: isItemsTargeted)
                 .font(.custom("Chalkboard SE", size: 15))
                 .dropDestination(for: String.self) { droppedItems, location in
-                    for task in droppedItems {
+                        for task in droppedItems {
                         trash.removeAll {$0 == task}
                         recycling.removeAll {$0 == task}
                         depends.removeAll {$0 == task}
@@ -127,37 +128,52 @@ struct DragDropView: View {
                 }
             
             if recycling.contains("Electronics📱💻") {
-                Button("Show Feedback") {
-                    showRecycledElectronics.toggle()
-                }
-                .alert("This is a tricky one! Most people mistakenly throw away their unwanted electronics, but they are actually recyclable! However, it is important to note that electronics cannot be recycled in traditional curbside recycling bins.", isPresented: $showRecycledElectronics) {
-                    
-                }
-                
+                Text("")
+                    .onAppear {
+                        if recycling.contains("Electronics📱💻") {
+                            showRecycledElectronics.toggle()
+                        }
+                    }
+                    .alert("Almost there! Recycling electronics is one of the easiest ways to reduce waste. Many people do not know that electronics are recyclable! However, the reason behind public skepticism is the special circumstances or recycling these items, namely recycling them through special recycling events or drop-off locations to ensure the proper disposal of devices.", isPresented: $showRecycledElectronics) {
+                        
+                    }
             } else if trash.contains("Electronics📱💻") {
-                Button("Show Feedback") {
-                    showTrashedElectronics.toggle()
-                }
-                .alert("Not quite! More than 80% of electronics get thrown away because many people do not know that they are in fact recyclable! However, the reason behind public skepticism is the special circumstances or recycling these items, namely recycling them through special recycling events or drop-off locations to ensure the proper disposal of devices.", isPresented: $showTrashedElectronics) {
-                    
-                }
+                Text("")
+                    .onAppear {
+                        if trash.contains("Electronics📱💻") {
+                            showTrashedElectronics.toggle()
+                        }
+                    }
+                    .alert("Not quite! More than 80% of electronics get thrown away because many people do not know that they are in fact recyclable! However, the reason behind public skepticism is the special circumstances or recycling these items, namely recycling them through special recycling events or drop-off locations to ensure the proper disposal of devices.", isPresented: $showTrashedElectronics) {
+                        
+                    }
+                
+                
             } else if depends.contains("Electronics📱💻"){
-                Button("Show Feedback") {
-                    showDependsElectronics.toggle()
-                }
-                .alert("You got it! Due to their materials, electronics are recyclable, but putting them in a regular recycling bin poses a fire hazard, so it is best to recycle them through special drop-off locations or special recycling programs. In addition, you can ask your phone/tech provider like Verizon or T-Mobile if you can trade in your device for a newer one and dispose of your it that way! Click the link below to find out more about recycling electronics.", isPresented: $showDependsElectronics) {
-                    
-                }
-                Link("Visit this EPA link for more information on special recycling circumstances for electronics!", destination: (ElectronicsURL!))
+                Text("")
+                    .onAppear {
+                        if depends.contains("Electronics📱💻") {
+                            showDependsElectronics.toggle()
+                        }
+                    }
+                    .alert("You got it! Due to their materials, electronics are recyclable, but putting them in a regular recycling bin poses a fire hazard, so it is best to recycle them through special drop-off locations or special recycling programs. In addition, you can ask your phone/tech provider like Verizon or T-Mobile if you can trade in your device for a newer one and dispose of your it that way! Click the link below to find out more about recycling electronics.", isPresented: $showDependsElectronics) {
+                        
+                    }
+
+//                Link("Visit this EPA link for more information on special recycling circumstances for electronics!", destination: (ElectronicsURL!))
             }
             
             if recycling.contains("CDs 💿") {
-                Button("Show Feedback") {
-                    showRecycledCDs.toggle()
-                }
-                .alert("Correct...mostly! CDs are usually made out of materials like polycarbonate plastic and aluminum, which are definitely recyclable! By recycling them, we are also conserving some of the resources that are key to the process of creating CDs, like natural gas, crude oil, and water. However, because CDs are usually made of polycarbonate, this mix of plastics makes it kind of hard for standard recycling machines to recycle them. Try again!", isPresented: $showRecycledCDs) {
-                    
-                }
+                Text("")
+                    .onAppear {
+                        if recycling.contains("CDs 💿") {
+                            showRecycledCDs.toggle()
+                        }
+                    }
+                    .alert("Correct...mostly! CDs are usually made out of materials like polycarbonate plastic and aluminum, which are definitely recyclable! By recycling them, we are also conserving some of the resources that are key to the process of creating CDs, like natural gas, crude oil, and water. However, because CDs are usually made of polycarbonate, this mix of plastics makes it kind of hard for standard recycling machines to recycle them. Try again!", isPresented: $showRecycledCDs) {
+                        
+                    }
+              
             } else if trash.contains("CDs 💿") {
                 Button("Show Feedback") {
                     showTrashedCDs.toggle()
