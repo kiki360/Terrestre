@@ -13,20 +13,24 @@ struct DialogueTestNoResponse: View {
     let dialogue: [Int: String]
     var body: some View {
         let TotalIterations: Int = dialogue.count - 1
-        Text("\(DialogueNoResponse(Iteration: iterations))")
-        Button("Next"){
-            iterations += 1
-            if iterations > TotalIterations{
-                iterations = TotalIterations
+        if TotalIterations == 0{
+            Text("\(DialogueNoResponse(Iteration: iterations))")
+            Button("Next"){
+                iterations += 1
+                if iterations > TotalIterations{
+                    iterations = TotalIterations
+                }
             }
-        }
-        Button("\(ButtonName())"){
-            showHistory.toggle()
-        }
-        if showHistory{
-            ForEach(0...iterations, id: \.self){ text in
-                Text("\(DialogueNoResponse(Iteration: text))")
+            Button("\(ButtonName())"){
+                showHistory.toggle()
             }
+            if showHistory{
+                ForEach(0...iterations, id: \.self){ text in
+                    Text("\(DialogueNoResponse(Iteration: text))")
+                }
+            }
+        } else {
+            Text("\(iterations) equals 0 so we can't show anything")
         }
     }
     func DialogueNoResponse(Iteration: Int) -> String{
@@ -43,4 +47,7 @@ struct DialogueTestNoResponse: View {
             return "Show Chat History"
         }
     }
+}
+#Preview {
+    DialogueTestNoResponse(dialogue: [:])
 }
