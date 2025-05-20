@@ -8,11 +8,11 @@ import SwiftUI
 
 struct DialogueTestNoResponse: View {
     @AppStorage("username") var username = "Guest"
-    let TotalIterations: Int
     @State var iterations: Int = 0
     @State var showHistory: Bool = false
     let dialogue: [Int: String]
     var body: some View {
+        let TotalIterations: Int = dialogue.count - 1
         Text("\(DialogueNoResponse(Iteration: iterations))")
         Button("Next"){
             iterations += 1

@@ -10,7 +10,7 @@ import SpriteKit
 struct OilSpillStruct: View {
     @State var showMission = false
     @State var hasEnded = false
-    @AppStorage("username") var username: String = ""
+    @AppStorage("username") var username: String = "Guest"
     @EnvironmentObject var oilSpill: OilSpillGameScene
     @Environment(\.isPresented) var isPresented
     @Environment(\.dismiss) var dismiss
@@ -43,7 +43,7 @@ struct OilSpillStruct: View {
 //                }
 //            })
             .fullScreenCover(isPresented: $showMission) {
-                DialogueTestNoResponse(TotalIterations: 2, dialogue:  [1: "Hi, \(username)! We need your help to stop the fracking in our town. To do this, could you please contact our local Town Hall?", 2: "Thanks! We will surely remember this when you return."])
+                DialogueTestNoResponse(dialogue:  [0: "\(username)!", 1: "Something went wrong at this Oil Rig and it has started spilling!", 2: "We need your help to get the surrounding wildlife away from it.", 3: "There are ten ducks you need to grab", 4: "Make sure you don't fall off! I don't think those guard rails up there are very safe."])
             }
         }
         .navigationBarBackButtonHidden()
