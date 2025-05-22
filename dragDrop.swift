@@ -128,51 +128,45 @@ struct DragDropView: View {
                 }
             
             if recycling.contains("Electronics📱💻") {
-                Text("")
-                    .onAppear {
-                        if recycling.contains("Electronics📱💻") {
-                            showRecycledElectronics.toggle()
-                        }
-                    }
-                    .alert("Almost there! Recycling electronics is one of the easiest ways to reduce waste. Many people do not know that electronics are recyclable! However, the reason behind public skepticism is the special circumstances or recycling these items, namely recycling them through special recycling events or drop-off locations to ensure the proper disposal of devices.", isPresented: $showRecycledElectronics) {
-                        
-                    }
+                
+                Button("Show Feedback") {
+                    showRecycledElectronics.toggle()
+                }
+                .alert("Almost there! Recycling electronics is one of the easiest ways to reduce waste. Many people do not know that electronics are recyclable! However, the reason behind public skepticism is the special circumstances or recycling these items, namely recycling them through special recycling events or drop-off locations to ensure the proper disposal of devices.", isPresented: $showRecycledElectronics) {
+                    
+                }
+                
+
             } else if trash.contains("Electronics📱💻") {
-                Text("")
-                    .onAppear {
-                        if trash.contains("Electronics📱💻") {
-                            showTrashedElectronics.toggle()
-                        }
-                    }
-                    .alert("Not quite! More than 80% of electronics get thrown away because many people do not know that they are in fact recyclable! However, the reason behind public skepticism is the special circumstances or recycling these items, namely recycling them through special recycling events or drop-off locations to ensure the proper disposal of devices.", isPresented: $showTrashedElectronics) {
-                        
-                    }
+                
+                Button("Show Feedback") {
+                    showTrashedElectronics.toggle()
+                }
+                .alert("Not quite! More than 80% of electronics get thrown away because many people do not know that they are in fact recyclable! However, the reason behind public skepticism is the special circumstances or recycling these items, namely recycling them through special recycling events or drop-off locations to ensure the proper disposal of devices.", isPresented: $showTrashedElectronics) {
+                    
+                }
                 
                 
             } else if depends.contains("Electronics📱💻"){
-                Text("")
-                    .onAppear {
-                        if depends.contains("Electronics📱💻") {
-                            showDependsElectronics.toggle()
-                        }
-                    }
-                    .alert("You got it! Due to their materials, electronics are recyclable, but putting them in a regular recycling bin poses a fire hazard, so it is best to recycle them through special drop-off locations or special recycling programs. In addition, you can ask your phone/tech provider like Verizon or T-Mobile if you can trade in your device for a newer one and dispose of your it that way! Click the link below to find out more about recycling electronics.", isPresented: $showDependsElectronics) {
-                        
-                    }
+                
+                Button("Show Feedback") {
+                    showDependsElectronics.toggle()
+                }
+                .alert("You got it! Due to their materials, electronics are recyclable, but putting them in a regular recycling bin poses a fire hazard, so it is best to recycle them through special drop-off locations or special recycling programs. In addition, you can ask your phone/tech provider like Verizon or T-Mobile if you can trade in your device for a newer one and dispose of your it that way! Click the link below to find out more about recycling electronics.", isPresented: $showDependsElectronics) {
+                    
+                }
 
 //                Link("Visit this EPA link for more information on special recycling circumstances for electronics!", destination: (ElectronicsURL!))
             }
             
             if recycling.contains("CDs 💿") {
-                Text("")
-                    .onAppear {
-                        if recycling.contains("CDs 💿") {
-                            showRecycledCDs.toggle()
-                        }
-                    }
-                    .alert("Correct...mostly! CDs are usually made out of materials like polycarbonate plastic and aluminum, which are definitely recyclable! By recycling them, we are also conserving some of the resources that are key to the process of creating CDs, like natural gas, crude oil, and water. However, because CDs are usually made of polycarbonate, this mix of plastics makes it kind of hard for standard recycling machines to recycle them. Try again!", isPresented: $showRecycledCDs) {
-                        
-                    }
+                
+                Button("Show Feedback") {
+                    showRecycledCDs.toggle()
+                }
+                .alert("Correct...mostly! CDs are usually made out of materials like polycarbonate plastic and aluminum, which are definitely recyclable! By recycling them, we are also conserving some of the resources that are key to the process of creating CDs, like natural gas, crude oil, and water. However, because CDs are usually made of polycarbonate, this mix of plastics makes it kind of hard for standard recycling machines to recycle them. Try again!", isPresented: $showRecycledCDs) {
+                    
+                }
               
             } else if trash.contains("CDs 💿") {
                 Button("Show Feedback") {
