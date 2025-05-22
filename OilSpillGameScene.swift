@@ -53,7 +53,7 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     let rightArrow = SKSpriteNode(imageNamed: "rightArrow")
     let actionButton = SKShapeNode(ellipseOf: CGSize(width: 100, height: 100))
     
-    @Published var animalsSaved = 0
+    @AppStorage("animals_saved") var animalsSaved = 0
     var animalCounter = SKLabelNode()
     
     var spritePositionX: [Int] = []
@@ -92,19 +92,33 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         
         // MARK: Platforms and animal sprites added
         for i in 1...100 {
-            let otherPlatform = SKSpriteNode(color: .black, size: startingPlatform.size)
-            
-            let y = Int.random(in: 250...600)
-            let x = (Int(i) * 200) + 200
-            
-            otherPlatform.position = CGPoint(x: x, y: y)
-            otherPlatform.physicsBody = SKPhysicsBody(rectangleOf: startingPlatform.size)
-            otherPlatform.physicsBody?.isDynamic = false
-            addChild(otherPlatform)
-            
-            spritePositionX.append(x)
-            spritePositionY.append((y + 60))
-            
+            if i == 1 {
+                let otherPlatform = SKSpriteNode(color: .black, size: startingPlatform.size)
+                
+                let y = Int.random(in: 250...600)
+                let x = (Int(i) * 200) + 200
+                
+                otherPlatform.position = CGPoint(x: x, y: y)
+                otherPlatform.physicsBody = SKPhysicsBody(rectangleOf: startingPlatform.size)
+                otherPlatform.physicsBody?.isDynamic = false
+                addChild(otherPlatform)
+                
+                spritePositionX.append(x)
+                spritePositionY.append((y + 60))
+            } else {
+                let otherPlatform = SKSpriteNode(color: .black, size: startingPlatform.size)
+                
+                let y = Int.random(in: 250...600)
+                let x = (Int(i) * 200) + 350
+                
+                otherPlatform.position = CGPoint(x: x, y: y)
+                otherPlatform.physicsBody = SKPhysicsBody(rectangleOf: startingPlatform.size)
+                otherPlatform.physicsBody?.isDynamic = false
+                addChild(otherPlatform)
+                
+                spritePositionX.append(x)
+                spritePositionY.append((y + 60))
+            }
         }
         
         // MARK: Animal1

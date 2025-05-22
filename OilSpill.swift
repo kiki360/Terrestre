@@ -14,6 +14,8 @@ struct OilSpillStruct: View {
     @EnvironmentObject var oilSpill: OilSpillGameScene
     @Environment(\.isPresented) var isPresented
     @Environment(\.dismiss) var dismiss
+    
+    @AppStorage("animals_saved") var animalsSaved = 0
     var body: some View {
         NavigationStack {
             ZStack {
@@ -33,17 +35,29 @@ struct OilSpillStruct: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.clear)
             .onAppear() {
-                print(oilSpill.animalsSaved)
                 showMission = true
             }
-            .onChange(of: oilSpill.animalsSaved, {
-                print("change registered")
-                print(oilSpill.animalsSaved)
-                if oilSpill.animalsSaved == 10 {
+            .onChange(of: animalsSaved, {
+                print("received: \(animalsSaved)")
+                if animalsSaved == 10 {
                     hasEnded = true
                     print(hasEnded)
                 }
             })
+//            .onChange(of: oilSpill.animalsSaved, {
+//                print("onChange received: \(oilSpill.animalsSaved)")
+//                if oilSpill.animalsSaved == 10 {
+//                    hasEnded = true
+//                    print(hasEnded)
+//                }
+//            })
+//            .onReceive(oilSpill.$animalsSaved, perform: { _ in
+//                print("onReceive received: \(oilSpill.animalsSaved)")
+//                if oilSpill.animalsSaved == 10 {
+//                    hasEnded = true
+//                    print(hasEnded)
+//                }
+//            })
             .fullScreenCover(isPresented: $showMission) {
                 Spacer()
                 
@@ -79,7 +93,7 @@ struct OilSpillStruct: View {
                     } label: {
                         Text("Restart")
                     }
-
+                    
                     Button {
                         dismiss()
                     } label: {
