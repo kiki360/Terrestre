@@ -7,22 +7,30 @@
 import SwiftUI
 
 struct DialogueTestNoResponse: View {
+    @Binding var isPresented: Bool
     @AppStorage("username") var username = "Guest"
-    @State var iterations: Int = 0
+    @State var iterations: Int = 1
     @State var showHistory: Bool = false
+    @State var ShowDoneButton: Bool = false
     let dialogue: [Int: String]
     var body: some View {
         let TotalIterations: Int = dialogue.count - 1
-        if TotalIterations == 0{
+        if TotalIterations >= 0{
             Text("\(DialogueNoResponse(Iteration: iterations))")
             Button("Next"){
                 iterations += 1
-                if iterations > TotalIterations{
+                if iterations >= TotalIterations{
                     iterations = TotalIterations
+                    ShowDoneButton = true
                 }
             }
             Button("\(ButtonName())"){
                 showHistory.toggle()
+            }
+            if ShowDoneButton{
+                Button("Done"){
+                    isPresented = false
+                }
             }
             if showHistory{
                 ForEach(0...iterations, id: \.self){ text in
@@ -48,6 +56,6 @@ struct DialogueTestNoResponse: View {
         }
     }
 }
-#Preview {
-    DialogueTestNoResponse(dialogue: [:])
-}
+//#Preview {
+//    DialogueTestNoResponse(dialogue: [:])
+//} what happens if zero values are passed

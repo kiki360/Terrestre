@@ -43,7 +43,7 @@ struct OilSpillStruct: View {
 //                }
 //            })
             .fullScreenCover(isPresented: $showMission) {
-                DialogueTestNoResponse(dialogue:  [0: "\(username)!", 1: "Something went wrong at this Oil Rig and it has started spilling!", 2: "We need your help to get the surrounding wildlife away from it.", 3: "There are ten ducks you need to grab", 4: "Make sure you don't fall off! I don't think those guard rails up there are very safe."])
+                DialogueTestNoResponse(isPresented: $showMission, dialogue:  [1: "\(username)!", 2: "Something went wrong at this Oil Rig and it has started spilling!", 3: "We need your help to get the surrounding wildlife away from it.", 4: "There are ten ducks you need to grab", 5: "Make sure you don't fall off! I don't think those guard rails up there are very safe."])
             }
         }
         .navigationBarBackButtonHidden()
