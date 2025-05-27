@@ -615,11 +615,20 @@ struct DragDropView: View {
                     //MARK: Alerts Stop
                 } else if trash.contains("Pizza Boxes🍕") {
 //                    Button{
-                        
+                    Button("Pizza Boxes🍕 Feedback"){
+                        showTrashedPizza.toggle()
+                    }
+                    .alert("Yep! Because pizzas usually leave greasy residue on the cardboard box, it's hard for them to be recycled, so your best bet is to just throw it in the trash.", isPresented: $showTrashedPizza){}
 //                    }
-//                    "Yep! Because pizzas usually leave greasy residue on the cardboard box, it's hard for them to be recycled, so your best bet is to just throw it in the trash.")
+//                    "")
                 } else if depends.contains("Pizza Boxes🍕") {
-                    Text("Good try, pizza boxes are tricky because they are made of cardboard, but greasy food can make them hard to recycle. However, there is one more specific correct answer here.")
+                    Button("Pizza Boxes🍕 Feedback"){
+                        showDependsPizza.toggle()
+                    }
+                    .alert("Good try, pizza boxes are tricky because they are made of cardboard, but greasy food can make them hard to recycle. However, there is one more specific correct answer here.", isPresented: $showDependsPizza){
+                        
+                    }
+//                    Text("")
                 }
             }
             
