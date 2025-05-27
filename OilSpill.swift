@@ -10,7 +10,7 @@ import SpriteKit
 struct OilSpillStruct: View {
     @State var showMission = false
     @State var hasEnded = false
-    
+    @Binding var path: [Screen]
     @EnvironmentObject var oilSpill: OilSpillGameScene
     @Environment(\.isPresented) var isPresented
     @Environment(\.dismiss) var dismiss
@@ -74,7 +74,7 @@ struct OilSpillStruct: View {
     }
 }
 
-#Preview {
-    OilSpillStruct()
-        .environmentObject(OilSpillGameScene())
-}
+//#Preview {
+//    OilSpillStruct()
+//        .environmentObject(OilSpillGameScene())
+//}

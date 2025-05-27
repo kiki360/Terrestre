@@ -6,14 +6,20 @@
 //
 
 import SwiftUI
-
+enum Screen: Hashable{
+    case Levels
+    case Settings
+    case Statistics
+    case OilSpill
+}
 struct HomeScreen: View {
     //MARK: Universal font for this app
     //    .font(.custom("Courier", size: 23))
     @AppStorage("username") var username = "Guest"
+    @State var path = [Screen]()
     @State var popover = false
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path){
             HStack {
                 Text("Welcome, \(username)")
                     .font(.custom("Courier", size: 70))
@@ -27,9 +33,7 @@ struct HomeScreen: View {
                     }
                 //The popover was pretty straight forward; I didn't have to do anything with the developer documentation it was just similar to an alert
                 
-                NavigationLink {
-                    SettingsPage()
-                } label: {
+                NavigationLink(value: Screen.Settings){
                     Image(systemName: "gear")
                         .foregroundStyle(.gray)
                         .font(.title)
@@ -39,9 +43,7 @@ struct HomeScreen: View {
             }
             
             HStack {
-                NavigationLink {
-                    LevelsMenu()
-                } label: {
+                NavigationLink(value: Screen.Levels){
                     RoundedRectangle(cornerRadius: 25)
                         .foregroundStyle(.black)
                         .frame(width: 200, height: 75)
@@ -54,9 +56,7 @@ struct HomeScreen: View {
                         .shadow(radius: 5, x: 7, y: 7)
                 }
                 
-                NavigationLink {
-                    StatisticsPage()
-                } label: {
+                NavigationLink(value: Screen.Statistics){
                     RoundedRectangle(cornerRadius: 25)
                         .frame(width: 200, height: 75)
                         .foregroundStyle(.blue)
@@ -68,6 +68,18 @@ struct HomeScreen: View {
                         }
                         .shadow(radius: 5, x: 7, y: 7)
                 }
+            }
+        }
+        .navigationDestination(for: Screen.self){ screen in
+            switch screen {
+            case .Levels:
+                LevelsMenu()
+            case .Settings:
+                SettingsPage()
+            case .Statistics:
+                StatisticsPage()
+            case .OilSpill:
+//                OilSpill()
             }
         }
     }

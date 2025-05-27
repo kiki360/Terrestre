@@ -602,15 +602,11 @@ struct DragDropView: View {
                     }
                     .alert("This one's a bit of a curveball! Even though pizza boxes are usually made of cardboard, the food inside them usually leaves grease on the cardboard, making it hard for them to recycle.", isPresented: $showRecycledPizza) {
                     }
-                    //MARK: Alerts Stop
                 } else if trash.contains("Pizza Boxes🍕") {
-                    //                    Button{
                     Button("Pizza Boxes🍕 Feedback"){
                         showTrashedPizza.toggle()
                     }
                     .alert("Yep! Because pizzas usually leave greasy residue on the cardboard box, it's hard for them to be recycled, so your best bet is to just throw it in the trash.", isPresented: $showTrashedPizza){}
-                    //                    }
-                    //                    "")
                 } else if depends.contains("Pizza Boxes🍕") {
                     Button("Pizza Boxes🍕 Feedback"){
                         showDependsPizza.toggle()
@@ -682,6 +678,4 @@ struct SortView: View {
     }
 }
 
-#Preview {
-    DragDropView()
-}
+
