@@ -74,6 +74,7 @@ struct DragDropView: View {
     @State var showCarPartsRecycling: Bool = false
     @State var showCarPartsTrash: Bool = false
     @State var showCarPartsDepends: Bool = false
+    @State var allItems: Bool = false
     
     
     
@@ -136,51 +137,40 @@ struct DragDropView: View {
                 }
             List(){
                 if recycling.contains("Electronics📱💻") {
-                    Text("")
-                        .onAppear {
-                            if recycling.contains("Electronics📱💻") {
-                                showRecycledElectronics.toggle()
-                            }
-                        }
-                        .alert("Almost there! Recycling electronics is one of the easiest ways to reduce waste. Many people do not know that electronics are recyclable! However, the reason behind public skepticism is the special circumstances or recycling these items, namely recycling them through special recycling events or drop-off locations to ensure the proper disposal of devices.", isPresented: $showRecycledElectronics) {
-                            
-                        }
+                    Button("Electronics📱💻 Feedback") {
+                        showRecycledElectronics.toggle()
+                    }
+                    .alert("Almost there! Recycling electronics is one of the easiest ways to reduce waste. Many people do not know that electronics are recyclable! However, the reason behind public skepticism is the special circumstances or recycling these items, namely recycling them through special recycling events or drop-off locations to ensure the proper disposal of devices.", isPresented: $showRecycledElectronics) {
+                        
+                    }
+                    
                 } else if trash.contains("Electronics📱💻") {
-                    Text("")
-                        .onAppear {
-                            if trash.contains("Electronics📱💻") {
-                                showTrashedElectronics.toggle()
-                            }
-                        }
-                        .alert("Not quite! More than 80% of electronics get thrown away because many people do not know that they are in fact recyclable! However, the reason behind public skepticism is the special circumstances or recycling these items, namely recycling them through special recycling events or drop-off locations to ensure the proper disposal of devices.", isPresented: $showTrashedElectronics) {
-                            
-                        }
+                    Button("Electronics📱💻 Feedback") {
+                        showTrashedElectronics.toggle()
+                    }
+                    .alert("Not quite! More than 80% of electronics get thrown away because many people do not know that they are in fact recyclable! However, the reason behind public skepticism is the special circumstances or recycling these items, namely recycling them through special recycling events or drop-off locations to ensure the proper disposal of devices.", isPresented: $showTrashedElectronics) {
+                        
+                    }
                     
                     
                 } else if depends.contains("Electronics📱💻"){
-                    Text("")
-                        .onAppear {
-                            if depends.contains("Electronics📱💻") {
-                                showDependsElectronics.toggle()
-                            }
-                        }
-                        .alert("You got it! Due to their materials, electronics are recyclable, but putting them in a regular recycling bin poses a fire hazard, so it is best to recycle them through special drop-off locations or special recycling programs. In addition, you can ask your phone/tech provider like Verizon or T-Mobile if you can trade in your device for a newer one and dispose of your it that way! Click the link below to find out more about recycling electronics.", isPresented: $showDependsElectronics) {
-                            
-                        }
+                    Button("Electronics📱💻 Feedback") {
+                        showDependsElectronics.toggle()
+                    }
+                    .alert("You got it! Due to their materials, electronics are recyclable, but putting them in a regular recycling bin poses a fire hazard, so it is best to recycle them through special drop-off locations or special recycling programs. In addition, you can ask your phone/tech provider like Verizon or T-Mobile if you can trade in your device for a newer one and dispose of your it that way! Click the link below to find out more about recycling electronics.", isPresented: $showDependsElectronics) {
+                        
+                    }
                     
-                    //                Link("Visit this EPA link for more information on special recycling circumstances for electronics!", destination: (ElectronicsURL!))
+                    
                 }
                 
                 if recycling.contains("CDs 💿") {
-                    Text("")
-                        .onAppear {
-                            if recycling.contains("CDs 💿") {
-                                showRecycledCDs.toggle()
-                            }
-                        }
-                        .alert("Correct...mostly! CDs are usually made out of materials like polycarbonate plastic and aluminum, which are definitely recyclable! By recycling them, we are also conserving some of the resources that are key to the process of creating CDs, like natural gas, crude oil, and water. However, because CDs are usually made of polycarbonate, this mix of plastics makes it kind of hard for standard recycling machines to recycle them. Try again!", isPresented: $showRecycledCDs) {
-                            
-                        }
+                    Button("CDs 💿 Feedback") {
+                        showRecycledCDs.toggle()
+                    }
+                    .alert("Correct...mostly! CDs are usually made out of materials like polycarbonate plastic and aluminum, which are definitely recyclable! By recycling them, we are also conserving some of the resources that are key to the process of creating CDs, like natural gas, crude oil, and water. However, because CDs are usually made of polycarbonate, this mix of plastics makes it kind of hard for standard recycling machines to recycle them. Try again!", isPresented: $showRecycledCDs) {
+                        
+                    }
                     
                 } else if trash.contains("CDs 💿") {
                     Button("CDs 💿 Feedback") {
@@ -614,13 +604,13 @@ struct DragDropView: View {
                     }
                     //MARK: Alerts Stop
                 } else if trash.contains("Pizza Boxes🍕") {
-//                    Button{
+                    //                    Button{
                     Button("Pizza Boxes🍕 Feedback"){
                         showTrashedPizza.toggle()
                     }
                     .alert("Yep! Because pizzas usually leave greasy residue on the cardboard box, it's hard for them to be recycled, so your best bet is to just throw it in the trash.", isPresented: $showTrashedPizza){}
-//                    }
-//                    "")
+                    //                    }
+                    //                    "")
                 } else if depends.contains("Pizza Boxes🍕") {
                     Button("Pizza Boxes🍕 Feedback"){
                         showDependsPizza.toggle()
@@ -628,7 +618,15 @@ struct DragDropView: View {
                     .alert("Good try, pizza boxes are tricky because they are made of cardboard, but greasy food can make them hard to recycle. However, there is one more specific correct answer here.", isPresented: $showDependsPizza){
                         
                     }
-//                    Text("")
+                }
+                
+                if items.isEmpty{
+                    Button("End Message!") {
+                        allItems.toggle()
+                    }
+                    .alert("Congratulations! You sorted every item! Did you sort all of them correctly? If yes, good job! If no, try the challenge again and see if you have gotten better!", isPresented: $allItems) {
+                        
+                    }
                 }
             }
             
@@ -665,7 +663,8 @@ struct SortView: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 12)
                     .frame(maxWidth: 250, maxHeight: .infinity)
-                    .foregroundStyle(isTargeted ? .teal.opacity(0.15) :Color(.secondarySystemFill))
+                    .opacity(0.35)
+                    .foregroundStyle(isTargeted ? .teal.opacity(0.37) :Color(.secondarySystemFill))
                 
                 VStack(alignment: .leading, spacing: 12) {
                     ForEach(tasks, id: \.self) { task in
@@ -683,4 +682,6 @@ struct SortView: View {
     }
 }
 
-
+#Preview {
+    DragDropView()
+}
