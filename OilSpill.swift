@@ -10,6 +10,8 @@ import SpriteKit
 struct OilSpillStruct: View {
     @State var showMission = false
     @State var hasEnded = false
+    @State var gameScene: SKScene?
+    @State var sceneSize: CGSize?
     
     @EnvironmentObject var oilSpill: OilSpillGameScene
     @Environment(\.isPresented) var isPresented
@@ -19,45 +21,43 @@ struct OilSpillStruct: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                GeometryReader { Geometry in
+            GeometryReader { Geometry in
+//                    if let scene = gameScene {
+//                        SpriteView(scene: scene)
+//                            .frame(width: Geometry.size.width, height: Geometry.size.height)
+//                    } else {
+//                        Color.clear
+//                    }
                     SpriteView(scene: OilSpillGameScene(size: Geometry.size))
-                    
-                    Button {
-                        print("button pressed")
-                        dismiss()
-                    } label: {
-                        Image(systemName: "house.fill")
-                            .font(.largeTitle)
-                            .foregroundStyle(.white)
-                    }
                 }
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "house.fill")
+                        .position(x: 25, y: 25)
+                        .font(.largeTitle)
+                        .bold()
+                        .foregroundStyle(.white)
+                        .frame(width: 100, height: 100)
+                }
+
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.clear)
             .onAppear() {
+//                    sceneSize = Geometry.size
                 showMission = true
+//                    gameScene = OilSpillGameScene(size: Geometry.size)
             }
             .onChange(of: animalsSaved, {
-                print("received: \(animalsSaved)")
-                if animalsSaved == 10 {
+                print("animals saved = \(animalsSaved)")
+                if animalsSaved == 2 {
                     hasEnded = true
-                    print(hasEnded)
+                    oilSpill.left = false
+                    oilSpill.right = false
+                    oilSpill.up = false
                 }
             })
-//            .onChange(of: oilSpill.animalsSaved, {
-//                print("onChange received: \(oilSpill.animalsSaved)")
-//                if oilSpill.animalsSaved == 10 {
-//                    hasEnded = true
-//                    print(hasEnded)
-//                }
-//            })
-//            .onReceive(oilSpill.$animalsSaved, perform: { _ in
-//                print("onReceive received: \(oilSpill.animalsSaved)")
-//                if oilSpill.animalsSaved == 10 {
-//                    hasEnded = true
-//                    print(hasEnded)
-//                }
-//            })
             .fullScreenCover(isPresented: $showMission) {
                 Spacer()
                 
@@ -88,7 +88,9 @@ struct OilSpillStruct: View {
             .fullScreenCover(isPresented: $hasEnded) {
                 HStack {
                     Button {
+                        animalsSaved = 0
                         oilSpill.Player.position.x = 100
+                        gameScene = OilSpillGameScene()
                         hasEnded = false
                     } label: {
                         Text("Restart")

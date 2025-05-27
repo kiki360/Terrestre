@@ -62,6 +62,8 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     
     
     override func sceneDidLoad() {
+        animalsSaved = 0
+        
         // MARK: Background
         let Background = SKSpriteNode(imageNamed: "OilSpillBg")
         Background.size = self.size
@@ -507,4 +509,13 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     nonisolated func didEnd(_ contact: SKPhysicsContact) {
         
     }
+    
+//    override init(size: CGSize) {
+//        super.init(size: size)
+//        self.scaleMode = .aspectFit
+//    }
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
 }
