@@ -16,7 +16,6 @@ struct DragDropView: View {
     @State var isTrashtargeted = false
     @State var isRecyclingtargeted = false
     @State var isDependstargeted = false
-    let ElectronicsURL = URL(string: "https://epa.illinois.gov/topics/waste-management/materials-management/electronics-recycling1.html#:~:text=Did%20you%20know%20that%20it,are%20unwanted%20by%20Illinois%20residents.")
     @State var showRecycledElectronics: Bool = false
     @State var showTrashedElectronics: Bool = false
     @State var showDependsElectronics: Bool = false
@@ -75,7 +74,7 @@ struct DragDropView: View {
     @State var showCarPartsTrash: Bool = false
     @State var showCarPartsDepends: Bool = false
     @State var allItems: Bool = false
-    
+    let ElectronicsURL = URL(string: "https://epa.illinois.gov/topics/waste-management/materials-management/electronics-recycling1.html#:~:text=Did%20you%20know%20that%20it,are%20unwanted%20by%20Illinois%20residents.")
     
     
     var body: some View {
