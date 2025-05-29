@@ -16,7 +16,7 @@ let package = Package(
         .iOSApplication(
             name: "Terrestre",
             targets: ["AppModule"],
-            bundleIdentifier: "org.jhhs.627115.ClimateChangeGroupApp",
+            bundleIdentifier: "org.jhhs.627115.Terrestre",
             teamIdentifier: "U34DP379RQ",
             displayVersion: "1.0",
             bundleVersion: "1",
