@@ -1,6 +1,6 @@
 //
 //  QuestionView.swift
-//  ClimateChangeGroupApp
+//  Terrestre
 //
 //  Created by Jacob Caulfield on 4/23/25.
 //

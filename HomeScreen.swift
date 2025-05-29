@@ -1,13 +1,13 @@
 //
 //  HomeScreen.swift
-//  ClimateChangeGroupApp
+//  Terrestre
 //
 //  Created by Calliope Epstein-Pawlak on 4/15/25.
 //
 
 import SwiftUI
 struct HomeScreen: View {
-    //MARK: Universal font for this app
+    //MARK: Universal Font
     //    .font(.custom("Courier", size: 23))
     @AppStorage("username") var username = "Guest"
     @State var popover = false
