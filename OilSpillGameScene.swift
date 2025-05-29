@@ -513,6 +513,103 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         
     }
     
+//    func reset() {
+//        self.removeAllChildren()
+//        
+//        let Background = SKSpriteNode(imageNamed: "OilSpillBg")
+//        Background.size = self.size
+//        Background.position = CGPoint(x: 0, y: 0)
+//        Background.zPosition = -1
+//        
+//        Player.size = CGSize(width: 144, height: 192)
+//        Player.position = CGPoint(x: 100, y: 700)
+//        
+//        startingPlatform.size = CGSize(width: 200, height: 25)
+//        startingPlatform.position = CGPoint(x: 115, y: 300)
+//        startingPlatform.color = .black
+//        
+//        for i in 1...100 {
+//            if i == 1 {
+//                let otherPlatform = SKSpriteNode(color: .black, size: startingPlatform.size)
+//                
+//                let y = Int.random(in: 250...600)
+//                let x = (Int(i) * 200) + 200
+//                
+//                otherPlatform.position = CGPoint(x: x, y: y)
+//                otherPlatform.physicsBody = SKPhysicsBody(rectangleOf: startingPlatform.size)
+//                otherPlatform.physicsBody?.isDynamic = false
+//                addChild(otherPlatform)
+//                
+//                spritePositionX.append(x)
+//                spritePositionY.append((y + 60))
+//            } else {
+//                let otherPlatform = SKSpriteNode(color: .black, size: startingPlatform.size)
+//                
+//                let y = Int.random(in: 250...600)
+//                let x = (Int(i) * 200) + 350
+//                
+//                otherPlatform.position = CGPoint(x: x, y: y)
+//                otherPlatform.physicsBody = SKPhysicsBody(rectangleOf: startingPlatform.size)
+//                otherPlatform.physicsBody?.isDynamic = false
+//                addChild(otherPlatform)
+//                
+//                spritePositionX.append(x)
+//                spritePositionY.append((y + 60))
+//            }
+//        }
+//        
+//        Animal1.position = CGPoint(x: spritePositionX[0], y: spritePositionY[0])
+//        
+//        Animal2.position = CGPoint(x: spritePositionX[2], y: spritePositionY[2])
+//        
+//        Animal3.position = CGPoint(x: spritePositionX[6], y: spritePositionY[6])
+//        
+//        Animal4.position = CGPoint(x: spritePositionX[18], y: spritePositionY[18])
+//        
+//        Animal5.position = CGPoint(x: spritePositionX[20], y: spritePositionY[20])
+//        
+//        Animal6.position = CGPoint(x: spritePositionX[30], y: spritePositionY[30])
+//        
+//        Animal7.position = CGPoint(x: spritePositionX[44], y: spritePositionY[44])
+//        
+//        Animal8.position = CGPoint(x: spritePositionX[60], y: spritePositionY[60])
+//        
+//        Animal9.position = CGPoint(x: spritePositionX[72], y: spritePositionY[72])
+//        
+//        Animal10.position = CGPoint(x: spritePositionX[90], y: spritePositionY[90])
+//        
+//        upArrow.position = UserDefaults.standard.getCGPoint(forKey: "upButtonPlacement") ?? CGPoint(x: 450, y: -200)
+//        
+//        leftArrow.position = UserDefaults.standard.getCGPoint(forKey: "leftButtonPlacement") ?? CGPoint(x: 400, y: -300)
+//        
+//        rightArrow.position = UserDefaults.standard.getCGPoint(forKey: "rightButtonPlacement") ?? CGPoint(x: 500, y: -300)
+//        
+//        animalsSaved = 0
+//        
+//        animalCounter.position = CGPoint(x: -200, y: 325)
+//        animalCounter.text = "\(animalsSaved) out of 10 animals saved"
+//        
+//        addChild(startingPlatform)
+//        addChild(Animal1)
+//        addChild(Animal2)
+//        addChild(Animal3)
+//        addChild(Animal4)
+//        addChild(Animal5)
+//        addChild(Animal6)
+//        addChild(Animal7)
+//        addChild(Animal8)
+//        addChild(Animal9)
+//        addChild(Animal10)
+//        addChild(Player)
+//        cameraNode.addChild(upArrow)
+//        cameraNode.addChild(leftArrow)
+//        cameraNode.addChild(rightArrow)
+//        print("added arrows at \(upArrow.position)")
+//        //        cameraNode.addChild(actionButton)
+//        cameraNode.addChild(animalCounter)
+//        cameraNode.addChild(Background)
+//    }
+    
 //    override init(size: CGSize) {
 //        super.init(size: size)
 //        self.scaleMode = .aspectFit

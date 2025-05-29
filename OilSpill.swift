@@ -10,7 +10,6 @@ import SpriteKit
 struct OilSpillStruct: View {
     @State var showMission = false
     @State var hasEnded = false
-    @State var gameScene: SKScene = OilSpillGameScene()
     @State var sceneSize: CGSize?
     
     @EnvironmentObject var oilSpill: OilSpillGameScene
@@ -22,9 +21,7 @@ struct OilSpillStruct: View {
         NavigationStack {
             ZStack {
                 GeometryReader { Geometry in
-                    SpriteView(scene: gameScene)
-                        .frame(width: Geometry.size.width, height: Geometry.size.height)
-                    //                    SpriteView(scene: OilSpillGameScene(size: Geometry.size))
+                SpriteView(scene: OilSpillGameScene(size: Geometry.size))
                     
                     
                     Button {
@@ -47,7 +44,7 @@ struct OilSpillStruct: View {
             }
             .onChange(of: animalsSaved, {
                 print("animals saved = \(animalsSaved)")
-                if animalsSaved == 2 {
+                if animalsSaved == 10 {
                     hasEnded = true
                     oilSpill.left = false
                     oilSpill.right = false
@@ -94,21 +91,22 @@ struct OilSpillStruct: View {
                     .bold()
                 
                 HStack {
-                    Button {
-                        gameScene = OilSpillGameScene()
-                        hasEnded = false
-                    } label: {
-                        RoundedRectangle(cornerRadius: 20)
-                            .frame(width: 150, height: 75)
-                            .foregroundStyle(.black)
-                            .padding()
-                            .overlay {
-                                Text("Restart")
-                                    .font(.custom("Courier", size: 23))
-                                    .foregroundStyle(.white)
-                            }
-                            .shadow(radius: 5, x: 7, y: 7)
-                    }
+//                    Button {
+//                        gameScene = OilSpillGameScene()
+//                        hasEnded = false
+//                        oilSpill.reset()
+//                    } label: {
+//                        RoundedRectangle(cornerRadius: 20)
+//                            .frame(width: 150, height: 75)
+//                            .foregroundStyle(.black)
+//                            .padding()
+//                            .overlay {
+//                                Text("Restart")
+//                                    .font(.custom("Courier", size: 23))
+//                                    .foregroundStyle(.white)
+//                            }
+//                            .shadow(radius: 5, x: 7, y: 7)
+//                    }
                     
                     Button {
                         dismiss()
