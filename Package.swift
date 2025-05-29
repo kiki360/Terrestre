@@ -8,19 +8,19 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "Terestre",
+    name: "Terrestre",
     platforms: [
         .iOS("17")
     ],
     products: [
         .iOSApplication(
-            name: "Terestre",
+            name: "Terrestre",
             targets: ["AppModule"],
-            bundleIdentifier: "org.jhhs.627115.ClimateChangeGroupApp",
+            bundleIdentifier: "org.jhhs.627115.Terrestre",
             teamIdentifier: "U34DP379RQ",
             displayVersion: "1.0",
             bundleVersion: "1",
-            appIcon: .placeholder(icon: .earth),
+            appIcon: .asset("AppIcon"),
             accentColor: .presetColor(.green),
             supportedDeviceFamilies: [
                 .pad,

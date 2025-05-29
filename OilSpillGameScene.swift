@@ -1,6 +1,6 @@
 //
 //  GamePhysics.swift
-//  ClimateChangeGroupApp
+//  Terrestre
 //
 //  Created by Calliope Epstein-Pawlak on 4/17/25.
 //
@@ -22,14 +22,14 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     let cameraNode = SKCameraNode()
     
     let atlas = SKTextureAtlas(named: "player")
-    //let idle = atlas.textureNamed("walk1")
+    let moving = SKTextureAtlas(named: "walk1")
     //let walking = atlas.textureNamed("walk2")
     //let playerWalkSprites = [idle, walking]
     
     //    var backgroundImage = ""
     var animalImage = ""
     
-    var Player = SKSpriteNode(imageNamed: "PlayerCharacter")
+    @State var Player = SKSpriteNode(imageNamed: "PlayerCharacter")
     var Animal1 = SKSpriteNode(imageNamed: "Duck")
     var Animal2 = SKSpriteNode(imageNamed: "Duck")
     var Animal3 = SKSpriteNode(imageNamed: "Duck")
@@ -53,7 +53,7 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     let rightArrow = SKSpriteNode(imageNamed: "rightArrow")
     let actionButton = SKShapeNode(ellipseOf: CGSize(width: 100, height: 100))
     
-    @Published var animalsSaved = 0
+    @AppStorage("animals_saved") var animalsSaved = 0
     var animalCounter = SKLabelNode()
     
     var spritePositionX: [Int] = []
@@ -62,6 +62,8 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     
     
     override func sceneDidLoad() {
+        animalsSaved = 0
+        
         // MARK: Background
         let Background = SKSpriteNode(imageNamed: "OilSpillBg")
         Background.size = self.size
@@ -92,19 +94,33 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         
         // MARK: Platforms and animal sprites added
         for i in 1...100 {
-            let otherPlatform = SKSpriteNode(color: .black, size: startingPlatform.size)
-            
-            let y = Int.random(in: 250...600)
-            let x = (Int(i) * 200) + 200
-            
-            otherPlatform.position = CGPoint(x: x, y: y)
-            otherPlatform.physicsBody = SKPhysicsBody(rectangleOf: startingPlatform.size)
-            otherPlatform.physicsBody?.isDynamic = false
-            addChild(otherPlatform)
-            
-            spritePositionX.append(x)
-            spritePositionY.append((y + 60))
-            
+            if i == 1 {
+                let otherPlatform = SKSpriteNode(color: .black, size: startingPlatform.size)
+                
+                let y = Int.random(in: 250...600)
+                let x = (Int(i) * 200) + 200
+                
+                otherPlatform.position = CGPoint(x: x, y: y)
+                otherPlatform.physicsBody = SKPhysicsBody(rectangleOf: startingPlatform.size)
+                otherPlatform.physicsBody?.isDynamic = false
+                addChild(otherPlatform)
+                
+                spritePositionX.append(x)
+                spritePositionY.append((y + 60))
+            } else {
+                let otherPlatform = SKSpriteNode(color: .black, size: startingPlatform.size)
+                
+                let y = Int.random(in: 250...600)
+                let x = (Int(i) * 200) + 350
+                
+                otherPlatform.position = CGPoint(x: x, y: y)
+                otherPlatform.physicsBody = SKPhysicsBody(rectangleOf: startingPlatform.size)
+                otherPlatform.physicsBody?.isDynamic = false
+                addChild(otherPlatform)
+                
+                spritePositionX.append(x)
+                spritePositionY.append((y + 60))
+            }
         }
         
         // MARK: Animal1
@@ -251,6 +267,7 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         cameraNode.addChild(upArrow)
         cameraNode.addChild(leftArrow)
         cameraNode.addChild(rightArrow)
+        print("added arrows at \(upArrow.position)")
         //        cameraNode.addChild(actionButton)
         cameraNode.addChild(animalCounter)
         cameraNode.addChild(Background)
@@ -289,6 +306,9 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     // MARK: update (Player movement and actions)
     override func update(_ currentTime: TimeInterval) {
         if up == true {
+//            while up == true {
+//                Player = SKSpriteNode(imageNamed: "walk1")
+//            }
             withAnimation {
                 Player.position.y += 20
             }
@@ -332,9 +352,11 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let position = touch.location(in: self)
+            print(position)
             if nodes(at: position).first != nil {
                 switch nodes(at: position).first?.name?.lowercased() {
                 case "uparrow":
+                    print("upArrow here")
                     up = true
                 case "leftarrow":
                     left = true
@@ -342,7 +364,6 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
                     right = true
                 case "actionbutton":
                     grabbing = true
-                    
                 default:
                     break
                 }
@@ -493,4 +514,110 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     nonisolated func didEnd(_ contact: SKPhysicsContact) {
         
     }
+    
+//    func reset() {
+//        self.removeAllChildren()
+//        
+//        let Background = SKSpriteNode(imageNamed: "OilSpillBg")
+//        Background.size = self.size
+//        Background.position = CGPoint(x: 0, y: 0)
+//        Background.zPosition = -1
+//        
+//        Player.size = CGSize(width: 144, height: 192)
+//        Player.position = CGPoint(x: 100, y: 700)
+//        
+//        startingPlatform.size = CGSize(width: 200, height: 25)
+//        startingPlatform.position = CGPoint(x: 115, y: 300)
+//        startingPlatform.color = .black
+//        
+//        for i in 1...100 {
+//            if i == 1 {
+//                let otherPlatform = SKSpriteNode(color: .black, size: startingPlatform.size)
+//                
+//                let y = Int.random(in: 250...600)
+//                let x = (Int(i) * 200) + 200
+//                
+//                otherPlatform.position = CGPoint(x: x, y: y)
+//                otherPlatform.physicsBody = SKPhysicsBody(rectangleOf: startingPlatform.size)
+//                otherPlatform.physicsBody?.isDynamic = false
+//                addChild(otherPlatform)
+//                
+//                spritePositionX.append(x)
+//                spritePositionY.append((y + 60))
+//            } else {
+//                let otherPlatform = SKSpriteNode(color: .black, size: startingPlatform.size)
+//                
+//                let y = Int.random(in: 250...600)
+//                let x = (Int(i) * 200) + 350
+//                
+//                otherPlatform.position = CGPoint(x: x, y: y)
+//                otherPlatform.physicsBody = SKPhysicsBody(rectangleOf: startingPlatform.size)
+//                otherPlatform.physicsBody?.isDynamic = false
+//                addChild(otherPlatform)
+//                
+//                spritePositionX.append(x)
+//                spritePositionY.append((y + 60))
+//            }
+//        }
+//        
+//        Animal1.position = CGPoint(x: spritePositionX[0], y: spritePositionY[0])
+//        
+//        Animal2.position = CGPoint(x: spritePositionX[2], y: spritePositionY[2])
+//        
+//        Animal3.position = CGPoint(x: spritePositionX[6], y: spritePositionY[6])
+//        
+//        Animal4.position = CGPoint(x: spritePositionX[18], y: spritePositionY[18])
+//        
+//        Animal5.position = CGPoint(x: spritePositionX[20], y: spritePositionY[20])
+//        
+//        Animal6.position = CGPoint(x: spritePositionX[30], y: spritePositionY[30])
+//        
+//        Animal7.position = CGPoint(x: spritePositionX[44], y: spritePositionY[44])
+//        
+//        Animal8.position = CGPoint(x: spritePositionX[60], y: spritePositionY[60])
+//        
+//        Animal9.position = CGPoint(x: spritePositionX[72], y: spritePositionY[72])
+//        
+//        Animal10.position = CGPoint(x: spritePositionX[90], y: spritePositionY[90])
+//        
+//        upArrow.position = UserDefaults.standard.getCGPoint(forKey: "upButtonPlacement") ?? CGPoint(x: 450, y: -200)
+//        
+//        leftArrow.position = UserDefaults.standard.getCGPoint(forKey: "leftButtonPlacement") ?? CGPoint(x: 400, y: -300)
+//        
+//        rightArrow.position = UserDefaults.standard.getCGPoint(forKey: "rightButtonPlacement") ?? CGPoint(x: 500, y: -300)
+//        
+//        animalsSaved = 0
+//        
+//        animalCounter.position = CGPoint(x: -200, y: 325)
+//        animalCounter.text = "\(animalsSaved) out of 10 animals saved"
+//        
+//        addChild(startingPlatform)
+//        addChild(Animal1)
+//        addChild(Animal2)
+//        addChild(Animal3)
+//        addChild(Animal4)
+//        addChild(Animal5)
+//        addChild(Animal6)
+//        addChild(Animal7)
+//        addChild(Animal8)
+//        addChild(Animal9)
+//        addChild(Animal10)
+//        addChild(Player)
+//        cameraNode.addChild(upArrow)
+//        cameraNode.addChild(leftArrow)
+//        cameraNode.addChild(rightArrow)
+//        print("added arrows at \(upArrow.position)")
+//        //        cameraNode.addChild(actionButton)
+//        cameraNode.addChild(animalCounter)
+//        cameraNode.addChild(Background)
+//    }
+    
+//    override init(size: CGSize) {
+//        super.init(size: size)
+//        self.scaleMode = .aspectFit
+//    }
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
 }
