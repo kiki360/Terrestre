@@ -79,7 +79,7 @@ struct HomeScreen: View {
             case .Statistics:
                 StatisticsPage()
             case .OilSpill:
-//                OilSpill()
+                OilSpillStruct(path: $path)
             }
         }
     }
