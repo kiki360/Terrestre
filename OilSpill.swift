@@ -1,6 +1,6 @@
 //
 //  OilSpill.swift
-//  ClimateChangeGroupApp
+//  Terrestre
 //
 //  Created by Jacob Caulfield on 4/21/25.
 //
@@ -10,7 +10,6 @@ import SpriteKit
 struct OilSpillStruct: View {
     @State var showMission = false
     @State var hasEnded = false
-    @Binding var path: [Screen]
     @EnvironmentObject var oilSpill: OilSpillGameScene
     @Environment(\.isPresented) var isPresented
     @Environment(\.dismiss) var dismiss

@@ -1,6 +1,6 @@
 //
 //  dragDrop.swift
-//  ClimateChangeGroupApp
+//  Terrestre
 //
 //  Created by Martin G. Zapryanov on 4/17/25.
 //
@@ -663,6 +663,7 @@ struct SortView: View {
                     .foregroundStyle(isTargeted ? .teal.opacity(0.37) :Color(.secondarySystemFill))
                 
                 VStack(alignment: .leading, spacing: 12) {
+//                    Made you look
                     ForEach(tasks, id: \.self) { task in
                         Text(task)
                             .background(Color(uiColor: .secondarySystemGroupedBackground))
