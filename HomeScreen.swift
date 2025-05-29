@@ -73,7 +73,7 @@ struct HomeScreen: View {
         .navigationDestination(for: Screen.self){ screen in
             switch screen {
             case .Levels:
-                LevelsMenu()
+                LevelsMenu(path: $path)
             case .Settings:
                 SettingsPage()
             case .Statistics:

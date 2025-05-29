@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LevelsMenu: View {
+    @Binding var path: [Screen]
     var body: some View {
         NavigationStack{
             Text("Select a Mission")
@@ -32,7 +33,7 @@ struct LevelsMenu: View {
                     .padding()
                 
                 NavigationLink("Oil Spill") {
-                    OilSpillStruct()
+                    OilSpillStruct(path: $path)
                 }
                 .font(.custom("Courier", size: 23))
                 .foregroundStyle(.white)
