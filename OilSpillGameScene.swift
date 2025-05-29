@@ -267,6 +267,7 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
         cameraNode.addChild(upArrow)
         cameraNode.addChild(leftArrow)
         cameraNode.addChild(rightArrow)
+        print("added arrows at \(upArrow.position)")
         //        cameraNode.addChild(actionButton)
         cameraNode.addChild(animalCounter)
         cameraNode.addChild(Background)
@@ -348,9 +349,11 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             let position = touch.location(in: self)
+            print(position)
             if nodes(at: position).first != nil {
                 switch nodes(at: position).first?.name?.lowercased() {
                 case "uparrow":
+                    print("upArrow here")
                     up = true
                 case "leftarrow":
                     left = true
