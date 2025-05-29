@@ -29,7 +29,7 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     //    var backgroundImage = ""
     var animalImage = ""
     
-    var Player = SKSpriteNode(imageNamed: "PlayerCharacter")
+    @State var Player = SKSpriteNode(imageNamed: "PlayerCharacter")
     var Animal1 = SKSpriteNode(imageNamed: "Duck")
     var Animal2 = SKSpriteNode(imageNamed: "Duck")
     var Animal3 = SKSpriteNode(imageNamed: "Duck")
@@ -289,6 +289,9 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     // MARK: update (Player movement and actions)
     override func update(_ currentTime: TimeInterval) {
         if up == true {
+//            while up == true {
+//                Player = SKSpriteNode(imageNamed: "walk1")
+//            }
             withAnimation {
                 Player.position.y += 20
             }
@@ -336,17 +339,12 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
                 switch nodes(at: position).first?.name?.lowercased() {
                 case "uparrow":
                     up = true
-                    var Player = SKSpriteNode(imageNamed: "walk1")
                 case "leftarrow":
                     left = true
-                    var Player = SKSpriteNode(imageNamed: "walk1")
                 case "rightarrow":
                     right = true
-                    var Player = SKSpriteNode(imageNamed: "walk1")
                 case "actionbutton":
                     grabbing = true
-                    var Player = SKSpriteNode(imageNamed: "walk1")
-                    
                 default:
                     break
                 }
