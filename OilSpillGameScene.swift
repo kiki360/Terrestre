@@ -22,14 +22,14 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     let cameraNode = SKCameraNode()
     
     let atlas = SKTextureAtlas(named: "player")
-    //let idle = atlas.textureNamed("walk1")
+    let moving = SKTextureAtlas(named: "walk1")
     //let walking = atlas.textureNamed("walk2")
     //let playerWalkSprites = [idle, walking]
     
     //    var backgroundImage = ""
     var animalImage = ""
     
-    var Player = SKSpriteNode(imageNamed: "PlayerCharacter")
+    @State var Player = SKSpriteNode(imageNamed: "PlayerCharacter")
     var Animal1 = SKSpriteNode(imageNamed: "Duck")
     var Animal2 = SKSpriteNode(imageNamed: "Duck")
     var Animal3 = SKSpriteNode(imageNamed: "Duck")
@@ -289,6 +289,9 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     // MARK: update (Player movement and actions)
     override func update(_ currentTime: TimeInterval) {
         if up == true {
+//            while up == true {
+//                Player = SKSpriteNode(imageNamed: "walk1")
+//            }
             withAnimation {
                 Player.position.y += 20
             }
@@ -342,7 +345,6 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
                     right = true
                 case "actionbutton":
                     grabbing = true
-                    
                 default:
                     break
                 }
