@@ -1,6 +1,6 @@
 //
 //  OilSpill.swift
-//  ClimateChangeGroupApp
+//  Terrestre
 //
 //  Created by Jacob Caulfield on 4/21/25.
 //
@@ -189,3 +189,7 @@ struct OilSpillStruct: View {
  Spacer()
  }
  }*/
+//#Preview {
+//    OilSpillStruct()
+//        .environmentObject(OilSpillGameScene())
+//}
