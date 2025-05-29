@@ -1,6 +1,6 @@
 //
 //  SettingsPage.swift
-//  ClimateChangeGroupApp
+//  Terrestre
 //
 //  Created by Calliope Epstein-Pawlak on 4/17/25.
 //

@@ -1,6 +1,6 @@
 //
 //  OilSpill.swift
-//  ClimateChangeGroupApp
+//  Terrestre
 //
 //  Created by Jacob Caulfield on 4/21/25.
 //
