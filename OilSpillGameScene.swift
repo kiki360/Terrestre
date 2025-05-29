@@ -22,7 +22,7 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
     let cameraNode = SKCameraNode()
     
     let atlas = SKTextureAtlas(named: "player")
-    //let idle = atlas.textureNamed("walk1")
+    let moving = SKTextureAtlas(named: "walk1")
     //let walking = atlas.textureNamed("walk2")
     //let playerWalkSprites = [idle, walking]
     
@@ -336,12 +336,16 @@ class OilSpillGameScene: SKScene, SKPhysicsContactDelegate, ObservableObject {
                 switch nodes(at: position).first?.name?.lowercased() {
                 case "uparrow":
                     up = true
+                    var Player = SKSpriteNode(imageNamed: "walk1")
                 case "leftarrow":
                     left = true
+                    var Player = SKSpriteNode(imageNamed: "walk1")
                 case "rightarrow":
                     right = true
+                    var Player = SKSpriteNode(imageNamed: "walk1")
                 case "actionbutton":
                     grabbing = true
+                    var Player = SKSpriteNode(imageNamed: "walk1")
                     
                 default:
                     break
